@@ -5,20 +5,20 @@ import java.util.TreeMap;
 public class SheetWeek implements Comparable<SheetWeek> {
 
 	private int id;
-	private TreeMap<Item, Double> items;
+	private TreeMap<Item, Price> items;
 	private int order;
 
 	public SheetWeek() {
-		this.items = new TreeMap<Item, Double>();
+		this.items = new TreeMap<Item, Price>();
 	}
 
 	public SheetWeek(int id, int order) {
-		this.items = new TreeMap<Item, Double>();
+		this.items = new TreeMap<Item, Price>();
 		this.id = id;
 		this.order = order;
 	}
 
-	public SheetWeek(int id, TreeMap<Item, Double> items, int order) {
+	public SheetWeek(int id, TreeMap<Item, Price> items, int order) {
 		this.id = id;
 		this.items = items;
 		this.order = order;
@@ -32,11 +32,11 @@ public class SheetWeek implements Comparable<SheetWeek> {
 		this.id = id;
 	}
 
-	public TreeMap<Item, Double> getItems() {
+	public TreeMap<Item, Price> getItems() {
 		return items;
 	}
 
-	public void setItems(TreeMap<Item, Double> items) {
+	public void setItems(TreeMap<Item, Price> items) {
 		this.items = items;
 	}
 
