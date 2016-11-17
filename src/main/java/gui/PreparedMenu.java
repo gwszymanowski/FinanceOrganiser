@@ -1,5 +1,7 @@
 package gui;
 
+import java.awt.event.ActionListener;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -9,8 +11,8 @@ public class PreparedMenu extends JMenuBar {
 	private static final long serialVersionUID = 1L;
 
 	JMenu file, options, advanced, help;
-	JMenuItem categoriesSubmenu, branchesSubmenu, general, exceptional;
-	
+	public JMenuItem categoriesSubmenu, branchesSubmenu, general, exceptional;
+
 	public PreparedMenu() {
 
 		addFile();
@@ -28,12 +30,15 @@ public class PreparedMenu extends JMenuBar {
 	private void addOptions() {
 		options = new JMenu("Options");
 
-		JMenu i1 = new JMenu("Choose mode");
-		general = new JMenuItem("General");
-		i1.add(general);
-		exceptional = new JMenuItem("Exceptional");
-		i1.add(exceptional);
-		options.add(i1);
+		JMenu mode = new JMenu("Choose mode");
+		
+			general = new JMenuItem("General");
+			mode.add(general);
+			
+			exceptional = new JMenuItem("Exceptional");
+			mode.add(exceptional);
+		
+		options.add(mode);
 
 		add(options);
 	}
@@ -42,13 +47,13 @@ public class PreparedMenu extends JMenuBar {
 		advanced = new JMenu("Advanced");
 
 		JMenu configure = new JMenu("Configure");
-		
-		categoriesSubmenu = new JMenuItem("categories");
-		configure.add(categoriesSubmenu);
-		
-		branchesSubmenu = new JMenuItem("branches");
-		configure.add(branchesSubmenu);
-		
+
+			categoriesSubmenu = new JMenuItem("categories");
+			configure.add(categoriesSubmenu);
+	
+			branchesSubmenu = new JMenuItem("branches");
+			configure.add(branchesSubmenu);
+
 		advanced.add(configure);
 
 		add(advanced);
@@ -57,6 +62,13 @@ public class PreparedMenu extends JMenuBar {
 	private void addHelp() {
 		help = new JMenu("Help");
 		add(help);
+	}
+
+	public void addActionListener(ActionListener listener) {
+		general.addActionListener(listener);
+		exceptional.addActionListener(listener);
+		categoriesSubmenu.addActionListener(listener);
+		branchesSubmenu.addActionListener(listener);
 	}
 
 }

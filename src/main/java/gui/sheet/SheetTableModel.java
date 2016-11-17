@@ -1,8 +1,8 @@
-package gui;
+package gui.sheet;
 
 import javax.swing.table.AbstractTableModel;
 
-public class ProductTableModel extends AbstractTableModel {
+public class SheetTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -16,7 +16,7 @@ public class ProductTableModel extends AbstractTableModel {
 		return 0;
 	}
 
-	public Object getValueAt(int arg0, int arg1) {
+	public Object getValueAt(int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
 		return null;
 	}
