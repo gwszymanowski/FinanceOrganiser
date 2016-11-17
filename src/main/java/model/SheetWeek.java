@@ -1,24 +1,24 @@
 package model;
 
-import java.util.TreeMap;
+import java.util.LinkedHashSet;
 
 public class SheetWeek implements Comparable<SheetWeek> {
 
 	private int id;
-	private TreeMap<Item, Price> items;
+	private LinkedHashSet<SheetRow> items;
 	private int order;
 
 	public SheetWeek() {
-		this.items = new TreeMap<Item, Price>();
+		this.items = new LinkedHashSet<SheetRow>();
 	}
 
 	public SheetWeek(int id, int order) {
-		this.items = new TreeMap<Item, Price>();
+		this.items = new LinkedHashSet<SheetRow>();
 		this.id = id;
 		this.order = order;
 	}
 
-	public SheetWeek(int id, TreeMap<Item, Price> items, int order) {
+	public SheetWeek(int id, LinkedHashSet<SheetRow> items, int order) {
 		this.id = id;
 		this.items = items;
 		this.order = order;
@@ -32,11 +32,11 @@ public class SheetWeek implements Comparable<SheetWeek> {
 		this.id = id;
 	}
 
-	public TreeMap<Item, Price> getItems() {
+	public LinkedHashSet<SheetRow> getItems() {
 		return items;
 	}
 
-	public void setItems(TreeMap<Item, Price> items) {
+	public void setItems(LinkedHashSet<SheetRow> items) {
 		this.items = items;
 	}
 

@@ -1,10 +1,18 @@
 package model;
 
-public class Item implements Comparable<Item> {
+public class Branch {
 
 	private int id;
-	private Branch title;
-	private int order;
+	private String title;
+
+	public Branch(int id, String title) {
+		this.id = id;
+		this.title = title;
+	}
+
+	public Branch(String title) {
+		this.title = title;
+	}
 
 	public int getId() {
 		return id;
@@ -14,27 +22,18 @@ public class Item implements Comparable<Item> {
 		this.id = id;
 	}
 
-	public Branch getTitle() {
+	public String getTitle() {
 		return title;
 	}
 
-	public void setTitle(Branch title) {
+	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public int getOrder() {
-		return order;
-	}
-
-	public void setOrder(int order) {
-		this.order = order;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + order;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -47,19 +46,13 @@ public class Item implements Comparable<Item> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Item other = (Item) obj;
-		if (order != other.order)
-			return false;
+		Branch other = (Branch) obj;
 		if (title == null) {
 			if (other.title != null)
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
 		return true;
-	}
-
-	public int compareTo(Item e) {
-		return Integer.compare(this.order, e.getOrder());
 	}
 
 }

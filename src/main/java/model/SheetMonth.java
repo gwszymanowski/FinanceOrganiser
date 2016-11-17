@@ -1,9 +1,10 @@
 package model;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.TreeSet;
 
-public class SheetMonth {
+public class SheetMonth implements Comparable<SheetMonth> {
 
 	private int id;
 	private Date date;
@@ -52,6 +53,22 @@ public class SheetMonth {
 
 	public void setWeeks(TreeSet<SheetWeek> weeks) {
 		this.weeks = weeks;
+	}
+
+	public int compareTo(SheetMonth e) {
+
+		if (this.date == null || e.getDate() == null)
+			throw new NullPointerException("Object cannot be compared if date field is null");
+
+		Calendar cal = Calendar.getInstance();
+		
+		cal.setTime(this.date);
+		int thismonth = cal.get(Calendar.MONTH);
+
+		cal.setTime(e.getDate());
+		int givenMonth = cal.get(Calendar.MONTH);
+
+		return Integer.compare(thismonth, givenMonth);
 	}
 
 }

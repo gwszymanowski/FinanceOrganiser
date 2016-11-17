@@ -43,4 +43,32 @@ public class Price {
 		this.actual = actual;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		long temp;
+		temp = Double.doubleToLongBits(actual);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		temp = Double.doubleToLongBits(estimated);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Price other = (Price) obj;
+		if (Double.doubleToLongBits(actual) != Double.doubleToLongBits(other.actual))
+			return false;
+		if (Double.doubleToLongBits(estimated) != Double.doubleToLongBits(other.estimated))
+			return false;
+		return true;
+	}
+
 }
