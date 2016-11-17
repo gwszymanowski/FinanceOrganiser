@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import general.Settings;
+import gui.branch.BranchView;
 import gui.category.CategoryView;
 import listener.MenuListener;
 
@@ -14,6 +15,7 @@ public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	PreparedMenu menu;
 	CategoryView categoryView;
+	BranchView branchView;
 	JPanel cards;
 
 	public MainFrame() {
@@ -25,8 +27,9 @@ public class MainFrame extends JFrame {
 	private void initCards() {
 
 		categoryView = new CategoryView();
+		branchView = new BranchView();
 		cards = new JPanel(new CardLayout());
-
+		cards.add(branchView, "branch");
 		cards.add(categoryView, "category");
 		add(cards);
 

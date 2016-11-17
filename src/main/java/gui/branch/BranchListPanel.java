@@ -1,5 +1,6 @@
 package gui.branch;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class BranchListPanel extends JPanel {
@@ -8,6 +9,8 @@ public class BranchListPanel extends JPanel {
 
 	public BranchListPanel() {
 
+		add(new JLabel("BRANCH LIST"));
+		
 	}
 
 }

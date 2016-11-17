@@ -24,10 +24,10 @@ public class BasicOptionsListener implements ActionListener {
 
 		if (e.getSource() == options.persistView) {
 			cardLayout.show(cards, "add");
-			System.out.println("PERSIST");
 		} else if (e.getSource() == options.listView) {
 			cardLayout.show(cards, "list");
-			System.out.println("LIST");
+		} else {
+			throw new IllegalAccessError();
 		}
 	}
 

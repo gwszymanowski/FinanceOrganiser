@@ -23,19 +23,15 @@ public class MenuListener implements ActionListener {
 		CardLayout cardLayout = (CardLayout) cards.getLayout();
 
 		if (e.getSource() == menu.branchesSubmenu) {
-			cardLayout.show(cards, "");
-			System.out.println("BRANCHES");
+			cardLayout.show(cards, "branch");
 		} else if (e.getSource() == menu.categoriesSubmenu) {
 			cardLayout.show(cards, "category");
-			System.out.println("CATEGORIES");
 		} else if (e.getSource() == menu.general) {
 			cardLayout.show(cards, "");
-			System.out.println("GENERAL");
 		} else if (e.getSource() == menu.exceptional) {
 			cardLayout.show(cards, "");
-			System.out.println("EXCEPTIONAL");
 		} else {
-			System.out.println("LOL");
+			throw new IllegalAccessError();
 		}
 
 	}
