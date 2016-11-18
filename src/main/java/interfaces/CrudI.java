@@ -4,11 +4,11 @@ import java.util.List;
 
 public interface CrudI<T> {
 
-	public boolean add(T object);
+	public void add(T object);
 
-	public boolean update(T object);
+	public void update(T object);
 
-	public boolean delete(int id);
+	public void delete(int id);
 
 	public List<T> getAll();
 

@@ -1,4 +1,4 @@
-package gui.branch;
+package gui.item;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -10,15 +10,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class BranchAddPanel extends JPanel {
+public class ItemAddPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public BranchAddPanel() {
+	public ItemAddPanel() {
 		setLayout(new BorderLayout());
 		
 		JPanel topPanel = new JPanel(new GridBagLayout());
-		topPanel.add(new JLabel("ADD NEW BRANCH"));
+		topPanel.add(new JLabel("ADD NEW ITEM"));
 		
 		add(topPanel, BorderLayout.NORTH);
 		

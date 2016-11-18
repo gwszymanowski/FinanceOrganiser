@@ -14,20 +14,24 @@ public class ItemService implements CrudI<Item> {
 		this.repo = new ItemRepository();
 	}
 
-	public boolean add(Item object) {
-		return repo.add(object);
+	public void add(Item object) {
+		repo.add(object);
 	}
 
-	public boolean update(Item object) {
-		return repo.update(object);
+	public void update(Item object) {
+		repo.update(object);
 	}
 
-	public boolean delete(int id) {
-		return repo.delete(id);
+	public void delete(int id) {
+		repo.delete(id);
 	}
 
 	public List<Item> getAll() {
 		return repo.getAll();
+	}
+	
+	public int getCount() {
+		return repo.getCount();
 	}
 
 }

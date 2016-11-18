@@ -1,4 +1,4 @@
-package gui.branch;
+package gui.item;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -8,25 +8,25 @@ import javax.swing.JPanel;
 import gui.BasicOptionsPanel;
 import listener.BasicOptionsListener;
 
-public class BranchView extends JPanel {
+public class ItemView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	BasicOptionsPanel options;
-	BranchListPanel listPanel;
-	BranchAddPanel addPanel;
+	ItemListPanel listPanel;
+	ItemAddPanel addPanel;
 	JPanel cards;
 	
-	public BranchView() {
+	public ItemView() {
 		setLayout(new BorderLayout());
 		options = new BasicOptionsPanel();
 
 		cards = new JPanel(new CardLayout());
 
-		listPanel = new BranchListPanel();
+		listPanel = new ItemListPanel();
 		cards.add(listPanel, "list");
 
-		addPanel = new BranchAddPanel();
+		addPanel = new ItemAddPanel();
 		cards.add(addPanel, "add");
 
 		options.addCardListeners(new BasicOptionsListener(options, cards));

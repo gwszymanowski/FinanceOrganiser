@@ -14,20 +14,24 @@ public class CategoryService implements CrudI<Category> {
 		this.repo = new CategoryRepository();
 	}
 
-	public boolean add(Category object) {
-		return repo.add(object);
+	public void add(Category object) {
+		repo.add(object);
 	}
 
-	public boolean update(Category object) {
-		return repo.update(object);
+	public void update(Category object) {
+		repo.update(object);
 	}
 
-	public boolean delete(int id) {
-		return repo.delete(id);
+	public void delete(int id) {
+		repo.delete(id);
 	}
 
 	public List<Category> getAll() {
 		return repo.getAll();
+	}
+	
+	public int getCount() {
+		return repo.getCount();
 	}
 
 }

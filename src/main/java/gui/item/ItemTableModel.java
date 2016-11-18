@@ -1,21 +1,21 @@
-package gui.category;
+package gui.item;
 
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import model.Category;
-import service.CategoryService;
+import model.Item;
+import service.ItemService;
 
-public class CategoryTableModel extends AbstractTableModel {
+public class ItemTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 
-	private List<Category> list;
-	private CategoryService service;
+	private List<Item> list;
+	private ItemService service;
 	
-	public CategoryTableModel() {
-		service = new CategoryService();
+	public ItemTableModel() {
+		service = new ItemService();
 		list = service.getAll();
 	}
 	
@@ -29,13 +29,13 @@ public class CategoryTableModel extends AbstractTableModel {
 
 	public Object getValueAt(int row, int col) {
 		
-		Category cat = list.get(row);
+		Item item = list.get(row);
 		
 		switch(col) {
 		case 0:
-			return cat.getTitle();
+			return item.getTitle();
 		case 1:
-			return cat.getOrder();
+			return item.getOrder();
 		}
 		return null;
 	}

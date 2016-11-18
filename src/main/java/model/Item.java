@@ -6,6 +6,12 @@ public class Item implements Comparable<Item> {
 	private String title;
 	private int order;
 
+	public Item(int id, String title, int order) {
+		this.id = id;
+		this.title = title;
+		this.order = order;
+	}
+
 	public int getId() {
 		return id;
 	}

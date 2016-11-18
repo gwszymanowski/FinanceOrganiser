@@ -1,26 +1,142 @@
 package repository;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import general.Database;
 import interfaces.CrudI;
 import model.Category;
 
 public class CategoryRepository implements CrudI<Category> {
 
-	public boolean add(Category object) {
-		return false;
+	public void add(Category cat) {
+
+		PreparedStatement stmt = null;
+		Database db = Database.getInstance();
+		Connection conn = db.getConnection();
+
+		try {
+
+			String insertSql = "INSERT INTO category(title) VALUES(?)";
+
+			stmt = conn.prepareStatement(insertSql);
+			stmt.setString(1, cat.getTitle());
+
+			stmt.executeUpdate();
+
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
-	public boolean update(Category object) {
-		return false;
+	public void update(Category cat) {
+
+		PreparedStatement stmt = null;
+		Database db = Database.getInstance();
+		Connection conn = db.getConnection();
+
+		try {
+
+			String updateSql = "UPDATE category SET title=? WHERE id=?";
+
+			stmt = conn.prepareStatement(updateSql);
+
+			stmt.setString(1, cat.getTitle());
+			stmt.setInt(2, cat.getId());
+
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
-	public boolean delete(int id) {
-		return false;
+	public void delete(int id) {
+		PreparedStatement stmt = null;
+		Database db = Database.getInstance();
+		Connection conn = db.getConnection();
+		try {
+
+			String deleteSql = "DELETE FROM category WHERE id = ?";
+			stmt = conn.prepareStatement(deleteSql);
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public List<Category> getAll() {
-		return null;
+
+		List<Category> categories = new ArrayList<Category>();
+
+		PreparedStatement stmt = null;
+		Database db = Database.getInstance();
+		Connection conn = db.getConnection();
+		try {
+
+			String selectSql = "SELECT * FROM category";
+
+			stmt = conn.prepareStatement(selectSql);
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+
+				Integer id = rs.getInt("id");
+				String title = rs.getString("title");
+				int order = rs.getInt("order_num");
+
+				Category s = new Category(id, title, order);
+				categories.add(s);
+
+			}
+			stmt.close();
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return categories;
+	}
+
+	public int getCount() {
+
+		PreparedStatement stmt = null;
+		Database db = Database.getInstance();
+		Connection conn = db.getConnection();
+		int count = 0;
+		try {
+
+			String selectSql = "SELECT count(*) as count FROM category";
+
+			stmt = conn.prepareStatement(selectSql);
+
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+
+			count = rs.getInt("count");
+
+			stmt.close();
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return count;
 	}
 
 }
