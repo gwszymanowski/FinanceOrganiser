@@ -3,7 +3,7 @@ package model;
 public class Item implements Comparable<Item> {
 
 	private int id;
-	private Branch title;
+	private String title;
 	private int order;
 
 	public int getId() {
@@ -14,20 +14,20 @@ public class Item implements Comparable<Item> {
 		this.id = id;
 	}
 
-	public Branch getTitle() {
-		return title;
-	}
-
-	public void setTitle(Branch title) {
-		this.title = title;
-	}
-
 	public int getOrder() {
 		return order;
 	}
 
 	public void setOrder(int order) {
 		this.order = order;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	@Override

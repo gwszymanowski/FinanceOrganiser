@@ -2,20 +2,18 @@ package model;
 
 import java.util.Date;
 
-public class SheetRow implements Comparable<SheetRow> {
+public class SheetRow {
 
 	private Item item;
 	private Category category;
 	private Price price;
-	private int order;
 	private Date createdAt;
 	private Date lastModified;
 
-	public SheetRow(Item item, Category category, Price price, int order) {
+	public SheetRow(Item item, Category category, Price price) {
 		this.item = item;
 		this.category = category;
 		this.price = price;
-		this.order = order;
 		this.createdAt = new Date();
 	}
 
@@ -43,15 +41,6 @@ public class SheetRow implements Comparable<SheetRow> {
 
 	public void setPrice(Price price) {
 		this.price = price;
-		this.lastModified = new Date();
-	}
-
-	public int getOrder() {
-		return order;
-	}
-
-	public void setOrder(int order) {
-		this.order = order;
 		this.lastModified = new Date();
 	}
 
@@ -100,8 +89,5 @@ public class SheetRow implements Comparable<SheetRow> {
 		return true;
 	}
 
-	public int compareTo(SheetRow o) {	
-		return Integer.compare(this.order, o.getOrder());
-	}
 
 }
