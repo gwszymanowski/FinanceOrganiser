@@ -16,27 +16,34 @@ public class MainFrame extends JFrame {
 	PreparedMenu menu;
 	CategoryView categoryView;
 	BranchView branchView;
+	EntryPanel entryPanel;
 	JPanel cards;
 
 	public MainFrame() {
+		initPanels();
 		initCards();
-		initComponents();
+		initMenu();
 		initSettings();
 	}
 
 	private void initCards() {
 
-		categoryView = new CategoryView();
-		branchView = new BranchView();
 		cards = new JPanel(new CardLayout());
+		cards.add(entryPanel, "entry");
 		cards.add(branchView, "branch");
 		cards.add(categoryView, "category");
 		add(cards);
 
 	}
 
-	private void initComponents() {
-		
+	private void initPanels() {
+		categoryView = new CategoryView();
+		branchView = new BranchView();
+		entryPanel = new EntryPanel();
+	}
+
+	private void initMenu() {
+
 		menu = new PreparedMenu();
 		menu.addActionListener(new MenuListener(menu, cards));
 

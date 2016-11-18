@@ -31,6 +31,7 @@ public class MenuListener implements ActionListener {
 		} else if (e.getSource() == menu.exceptional) {
 			cardLayout.show(cards, "");
 		} else {
+			cardLayout.show(cards, "entry");
 			throw new IllegalAccessError();
 		}
 
