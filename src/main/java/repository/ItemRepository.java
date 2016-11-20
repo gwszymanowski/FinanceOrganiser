@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import general.Database;
-import interfaces.CrudI;
 import model.Item;
 
-public class ItemRepository implements CrudI<Item> {
+public class ItemRepository implements CrudRepositoryI<Item> {
 
 	public void add(Item item) {
 

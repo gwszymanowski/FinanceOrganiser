@@ -51,7 +51,7 @@ public class MainFrame extends JFrame {
 	}
 
 	private void initSettings() {
-		setAlwaysOnTop(true);
+	
 		setSize(Settings.WIDTH, Settings.HEIGHT);
 		setTitle("Personal finances");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

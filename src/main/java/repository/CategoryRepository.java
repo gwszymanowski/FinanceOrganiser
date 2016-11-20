@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import general.Database;
-import interfaces.CrudI;
 import model.Category;
 
-public class CategoryRepository implements CrudI<Category> {
+public class CategoryRepository implements CrudRepositoryI<Category> {
 
 	public void add(Category cat) {
 
@@ -30,7 +29,6 @@ public class CategoryRepository implements CrudI<Category> {
 
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -54,7 +52,6 @@ public class CategoryRepository implements CrudI<Category> {
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -72,7 +69,6 @@ public class CategoryRepository implements CrudI<Category> {
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -105,7 +101,6 @@ public class CategoryRepository implements CrudI<Category> {
 			stmt.close();
 			rs.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -132,7 +127,6 @@ public class CategoryRepository implements CrudI<Category> {
 			stmt.close();
 			rs.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

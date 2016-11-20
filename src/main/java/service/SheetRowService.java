@@ -2,11 +2,10 @@ package service;
 
 import java.util.List;
 
-import interfaces.CrudI;
 import model.SheetRow;
 import repository.SheetRowRepository;
 
-public class SheetRowService implements CrudI<SheetRow>{
+public class SheetRowService implements CrudServiceI<SheetRow>{
 
 	private SheetRowRepository repo;
 	

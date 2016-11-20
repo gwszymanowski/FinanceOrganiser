@@ -13,25 +13,33 @@ public class CategoryTableModel extends AbstractTableModel {
 
 	private List<Category> list;
 	private CategoryService service;
-	
+	private String[] colNames = {"Title", "Order number"};
+
 	public CategoryTableModel() {
 		service = new CategoryService();
 		list = service.getAll();
+
+
 	}
-	
+
+	@Override
+	public String getColumnName(int col) {
+		return colNames[col];
+	}
+
 	public int getColumnCount() {
 		return 2;
 	}
 
 	public int getRowCount() {
-		return service.getCount();
+		return list.size();
 	}
 
 	public Object getValueAt(int row, int col) {
-		
+
 		Category cat = list.get(row);
-		
-		switch(col) {
+
+		switch (col) {
 		case 0:
 			return cat.getTitle();
 		case 1:

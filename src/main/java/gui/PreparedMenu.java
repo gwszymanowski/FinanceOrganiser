@@ -51,7 +51,7 @@ public class PreparedMenu extends JMenuBar {
 			categoriesSubmenu = new JMenuItem("categories");
 			configure.add(categoriesSubmenu);
 	
-			branchesSubmenu = new JMenuItem("branches");
+			branchesSubmenu = new JMenuItem("static items");
 			configure.add(branchesSubmenu);
 
 		advanced.add(configure);

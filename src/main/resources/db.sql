@@ -8,7 +8,8 @@ title varchar(45)
 create table item (
 id int primary key auto_increment,
 title varchar(45),
-order_num int
+order_num int,
+isMain boolean
 );
 
 create table sheetRow(

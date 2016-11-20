@@ -8,11 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import general.Database;
-import interfaces.CrudI;
-import model.Category;
 import model.SheetRow;
 
-public class SheetRowRepository implements CrudI<SheetRow> {
+public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 	public void add(SheetRow s) {
 		
@@ -39,7 +37,6 @@ public class SheetRowRepository implements CrudI<SheetRow> {
 
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -68,7 +65,6 @@ public class SheetRowRepository implements CrudI<SheetRow> {
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -87,7 +83,6 @@ public class SheetRowRepository implements CrudI<SheetRow> {
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -110,6 +105,7 @@ public class SheetRowRepository implements CrudI<SheetRow> {
 			stmt = conn.prepareStatement(sb.toString());
 
 			ResultSet rs = stmt.executeQuery();
+			System.out.println(rs.toString());
 
 //			while (rs.next()) {
 //
@@ -125,16 +121,36 @@ public class SheetRowRepository implements CrudI<SheetRow> {
 			stmt.close();
 			rs.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		
-		return null;
+		return categories;
 	}
 	
 	public int getCount() {
-		return 0;
+		PreparedStatement stmt = null;
+		Database db = Database.getInstance();
+		Connection conn = db.getConnection();
+		int count = 0;
+		try {
+
+			String selectSql = "SELECT count(*) as count FROM sheetrow";
+
+			stmt = conn.prepareStatement(selectSql);
+
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+
+			count = rs.getInt("count");
+
+			stmt.close();
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return count;
 	}
 
 }

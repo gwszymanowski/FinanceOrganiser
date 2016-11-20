@@ -6,6 +6,13 @@ public class Category {
 	private String title;
 	private int order;
 
+	public Category() {
+	}
+
+	public Category(String title) {
+		this.title = title;
+	}
+
 	public Category(String title, int order) {
 		this.title = title;
 		this.order = order;

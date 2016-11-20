@@ -2,11 +2,10 @@ package service;
 
 import java.util.List;
 
-import interfaces.CrudI;
 import model.Category;
 import repository.CategoryRepository;
 
-public class CategoryService implements CrudI<Category> {
+public class CategoryService implements CrudServiceI<Category>{
 
 	private CategoryRepository repo;
 

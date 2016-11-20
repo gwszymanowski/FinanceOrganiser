@@ -2,11 +2,10 @@ package service;
 
 import java.util.List;
 
-import interfaces.CrudI;
 import model.Item;
 import repository.ItemRepository;
 
-public class ItemService implements CrudI<Item> {
+public class ItemService implements CrudServiceI<Item> {
 
 	private ItemRepository repo;
 

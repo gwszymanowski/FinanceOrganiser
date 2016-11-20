@@ -13,12 +13,18 @@ public class ItemTableModel extends AbstractTableModel {
 
 	private List<Item> list;
 	private ItemService service;
-	
+	private String[] colNames = { "Title", "Order number" };
+
 	public ItemTableModel() {
 		service = new ItemService();
 		list = service.getAll();
 	}
-	
+
+	@Override
+	public String getColumnName(int col) {
+		return colNames[col];
+	}
+
 	public int getColumnCount() {
 		return 2;
 	}
@@ -28,10 +34,10 @@ public class ItemTableModel extends AbstractTableModel {
 	}
 
 	public Object getValueAt(int row, int col) {
-		
+
 		Item item = list.get(row);
-		
-		switch(col) {
+
+		switch (col) {
 		case 0:
 			return item.getTitle();
 		case 1:
