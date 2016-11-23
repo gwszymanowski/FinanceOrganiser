@@ -4,8 +4,10 @@ import java.util.Date;
 
 public class SheetRow {
 
-	private String item;
+	private int id;
+	private String title;
 	private Category category;
+	private int order;
 	private Price price;
 	private Date createdAt;
 	private Date lastModified;
@@ -16,20 +18,46 @@ public class SheetRow {
 		this.lastModified = new Date();
 	}
 
-	public SheetRow(String item, Category category, Price price) {
-		this.item = item;
+	public SheetRow(String title, Category category, Price price) {
+		this.title = title;
 		this.category = category;
 		this.price = price;
 		this.createdAt = new Date();
 		this.lastModified = new Date();
 	}
 
-	public String getItem() {
-		return item;
+	public SheetRow(int id, String title, int order, Category category, Price price) {
+		this.id = id;
+		this.title = title;
+		this.order = order;
+		this.category = category;
+		this.price = price;
+		this.createdAt = new Date();
+		this.lastModified = new Date();
 	}
 
-	public void setItem(String item) {
-		this.item = item;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getOrder() {
+		return order;
+	}
+
+	public void setOrder(int order) {
+		this.order = order;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 		this.lastModified = new Date();
 	}
 
@@ -64,7 +92,7 @@ public class SheetRow {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((category == null) ? 0 : category.hashCode());
-		result = prime * result + ((item == null) ? 0 : item.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + ((price == null) ? 0 : price.hashCode());
 		return result;
 	}
@@ -83,10 +111,10 @@ public class SheetRow {
 				return false;
 		} else if (!category.equals(other.category))
 			return false;
-		if (item == null) {
-			if (other.item != null)
+		if (title == null) {
+			if (other.title != null)
 				return false;
-		} else if (!item.equals(other.item))
+		} else if (!title.equals(other.title))
 			return false;
 		if (price == null) {
 			if (other.price != null)
@@ -94,6 +122,12 @@ public class SheetRow {
 		} else if (!price.equals(other.price))
 			return false;
 		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "SheetRow [title=" + title + ", category=" + category + ", price=" + price + ", createdAt=" + createdAt
+				+ ", lastModified=" + lastModified + "]";
 	}
 
 }

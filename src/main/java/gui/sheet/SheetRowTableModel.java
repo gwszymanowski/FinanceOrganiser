@@ -41,7 +41,7 @@ public class SheetRowTableModel extends AbstractTableModel {
 
 		switch (col) {
 		case 0:
-			return sheetRow.getItem();
+			return sheetRow.getTitle();
 		case 1:
 			return sheetRow.getCategory().getTitle();
 		case 2:

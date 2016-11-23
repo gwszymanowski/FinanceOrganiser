@@ -78,7 +78,7 @@ public class SheetRowAddPanel extends JPanel {
 				String title = nameField.getText();
 				Category t = (Category)categoryBox.getSelectedItem();
 				sheetrow.setCategory(t);
-				sheetrow.setItem(title);
+				sheetrow.setTitle(title);
 				
 			}
 

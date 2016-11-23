@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
 import general.Database;
+import model.Category;
+import model.Price;
 import model.SheetRow;
 
 public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
@@ -21,16 +24,16 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		try {
 
 			StringBuilder sb = new StringBuilder();
-			sb.append("INSERT INTO category");
+			sb.append("INSERT INTO sheetrow");
 			sb.append("(title, estimated, actual, created_at, modified_at, category_id) ");
 			sb.append("VALUES(?, ?, ?, ?, ?, ?)");
 		
 			stmt = conn.prepareStatement(sb.toString());
-			stmt.setString(1, s.getItem());
+			stmt.setString(1, s.getTitle());
 			stmt.setDouble(2, s.getPrice().getEstimated());
 			stmt.setDouble(3, s.getPrice().getActual());
-			stmt.setDate(4, java.sql.Date.valueOf(s.getCreatedAt().toString()));
-			stmt.setDate(5, java.sql.Date.valueOf(s.getLastModified().toString()));
+			stmt.setTimestamp(4, new Timestamp(s.getCreatedAt().getTime()));
+			stmt.setTimestamp(5, new Timestamp(s.getCreatedAt().getTime()));
 			stmt.setInt(6, s.getCategory().getId());
 
 			stmt.executeUpdate();
@@ -97,25 +100,32 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		try {
 
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT * FROM sheetrow s ");
+			sb.append("SELECT s.id, s.title, s.order_num, s.estimated, s.actual, c.id, c.title FROM sheetrow s ");
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
+			sb.append("ORDER BY s.order_num, c.title");
 		
 			stmt = conn.prepareStatement(sb.toString());
-			System.out.println(sb.toString());
-			ResultSet rs = stmt.executeQuery();
+			ResultSet rs = stmt.executeQuery();			
 			
+			while (rs.next()) {
 
-//			while (rs.next()) {
-//
-//				Integer id = rs.getInt("id");
-//				String title = rs.getString("title");
-//				int order = rs.getInt("order_num");
-//
-//				SheetRow s = new SheetRow();
-//
-//				categories.add(s);
-//
-//			}
+				int id = rs.getInt(1);
+				String title = rs.getString(2);
+				int order = rs.getInt(3);
+				
+				double estimated = rs.getDouble(4);
+				double actual = rs.getDouble(5);
+				Price p = new Price(estimated, actual);
+				
+				int categoryId = rs.getInt(6);
+				String categoryTitle = rs.getString(7);				
+				Category c = new Category(categoryId, categoryTitle);
+
+				SheetRow s = new SheetRow(id, title, order, c, p);
+
+				categories.add(s);
+
+			}
 			stmt.close();
 			rs.close();
 		} catch (SQLException e) {

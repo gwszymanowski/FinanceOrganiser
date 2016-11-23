@@ -4,7 +4,6 @@ public class Category {
 
 	private int id;
 	private String title;
-	private int order;
 
 	public Category() {
 	}
@@ -13,15 +12,9 @@ public class Category {
 		this.title = title;
 	}
 
-	public Category(String title, int order) {
-		this.title = title;
-		this.order = order;
-	}
-
-	public Category(int id, String title, int order) {
+	public Category(int id, String title) {
 		this.id = id;
 		this.title = title;
-		this.order = order;
 	}
 
 	public int getId() {
@@ -40,19 +33,10 @@ public class Category {
 		this.title = title;
 	}
 
-	public int getOrder() {
-		return order;
-	}
-
-	public void setOrder(int order) {
-		this.order = order;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + order;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -66,8 +50,6 @@ public class Category {
 		if (getClass() != obj.getClass())
 			return false;
 		Category other = (Category) obj;
-		if (order != other.order)
-			return false;
 		if (title == null) {
 			if (other.title != null)
 				return false;
@@ -77,14 +59,12 @@ public class Category {
 	}
 
 	public String getFullString() {
-		return "Category [id=" + id + ", title=" + title + ", order=" + order + "]";
+		return "Category [id=" + id + ", title=" + title + "]";
 	}
-	
+
 	@Override
 	public String toString() {
 		return title;
 	}
 
-
-	
 }

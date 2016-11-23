@@ -71,4 +71,9 @@ public class Price {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return "Price [estimated=" + estimated + ", actual=" + actual + "]";
+	}
+
 }

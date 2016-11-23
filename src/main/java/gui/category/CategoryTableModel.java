@@ -13,7 +13,7 @@ public class CategoryTableModel extends AbstractTableModel {
 
 	private List<Category> list;
 	private CategoryService service;
-	private String[] colNames = { "Title", "Order number" };
+	private String[] colNames = { "Title" };
 
 	public CategoryTableModel() {
 		service = new CategoryService();
@@ -27,7 +27,7 @@ public class CategoryTableModel extends AbstractTableModel {
 	}
 
 	public int getColumnCount() {
-		return 2;
+		return 1;
 	}
 
 	public int getRowCount() {
@@ -41,8 +41,6 @@ public class CategoryTableModel extends AbstractTableModel {
 		switch (col) {
 		case 0:
 			return cat.getTitle();
-		case 1:
-			return cat.getOrder();
 		}
 		return null;
 	}
