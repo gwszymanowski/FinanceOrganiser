@@ -6,6 +6,9 @@ public class Item implements Comparable<Item> {
 	private String title;
 	private int order;
 
+	public Item() {
+	}
+
 	public Item(int id, String title, int order) {
 		this.id = id;
 		this.title = title;
@@ -66,6 +69,11 @@ public class Item implements Comparable<Item> {
 
 	public int compareTo(Item e) {
 		return Integer.compare(this.order, e.getOrder());
+	}
+
+	@Override
+	public String toString() {
+		return "Item [title=" + title + ", order=" + order + "]";
 	}
 
 }

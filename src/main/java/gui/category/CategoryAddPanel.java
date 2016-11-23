@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import listener.CompositeActionListener;
 import listener.ConfirmListener;
 import model.Category;
 import service.CategoryService;
@@ -47,18 +48,20 @@ public class CategoryAddPanel extends JPanel {
 		
 		cat = new Category();
 		
-		//this is launched second
-		submit.addActionListener(new ConfirmListener(new CategoryService(), cat));
+		CompositeActionListener listener = new CompositeActionListener();
 		
-		//this is launched first. Set values
-		submit.addActionListener(new ActionListener() {
+		listener.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				String title = field.getText();
 				cat.setTitle(title);
 			}
 			
-		});
+		}, 1);
+		
+		listener.addActionListener(new ConfirmListener(new CategoryService(), cat), 2);
+
+		submit.addActionListener(listener);
 		
 		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		bottomPanel.add(submit);

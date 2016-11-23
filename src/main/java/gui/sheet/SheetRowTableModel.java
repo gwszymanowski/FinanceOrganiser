@@ -13,12 +13,18 @@ public class SheetRowTableModel extends AbstractTableModel {
 
 	private List<SheetRow> list;
 	private SheetRowService service;
-	
+	private String[] colNames = { "Item", "Category", "Estimated price", "Actual price" };
+
+	@Override
+	public String getColumnName(int col) {
+		return colNames[col];
+	}
+
 	public SheetRowTableModel() {
 		service = new SheetRowService();
 		list = service.getAll();
 	}
-	
+
 	public int getColumnCount() {
 		return 4;
 	}
@@ -28,10 +34,10 @@ public class SheetRowTableModel extends AbstractTableModel {
 	}
 
 	public Object getValueAt(int row, int col) {
-		
+
 		SheetRow sheetRow = list.get(row);
 
-		switch(col) {
+		switch (col) {
 		case 0:
 			return sheetRow.getItem().getTitle();
 		case 1:
@@ -41,7 +47,7 @@ public class SheetRowTableModel extends AbstractTableModel {
 		case 3:
 			return sheetRow.getPrice().getActual();
 		}
-		
+
 		return null;
 	}
 
