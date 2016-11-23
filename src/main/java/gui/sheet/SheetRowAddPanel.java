@@ -56,41 +56,51 @@ public class SheetRowAddPanel extends JPanel {
 
 		body.add(new JLabel("Category: "), c);
 
-		categoryBox = new JComboBox<Category>();
+		JComboBox<Category> categoryBox = getCategoryComboBox();
 
-		List<Category> categories = categoryService.getAll();
-
-		for (Category cat : categories)
-			categoryBox.addItem(cat);
-		
 		c.gridx++;
 		body.add(categoryBox, c);
 
 		submit = new JButton("Submit");
 
+		addListeners();
+
+		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		bottomPanel.add(submit);
+		add(bottomPanel, BorderLayout.SOUTH);
+	}
+
+	private void addListeners() {
+
 		sheetrow = new SheetRow();
-		
+
 		CompositeActionListener listener = new CompositeActionListener();
 
 		listener.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				String title = nameField.getText();
-				Category t = (Category)categoryBox.getSelectedItem();
+				Category t = (Category) categoryBox.getSelectedItem();
 				sheetrow.setCategory(t);
 				sheetrow.setTitle(title);
-				
-			}
 
+			}
 		}, 1);
 
 		listener.addActionListener(new ConfirmListener(new SheetRowService(), sheetrow), 2);
 
 		submit.addActionListener(listener);
+	}
+	
+	private JComboBox<Category> getCategoryComboBox() {
+		JComboBox<Category> box = new JComboBox<Category>();
 
-		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		bottomPanel.add(submit);
-		add(bottomPanel, BorderLayout.SOUTH);
+		List<Category> categories = categoryService.getAll();
+
+		for (Category cat : categories)
+			box.addItem(cat);
+		
+		return box;
 	}
 
 }

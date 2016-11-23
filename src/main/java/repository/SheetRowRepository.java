@@ -100,7 +100,8 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		try {
 
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT s.id, s.title, s.order_num, s.estimated, s.actual, c.id, c.title FROM sheetrow s ");
+			sb.append("SELECT s.id, s.title, s.order_num, s.estimated, s.actual, ");
+			sb.append("c.id, c.title FROM sheetrow s ");
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
 			sb.append("ORDER BY s.order_num, c.title");
 		

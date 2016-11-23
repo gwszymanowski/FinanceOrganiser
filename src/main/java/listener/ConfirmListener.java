@@ -25,10 +25,9 @@ public class ConfirmListener implements ActionListener {
 				"Are you sure you want to add it?"
         		, "Confirm", dialogButton);
 
-        if(dialogResult == JOptionPane.YES_OPTION){
-        	System.out.println(o);
+        if(dialogResult == JOptionPane.YES_OPTION)
         	service.add(o);
-    	} 
+    	
 		
 	}
 

@@ -23,6 +23,7 @@ public class ItemAddPanel extends JPanel {
 
 	private Item item;
 	private JTextField field;
+	private JButton submit;
 
 	public ItemAddPanel() {
 		setLayout(new BorderLayout());
@@ -43,11 +44,19 @@ public class ItemAddPanel extends JPanel {
 		body.add(field, c);
 		add(body, BorderLayout.CENTER);
 
-		JButton submit = new JButton("Submit");
+		submit = new JButton("Submit");
 
+		addListeners();
+
+		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		bottomPanel.add(submit);
+		add(bottomPanel, BorderLayout.SOUTH);
+
+	}
+
+	private void addListeners() {
 		item = new Item();
 
-		
 		CompositeActionListener listener = new CompositeActionListener();
 		listener.addActionListener(new ActionListener() {
 
@@ -57,15 +66,10 @@ public class ItemAddPanel extends JPanel {
 			}
 
 		}, 1);
-		
-		listener.addActionListener(new ConfirmListener(new ItemService(), item), 2);
-	
-		submit.addActionListener(listener);
-	
-		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		bottomPanel.add(submit);
-		add(bottomPanel, BorderLayout.SOUTH);
 
+		listener.addActionListener(new ConfirmListener(new ItemService(), item), 2);
+
+		submit.addActionListener(listener);
 	}
 
 }

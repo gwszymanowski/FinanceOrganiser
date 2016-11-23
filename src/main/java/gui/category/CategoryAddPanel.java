@@ -24,7 +24,7 @@ public class CategoryAddPanel extends JPanel {
 	private JButton submit;
 	private JTextField field;
 	private Category cat;
-	
+
 	public CategoryAddPanel() {
 		setLayout(new BorderLayout());
 
@@ -46,26 +46,30 @@ public class CategoryAddPanel extends JPanel {
 
 		submit = new JButton("Submit");
 		
+		addListeners();
+
+		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		bottomPanel.add(submit);
+		add(bottomPanel, BorderLayout.SOUTH);
+	}
+
+	private void addListeners() {
 		cat = new Category();
-		
+
 		CompositeActionListener listener = new CompositeActionListener();
-		
+
 		listener.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
 				String title = field.getText();
 				cat.setTitle(title);
 			}
-			
+
 		}, 1);
-		
+
 		listener.addActionListener(new ConfirmListener(new CategoryService(), cat), 2);
 
 		submit.addActionListener(listener);
-		
-		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		bottomPanel.add(submit);
-		add(bottomPanel, BorderLayout.SOUTH);
 	}
 
 }
