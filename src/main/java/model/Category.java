@@ -76,9 +76,15 @@ public class Category {
 		return true;
 	}
 
-	@Override
-	public String toString() {
+	public String getFullString() {
 		return "Category [id=" + id + ", title=" + title + ", order=" + order + "]";
 	}
+	
+	@Override
+	public String toString() {
+		return title;
+	}
 
+
+	
 }

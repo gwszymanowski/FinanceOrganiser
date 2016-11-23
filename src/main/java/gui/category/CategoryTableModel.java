@@ -13,12 +13,11 @@ public class CategoryTableModel extends AbstractTableModel {
 
 	private List<Category> list;
 	private CategoryService service;
-	private String[] colNames = {"Title", "Order number"};
+	private String[] colNames = { "Title", "Order number" };
 
 	public CategoryTableModel() {
 		service = new CategoryService();
 		list = service.getAll();
-
 
 	}
 

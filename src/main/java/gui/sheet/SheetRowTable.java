@@ -3,6 +3,7 @@ package gui.sheet;
 import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 public class SheetRowTable extends JPanel {
@@ -17,7 +18,9 @@ public class SheetRowTable extends JPanel {
 		table = new JTable(model);
 		
 		setLayout(new BorderLayout());
-		add(table, BorderLayout.CENTER);
+		
+		JScrollPane scroll = new JScrollPane(table);  
+		add(scroll, BorderLayout.CENTER);
 	
 	}
 

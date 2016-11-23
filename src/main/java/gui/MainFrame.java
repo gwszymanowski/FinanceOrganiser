@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import general.Settings;
 import gui.category.CategoryView;
 import gui.item.ItemView;
+import gui.sheet.SheetRowView;
 import listener.MenuListener;
 
 public class MainFrame extends JFrame {
@@ -17,6 +18,7 @@ public class MainFrame extends JFrame {
 	CategoryView categoryView;
 	ItemView branchView;
 	EntryPanel entryPanel;
+	SheetRowView sheetRowView;
 	JPanel cards;
 
 	public MainFrame() {
@@ -32,6 +34,7 @@ public class MainFrame extends JFrame {
 		cards.add(entryPanel, "entry");
 		cards.add(branchView, "branch");
 		cards.add(categoryView, "category");
+		cards.add(sheetRowView, "general");
 		add(cards);
 
 	}
@@ -40,6 +43,7 @@ public class MainFrame extends JFrame {
 		categoryView = new CategoryView();
 		branchView = new ItemView();
 		entryPanel = new EntryPanel();
+		sheetRowView = new SheetRowView();
 	}
 
 	private void initMenu() {

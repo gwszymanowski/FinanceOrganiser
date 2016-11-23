@@ -9,6 +9,10 @@ public class Item implements Comparable<Item> {
 	public Item() {
 	}
 
+	public Item(String title) {
+		this.title = title;
+	}
+
 	public Item(int id, String title, int order) {
 		this.id = id;
 		this.title = title;
@@ -73,7 +77,7 @@ public class Item implements Comparable<Item> {
 
 	@Override
 	public String toString() {
-		return "Item [title=" + title + ", order=" + order + "]";
+		return title;
 	}
 
 }

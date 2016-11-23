@@ -23,11 +23,11 @@ public class MenuListener implements ActionListener {
 		CardLayout cardLayout = (CardLayout) cards.getLayout();
 
 		if (e.getSource() == menu.branchesSubmenu) {
-			cardLayout.show(cards, "branch");
+			cardLayout.show(cards, "");
 		} else if (e.getSource() == menu.categoriesSubmenu) {
 			cardLayout.show(cards, "category");
 		} else if (e.getSource() == menu.general) {
-			cardLayout.show(cards, "");
+			cardLayout.show(cards, "general");
 		} else if (e.getSource() == menu.exceptional) {
 			cardLayout.show(cards, "");
 		} else {

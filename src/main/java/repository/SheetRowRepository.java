@@ -22,15 +22,15 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 			StringBuilder sb = new StringBuilder();
 			sb.append("INSERT INTO category");
-			sb.append("(estimated, actual, created_at, modified_at, item_id, category_id) ");
+			sb.append("(title, estimated, actual, created_at, modified_at, category_id) ");
 			sb.append("VALUES(?, ?, ?, ?, ?, ?)");
 		
 			stmt = conn.prepareStatement(sb.toString());
-			stmt.setDouble(1, s.getPrice().getEstimated());
-			stmt.setDouble(2, s.getPrice().getActual());
-			stmt.setDate(3, java.sql.Date.valueOf(s.getCreatedAt().toString()));
-			stmt.setDate(4, java.sql.Date.valueOf(s.getLastModified().toString()));
-			stmt.setInt(5, s.getItem().getId());
+			stmt.setString(1, s.getItem());
+			stmt.setDouble(2, s.getPrice().getEstimated());
+			stmt.setDouble(3, s.getPrice().getActual());
+			stmt.setDate(4, java.sql.Date.valueOf(s.getCreatedAt().toString()));
+			stmt.setDate(5, java.sql.Date.valueOf(s.getLastModified().toString()));
 			stmt.setInt(6, s.getCategory().getId());
 
 			stmt.executeUpdate();
@@ -52,14 +52,13 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 			StringBuilder sb = new StringBuilder();
 			sb.append("UPDATE sheetrow SET estimated=?, actual=?, modified_at=?, ");
-			sb.append("item_id=?, category_id=? WHERE id=?");
+			sb.append("category_id=? WHERE id=?");
 			
 			stmt = conn.prepareStatement(sb.toString());
 
 			stmt.setDouble(1, s.getPrice().getEstimated());
 			stmt.setDouble(2, s.getPrice().getActual());
 			stmt.setDate(3, java.sql.Date.valueOf(s.getLastModified().toString()));
-			stmt.setInt(4, s.getItem().getId());
 			stmt.setInt(5, s.getCategory().getId());
 
 			stmt.executeUpdate();
@@ -98,14 +97,13 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		try {
 
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT s FROM sheetrow s ");
+			sb.append("SELECT * FROM sheetrow s ");
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
-			sb.append("INNER JOIN item i ON(s.item_id=i.id)");
 		
 			stmt = conn.prepareStatement(sb.toString());
-
+			System.out.println(sb.toString());
 			ResultSet rs = stmt.executeQuery();
-			System.out.println(rs.toString());
+			
 
 //			while (rs.next()) {
 //
@@ -136,7 +134,6 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		try {
 
 			String selectSql = "SELECT count(*) as count FROM sheetrow";
-
 			stmt = conn.prepareStatement(selectSql);
 
 			ResultSet rs = stmt.executeQuery();

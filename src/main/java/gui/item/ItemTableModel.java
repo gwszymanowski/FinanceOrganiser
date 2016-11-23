@@ -1,5 +1,6 @@
 package gui.item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -17,7 +18,8 @@ public class ItemTableModel extends AbstractTableModel {
 
 	public ItemTableModel() {
 		service = new ItemService();
-		list = service.getAll();
+		list = new ArrayList<Item>();
+		//list = service.getAll();
 	}
 
 	@Override
@@ -30,7 +32,7 @@ public class ItemTableModel extends AbstractTableModel {
 	}
 
 	public int getRowCount() {
-		return service.getCount();
+		return 0;
 	}
 
 	public Object getValueAt(int row, int col) {

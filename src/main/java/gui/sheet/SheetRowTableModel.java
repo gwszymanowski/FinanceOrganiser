@@ -1,5 +1,6 @@
 package gui.sheet;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -22,6 +23,7 @@ public class SheetRowTableModel extends AbstractTableModel {
 
 	public SheetRowTableModel() {
 		service = new SheetRowService();
+		list = new ArrayList<SheetRow>();
 		list = service.getAll();
 	}
 
@@ -30,7 +32,7 @@ public class SheetRowTableModel extends AbstractTableModel {
 	}
 
 	public int getRowCount() {
-		return service.getCount();
+		return list.size();
 	}
 
 	public Object getValueAt(int row, int col) {
@@ -39,7 +41,7 @@ public class SheetRowTableModel extends AbstractTableModel {
 
 		switch (col) {
 		case 0:
-			return sheetRow.getItem().getTitle();
+			return sheetRow.getItem();
 		case 1:
 			return sheetRow.getCategory().getTitle();
 		case 2:

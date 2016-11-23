@@ -4,24 +4,31 @@ import java.util.Date;
 
 public class SheetRow {
 
-	private Item item;
+	private String item;
 	private Category category;
 	private Price price;
 	private Date createdAt;
 	private Date lastModified;
 
-	public SheetRow(Item item, Category category, Price price) {
+	public SheetRow() {
+		this.price = new Price(0, 0);
+		this.createdAt = new Date();
+		this.lastModified = new Date();
+	}
+
+	public SheetRow(String item, Category category, Price price) {
 		this.item = item;
 		this.category = category;
 		this.price = price;
 		this.createdAt = new Date();
+		this.lastModified = new Date();
 	}
 
-	public Item getItem() {
+	public String getItem() {
 		return item;
 	}
 
-	public void setItem(Item item) {
+	public void setItem(String item) {
 		this.item = item;
 		this.lastModified = new Date();
 	}
@@ -88,6 +95,5 @@ public class SheetRow {
 			return false;
 		return true;
 	}
-
 
 }
