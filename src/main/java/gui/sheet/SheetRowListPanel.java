@@ -14,6 +14,8 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import listener.CompositeActionListener;
+
 public class SheetRowListPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -86,6 +88,7 @@ public class SheetRowListPanel extends JPanel {
 
 	private void addListeners() {
 
+	
 		slider.addChangeListener(new ChangeListener() {
 
 			@Override
@@ -94,6 +97,7 @@ public class SheetRowListPanel extends JPanel {
 				setMonth(String.valueOf(sliderVal));
 				setPickDate();
 				sheetrowPanel.setDatePick(pickDate);
+				refresh(Integer.parseInt(month), Integer.parseInt(year));
 			}
 
 		});
@@ -106,6 +110,7 @@ public class SheetRowListPanel extends JPanel {
 				setYear(boxVal);
 				setPickDate();
 				sheetrowPanel.setDatePick(pickDate);
+				refresh(Integer.parseInt(month), Integer.parseInt(year));
 			}
 
 		});
@@ -118,6 +123,10 @@ public class SheetRowListPanel extends JPanel {
 
 	public void setYear(String year) {
 		this.year = year;
+	}
+	
+	private void refresh(int monthNum, int yearNum) {
+		table.refresh(monthNum, yearNum);
 	}
 
 	private void setPickDate() {
