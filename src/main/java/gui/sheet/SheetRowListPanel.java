@@ -14,8 +14,6 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-import listener.CompositeActionListener;
-
 public class SheetRowListPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -25,6 +23,7 @@ public class SheetRowListPanel extends JPanel {
 	JSlider slider;
 	JComboBox<String> yearBox;
 	SheetRowAddPanel sheetrowPanel;
+	JLabel actualPriceLabel;
 	private String month, year, pickDate;
 
 	public SheetRowListPanel(SheetRowAddPanel sheetrowPanel) {
@@ -38,14 +37,16 @@ public class SheetRowListPanel extends JPanel {
 
 		bottomPanel = new JPanel(new BorderLayout());
 		setSlider();
-		setYearBox();
+
+		table = new SheetRowTable(slider.getValue(), 2016);
+		add(table, BorderLayout.CENTER);
+
+		setYearBoxPanel();
+		setSumLabel();
 
 		addListeners();
 		initializeYearMonthValues();
 		sheetrowPanel.setDatePick(pickDate);
-
-		table = new SheetRowTable(slider.getValue(), 2016);
-		add(table, BorderLayout.CENTER);
 
 		add(bottomPanel, BorderLayout.SOUTH);
 
@@ -70,12 +71,32 @@ public class SheetRowListPanel extends JPanel {
 		bottomPanel.add(slider, BorderLayout.WEST);
 	}
 
-	private void setYearBox() {
-		yearBox = new JComboBox<>();
-		yearBox.addItem(new String("2016"));
-		yearBox.addItem(new String("2017"));
+	private void setYearBoxPanel() {
 
-		bottomPanel.add(yearBox, BorderLayout.CENTER);
+		JPanel mainPanel = new JPanel(new BorderLayout());
+		
+		JPanel yearBoxPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+
+			yearBox = new JComboBox<>();
+			yearBox.addItem(new String("2016"));
+			yearBox.addItem(new String("2017"));
+			yearBox.setToolTipText(new String("Choose year"));
+			yearBox.setBorder(BorderFactory.createEmptyBorder(10, 30, 0, 0));
+
+		yearBoxPanel.add(yearBox);
+		
+		mainPanel.add(yearBoxPanel, BorderLayout.WEST);
+
+		JPanel pricePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+
+			actualPriceLabel = new JLabel("");
+			actualPriceLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 10, 40));
+
+		pricePanel.add(actualPriceLabel);
+
+		mainPanel.add(pricePanel, BorderLayout.EAST);
+
+		bottomPanel.add(mainPanel, BorderLayout.CENTER);
 	}
 
 	private void initializeYearMonthValues() {
@@ -88,16 +109,13 @@ public class SheetRowListPanel extends JPanel {
 
 	private void addListeners() {
 
-	
 		slider.addChangeListener(new ChangeListener() {
 
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				int sliderVal = slider.getValue();
 				setMonth(String.valueOf(sliderVal));
-				setPickDate();
-				sheetrowPanel.setDatePick(pickDate);
-				refresh(Integer.parseInt(month), Integer.parseInt(year));
+				setGeneralValues();
 			}
 
 		});
@@ -108,13 +126,18 @@ public class SheetRowListPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String boxVal = (String) yearBox.getSelectedItem();
 				setYear(boxVal);
-				setPickDate();
-				sheetrowPanel.setDatePick(pickDate);
-				refresh(Integer.parseInt(month), Integer.parseInt(year));
+				setGeneralValues();
 			}
 
 		});
 
+	}
+
+	private void setGeneralValues() {
+		setPickDate();
+		sheetrowPanel.setDatePick(pickDate);
+		refresh(Integer.parseInt(month), Integer.parseInt(year));
+		setSumLabel();
 	}
 
 	public void setMonth(String month) {
@@ -124,9 +147,14 @@ public class SheetRowListPanel extends JPanel {
 	public void setYear(String year) {
 		this.year = year;
 	}
-	
+
 	private void refresh(int monthNum, int yearNum) {
 		table.refresh(monthNum, yearNum);
+	}
+
+	private void setSumLabel() {
+		double sum = table.getList().stream().mapToDouble(x -> x.getPrice().getActual()).sum();
+		actualPriceLabel.setText(String.valueOf(sum));
 	}
 
 	private void setPickDate() {

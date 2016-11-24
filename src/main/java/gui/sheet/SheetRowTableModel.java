@@ -65,4 +65,10 @@ public class SheetRowTableModel extends AbstractTableModel {
 		fireTableDataChanged();
 	}
 
+	public List<SheetRow> getList() {
+		return list;
+	}
+	
+	
+
 }

@@ -1,10 +1,13 @@
 package gui.sheet;
 
 import java.awt.BorderLayout;
+import java.util.List;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import model.SheetRow;
 
 public class SheetRowTable extends JPanel {
 
@@ -27,6 +30,10 @@ public class SheetRowTable extends JPanel {
 	public void refresh(int monthNum, int yearNum) {
 		model.reloadData(monthNum, yearNum);
 		model.fireTableDataChanged();
+	}
+	
+	public List<SheetRow> getList() {
+		return model.getList();
 	}
 
 }
