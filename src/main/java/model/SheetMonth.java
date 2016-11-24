@@ -1,33 +1,30 @@
 package model;
 
+import java.sql.Date;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
-import java.util.Date;
+import java.util.Set;
 import java.util.TreeSet;
 
 public class SheetMonth implements Comparable<SheetMonth> {
 
 	private int id;
-	private Date date;
-	private TreeSet<SheetWeek> weeks;
+	private Instant date;
+	private Set<SheetRow> rows;
 
 	public SheetMonth() {
-		this.weeks = new TreeSet<SheetWeek>();
+		this.rows = new TreeSet<SheetRow>();
 	}
 
-	public SheetMonth(int id, Date date, TreeSet<SheetWeek> weeks) {
-		this.id = id;
-		this.date = date;
-		this.weeks = weeks;
-	}
-
-	public SheetMonth(int id, Date date) {
-		this.weeks = new TreeSet<SheetWeek>();
+	public SheetMonth(int id, Instant date) {
+		this.rows = new TreeSet<SheetRow>();
 		this.id = id;
 		this.date = date;
 	}
 
-	public SheetMonth(Date date) {
-		this.weeks = new TreeSet<SheetWeek>();
+	public SheetMonth(Instant date) {
+		this.rows = new TreeSet<SheetRow>();
 		this.date = date;
 	}
 
@@ -39,36 +36,47 @@ public class SheetMonth implements Comparable<SheetMonth> {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public Instant getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Instant date) {
 		this.date = date;
 	}
 
-	public TreeSet<SheetWeek> getWeeks() {
-		return weeks;
+	public Set<SheetRow> getRows() {
+		return rows;
 	}
 
-	public void setWeeks(TreeSet<SheetWeek> weeks) {
-		this.weeks = weeks;
+	public void setRows(Set<SheetRow> rows) {
+		this.rows = rows;
 	}
 
-	public int compareTo(SheetMonth e) {
+	public void addToSet(SheetRow row) {
+		this.rows.add(row);
+	}
 
-		if (this.date == null || e.getDate() == null)
-			throw new NullPointerException("Object cannot be compared if date field is null");
+	public int compareTo(SheetMonth s) {
 
-		Calendar cal = Calendar.getInstance();
-		
-		cal.setTime(this.date);
-		int thismonth = cal.get(Calendar.MONTH);
+		return 0;
 
-		cal.setTime(e.getDate());
-		int givenMonth = cal.get(Calendar.MONTH);
+	}
 
-		return Integer.compare(thismonth, givenMonth);
+	public boolean checkMonths(int month) {
+
+		java.util.Date d = Date.from(date);
+
+		Calendar c = Calendar.getInstance();
+
+		c.setTime(d);
+
+		int curr = c.get(Calendar.MONTH);
+
+		if (curr == month)
+			return true;
+		else
+			return false;
+
 	}
 
 }

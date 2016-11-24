@@ -15,6 +15,7 @@ public class SheetRowListPanel extends JPanel {
 
 	private SheetRowTable table;
 	private JPanel bottomPanel;
+	private JSlider slider;
 
 	public SheetRowListPanel() {
 		setLayout(new BorderLayout());
@@ -23,12 +24,11 @@ public class SheetRowListPanel extends JPanel {
 		topPanel.add(new JLabel("LIST OF EXPENSES:"));
 		add(topPanel, BorderLayout.NORTH);
 
-		table = new SheetRowTable();
-		add(table, BorderLayout.CENTER);
-
 		bottomPanel = new JPanel(new BorderLayout());
-
 		setSlider();
+
+		table = new SheetRowTable(slider.getValue(), 2016);
+		add(table, BorderLayout.CENTER);
 
 		add(bottomPanel, BorderLayout.SOUTH);
 
@@ -39,7 +39,7 @@ public class SheetRowListPanel extends JPanel {
 
 		int currentMonth = c.get(Calendar.MONTH) + 1;
 
-		JSlider slider = new JSlider(JSlider.HORIZONTAL, 1, 12, 1);
+		slider = new JSlider(JSlider.HORIZONTAL, 1, 12, 1);
 
 		slider.setMajorTickSpacing(3);
 		slider.setMinorTickSpacing(1);

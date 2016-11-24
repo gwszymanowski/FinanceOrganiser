@@ -13,8 +13,8 @@ public class SheetRowTable extends JPanel {
 	private JTable table;
 	private SheetRowTableModel model;
 	
-	public SheetRowTable() {
-		model = new SheetRowTableModel();
+	public SheetRowTable(int monthNum, int yearNum) {
+		model = new SheetRowTableModel(monthNum, yearNum);
 		table = new JTable(model);
 		
 		setLayout(new BorderLayout());

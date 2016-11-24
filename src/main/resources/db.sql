@@ -5,16 +5,16 @@ id int primary key auto_increment,
 title varchar(45)
 );
 
-create table sheetRow(
+create table sheetrow(
 id int primary key auto_increment,
+title varchar(45),
 order_num int,
 estimated double,
 actual double,
-created_at datetime,
 modified_at datetime,
+current datetime,
 category_id int,
-FOREIGN KEY(category_id) REFERENCES category(id) ON CASCADE DELETE
-
+FOREIGN KEY(category_id) REFERENCES category(id)
 );
 
 --create table item (

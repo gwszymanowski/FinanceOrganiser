@@ -1,30 +1,48 @@
 package gui.sheet;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 import javax.swing.table.AbstractTableModel;
 
+import model.SheetMonth;
 import model.SheetRow;
-import service.SheetRowService;
+import service.SheetMonthService;
 
 public class SheetRowTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 
 	private List<SheetRow> list;
-	private SheetRowService service;
+	private SheetMonthService service;
 	private String[] colNames = { "Item", "Category", "Estimated price", "Actual price" };
-
+	private int monthNum, yearNum;
+	private List<SheetMonth> sheets;
+	
 	@Override
 	public String getColumnName(int col) {
 		return colNames[col];
 	}
 
-	public SheetRowTableModel() {
-		service = new SheetRowService();
+	public SheetRowTableModel(int monthNum, int yearNum) {
+		this.monthNum = monthNum;
+		this.yearNum = yearNum;
+		service = new SheetMonthService();
+		
+		sheets = service.getByYear(yearNum);
+		Collections.sort(sheets);
+		
 		list = new ArrayList<SheetRow>();
-		list = service.getAll();
+		
+		
+		Optional<SheetMonth> sheetmonths = sheets.stream()
+				.filter(x -> x.checkMonths(monthNum) == true).findAny();
+		
+		//sheetmonths.
+		
+		//list.addAll()
 	}
 
 	public int getColumnCount() {

@@ -1,29 +1,30 @@
 package model;
 
-import java.util.Date;
+import java.time.Instant;
 
-public class SheetRow {
+public class SheetRow implements Comparable<SheetRow> {
 
 	private int id;
 	private String title;
 	private Category category;
 	private int order;
 	private Price price;
-	private Date createdAt;
-	private Date lastModified;
+	private Instant createdAt;
+	private Instant lastModified;
+	private Instant current;
 
 	public SheetRow() {
 		this.price = new Price(0, 0);
-		this.createdAt = new Date();
-		this.lastModified = new Date();
+		this.createdAt = Instant.now();
+		this.lastModified = Instant.now();
 	}
 
 	public SheetRow(String title, Category category, Price price) {
 		this.title = title;
 		this.category = category;
 		this.price = price;
-		this.createdAt = new Date();
-		this.lastModified = new Date();
+		this.createdAt = Instant.now();
+		this.lastModified = Instant.now();
 	}
 
 	public SheetRow(int id, String title, int order, Category category, Price price) {
@@ -32,8 +33,8 @@ public class SheetRow {
 		this.order = order;
 		this.category = category;
 		this.price = price;
-		this.createdAt = new Date();
-		this.lastModified = new Date();
+		this.createdAt = Instant.now();
+		this.lastModified = Instant.now();
 	}
 
 	public int getId() {
@@ -58,7 +59,7 @@ public class SheetRow {
 
 	public void setTitle(String title) {
 		this.title = title;
-		this.lastModified = new Date();
+		this.lastModified = Instant.now();
 	}
 
 	public Category getCategory() {
@@ -67,7 +68,7 @@ public class SheetRow {
 
 	public void setCategory(Category category) {
 		this.category = category;
-		this.lastModified = new Date();
+		this.lastModified = Instant.now();
 	}
 
 	public Price getPrice() {
@@ -76,15 +77,23 @@ public class SheetRow {
 
 	public void setPrice(Price price) {
 		this.price = price;
-		this.lastModified = new Date();
+		this.lastModified = Instant.now();
 	}
 
-	public Date getCreatedAt() {
+	public Instant getCreatedAt() {
 		return createdAt;
 	}
 
-	public Date getLastModified() {
+	public Instant getLastModified() {
 		return lastModified;
+	}
+
+	public Instant getCurrent() {
+		return current;
+	}
+
+	public void setCurrent(Instant current) {
+		this.current = current;
 	}
 
 	@Override
@@ -124,10 +133,8 @@ public class SheetRow {
 		return true;
 	}
 
-	@Override
-	public String toString() {
-		return "SheetRow [title=" + title + ", category=" + category + ", price=" + price + ", createdAt=" + createdAt
-				+ ", lastModified=" + lastModified + "]";
+	public int compareTo(SheetRow s) {
+		return Integer.compare(this.order, s.getOrder());
 	}
 
 }
