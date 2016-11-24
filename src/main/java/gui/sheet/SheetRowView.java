@@ -23,10 +23,9 @@ public class SheetRowView extends JPanel {
 
 		cards = new JPanel(new CardLayout());
 
-			listPanel = new SheetRowListPanel();
-			cards.add(listPanel, "list");
-	
 			addPanel = new SheetRowAddPanel();
+			listPanel = new SheetRowListPanel(addPanel);
+			cards.add(listPanel, "list");	
 			cards.add(addPanel, "add");
 
 		options.addCardListeners(new BasicOptionsListener(options, cards));

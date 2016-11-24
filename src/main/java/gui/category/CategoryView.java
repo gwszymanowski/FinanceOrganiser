@@ -26,7 +26,7 @@ public class CategoryView extends JPanel {
 			listPanel = new CategoryListPanel();
 			cards.add(listPanel, "list");
 	
-			addPanel = new CategoryAddPanel();
+			addPanel = new CategoryAddPanel(listPanel.table);
 			cards.add(addPanel, "add");
 
 		options.addCardListeners(new BasicOptionsListener(options, cards));

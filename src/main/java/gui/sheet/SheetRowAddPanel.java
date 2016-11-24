@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.Instant;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -25,9 +27,10 @@ public class SheetRowAddPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private JButton submit;
-	private JTextField nameField;
-	private JComboBox<Category> categoryBox;
+	JButton submit;
+	JTextField nameField;
+	JComboBox<Category> categoryBox;
+	JLabel datePickLabel;
 	private SheetRow sheetrow;
 	private CategoryService categoryService;
 
@@ -49,17 +52,23 @@ public class SheetRowAddPanel extends JPanel {
 		c.gridx++;
 		nameField = new JTextField(10);
 		body.add(nameField, c);
-		add(body, BorderLayout.CENTER);
 
 		c.gridx = 0;
 		c.gridy++;
-
 		body.add(new JLabel("Category: "), c);
 
-		JComboBox<Category> categoryBox = getCategoryComboBox();
-
+		categoryBox = getCategoryComboBox();
 		c.gridx++;
 		body.add(categoryBox, c);
+
+		c.gridx = 0;
+		c.gridy++;
+		body.add(new JLabel("Date:"), c);
+
+		c.gridx++;
+		datePickLabel = new JLabel("");
+		body.add(datePickLabel, c);
+		add(body, BorderLayout.CENTER);
 
 		submit = new JButton("Submit");
 
@@ -84,6 +93,18 @@ public class SheetRowAddPanel extends JPanel {
 				sheetrow.setCategory(t);
 				sheetrow.setTitle(title);
 
+				String chosenDate = datePickLabel.getText();
+
+				String[] yearmonth = chosenDate.split("/");
+
+				Calendar c = Calendar.getInstance();
+				
+				c.set(Calendar.YEAR, Integer.parseInt(yearmonth[0]));
+				c.set(Calendar.MONTH, Integer.parseInt(yearmonth[1]));
+
+			 	Instant inst = c.toInstant();				 
+ 				sheetrow.setCurrent(inst);
+
 			}
 		}, 1);
 
@@ -91,7 +112,7 @@ public class SheetRowAddPanel extends JPanel {
 
 		submit.addActionListener(listener);
 	}
-	
+
 	private JComboBox<Category> getCategoryComboBox() {
 		JComboBox<Category> box = new JComboBox<Category>();
 
@@ -99,8 +120,12 @@ public class SheetRowAddPanel extends JPanel {
 
 		for (Category cat : categories)
 			box.addItem(cat);
-		
+
 		return box;
+	}
+
+	public void setDatePick(String datePick) {
+		datePickLabel.setText(datePick);
 	}
 
 }

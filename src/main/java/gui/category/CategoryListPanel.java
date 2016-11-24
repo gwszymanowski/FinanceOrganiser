@@ -10,6 +10,8 @@ public class CategoryListPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	CategoryTable table;
+	
 	public CategoryListPanel() {
 		setLayout(new BorderLayout());
 		
@@ -17,7 +19,7 @@ public class CategoryListPanel extends JPanel {
 		topPanel.add(new JLabel("LIST OF CATEGORIES:"));
 		add(topPanel, BorderLayout.NORTH);
 		
-		CategoryTable table = new CategoryTable();
+		table = new CategoryTable();
 		add(table, BorderLayout.CENTER);
 
 	}

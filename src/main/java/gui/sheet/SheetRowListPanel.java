@@ -2,22 +2,32 @@ package gui.sheet;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Calendar;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 public class SheetRowListPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	private SheetRowTable table;
-	private JPanel bottomPanel;
-	private JSlider slider;
+	JPanel bottomPanel;
+	JSlider slider;
+	JComboBox<String> yearBox;
+	SheetRowAddPanel sheetrowPanel;
+	private String month, year, pickDate;
 
-	public SheetRowListPanel() {
+	public SheetRowListPanel(SheetRowAddPanel sheetrowPanel) {
+
+		this.sheetrowPanel = sheetrowPanel;
 		setLayout(new BorderLayout());
 
 		JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -26,6 +36,11 @@ public class SheetRowListPanel extends JPanel {
 
 		bottomPanel = new JPanel(new BorderLayout());
 		setSlider();
+		setYearBox();
+
+		addListeners();
+		initializeYearMonthValues();
+		sheetrowPanel.setDatePick(pickDate);
 
 		table = new SheetRowTable(slider.getValue(), 2016);
 		add(table, BorderLayout.CENTER);
@@ -51,6 +66,65 @@ public class SheetRowListPanel extends JPanel {
 		slider.setToolTipText(new String("Choose month"));
 
 		bottomPanel.add(slider, BorderLayout.WEST);
+	}
+
+	private void setYearBox() {
+		yearBox = new JComboBox<>();
+		yearBox.addItem(new String("2016"));
+		yearBox.addItem(new String("2017"));
+
+		bottomPanel.add(yearBox, BorderLayout.CENTER);
+	}
+
+	private void initializeYearMonthValues() {
+		int sliderVal = slider.getValue();
+		setMonth(String.valueOf(sliderVal));
+		String boxVal = (String) yearBox.getSelectedItem();
+		setYear(boxVal);
+		setPickDate();
+	}
+
+	private void addListeners() {
+
+		slider.addChangeListener(new ChangeListener() {
+
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				int sliderVal = slider.getValue();
+				setMonth(String.valueOf(sliderVal));
+				setPickDate();
+				sheetrowPanel.setDatePick(pickDate);
+			}
+
+		});
+
+		yearBox.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String boxVal = (String) yearBox.getSelectedItem();
+				setYear(boxVal);
+				setPickDate();
+				sheetrowPanel.setDatePick(pickDate);
+			}
+
+		});
+
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	private void setPickDate() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(this.year + "/");
+		sb.append(this.month);
+		this.pickDate = sb.toString();
 	}
 
 }

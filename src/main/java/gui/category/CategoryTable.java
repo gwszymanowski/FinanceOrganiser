@@ -23,5 +23,10 @@ public class CategoryTable extends JPanel {
 		add(scroll, BorderLayout.CENTER);
 	
 	}
+	
+	public void refresh() {
+		model.reloadData();
+		model.fireTableDataChanged();
+	}
 
 }

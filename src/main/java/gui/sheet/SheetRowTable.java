@@ -23,5 +23,10 @@ public class SheetRowTable extends JPanel {
 		add(scroll, BorderLayout.CENTER);
 	
 	}
+	
+	public void refresh(int monthNum, int yearNum) {
+		model.reloadData(monthNum, yearNum);
+		model.fireTableDataChanged();
+	}
 
 }

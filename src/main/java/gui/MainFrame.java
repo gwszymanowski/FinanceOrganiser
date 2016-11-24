@@ -10,6 +10,7 @@ import gui.category.CategoryView;
 import gui.item.ItemView;
 import gui.sheet.SheetRowView;
 import listener.MenuListener;
+import service.SheetMonthService;
 
 public class MainFrame extends JFrame {
 
@@ -26,6 +27,7 @@ public class MainFrame extends JFrame {
 		initCards();
 		initMenu();
 		initSettings();
+
 	}
 
 	private void initCards() {
@@ -34,7 +36,7 @@ public class MainFrame extends JFrame {
 		cards.add(entryPanel, "entry");
 		cards.add(branchView, "branch");
 		cards.add(categoryView, "category");
-		cards.add(sheetRowView, "general");
+		cards.add(sheetRowView, "exceptional");
 		add(cards);
 
 	}
@@ -61,6 +63,12 @@ public class MainFrame extends JFrame {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocation(Settings.X, Settings.Y);
 		setVisible(true);
+	}
+	
+	@SuppressWarnings("unused")
+	private void fill() {
+		SheetMonthService s = new SheetMonthService();
+		s.fill(2016);
 	}
 
 }

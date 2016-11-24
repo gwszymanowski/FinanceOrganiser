@@ -13,6 +13,7 @@ public class ItemTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 
 	private List<Item> list;
+	@SuppressWarnings("unused")
 	private ItemService service;
 	private String[] colNames = { "Title", "Order number" };
 

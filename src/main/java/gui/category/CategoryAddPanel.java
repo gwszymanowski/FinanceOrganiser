@@ -21,11 +21,13 @@ public class CategoryAddPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private JButton submit;
-	private JTextField field;
+	JButton submit;
+	JTextField field;
+	CategoryTable table;
 	private Category cat;
-
-	public CategoryAddPanel() {
+	
+	public CategoryAddPanel(CategoryTable table) {
+		this.table = table;
 		setLayout(new BorderLayout());
 
 		JPanel topPanel = new JPanel(new GridBagLayout());
@@ -68,6 +70,15 @@ public class CategoryAddPanel extends JPanel {
 		}, 1);
 
 		listener.addActionListener(new ConfirmListener(new CategoryService(), cat), 2);
+		
+		listener.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				table.refresh();			
+			}
+			
+		}, 3);
 
 		submit.addActionListener(listener);
 	}

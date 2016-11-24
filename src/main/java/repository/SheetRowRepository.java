@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import general.Database;
 import model.Category;
@@ -27,15 +25,15 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 			StringBuilder sb = new StringBuilder();
 			sb.append("INSERT INTO sheetrow");
-			sb.append("(title, estimated, actual, created_at, modified_at, category_id) ");
+			sb.append("(title, estimated, actual, modified_at, current, category_id) ");
 			sb.append("VALUES(?, ?, ?, ?, ?, ?)");
 		
 			stmt = conn.prepareStatement(sb.toString());
 			stmt.setString(1, s.getTitle());
 			stmt.setDouble(2, s.getPrice().getEstimated());
 			stmt.setDouble(3, s.getPrice().getActual());
-			stmt.setTimestamp(4, Timestamp.from(s.getCreatedAt()));
-			stmt.setTimestamp(5, Timestamp.from(s.getLastModified()));
+			stmt.setTimestamp(4, Timestamp.from(s.getLastModified()));
+			stmt.setTimestamp(5, Timestamp.from(s.getCurrent()));
 			stmt.setInt(6, s.getCategory().getId());
 
 			stmt.executeUpdate();
@@ -210,9 +208,9 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		return categories;
 	}
 	
-	public Set<SheetRow> getByYearMonth(int year, int month) {
+	public List<SheetRow> getByYearMonth(int year, int month) {
 		
-		Set<SheetRow> sheetRowSet = new TreeSet<SheetRow>();
+		List<SheetRow> sheetRowSet = new ArrayList<SheetRow>();
 		
 		PreparedStatement stmt = null;
 		Database db = Database.getInstance();

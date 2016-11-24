@@ -9,8 +9,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import general.Database;
 import model.SheetMonth;
@@ -38,6 +36,7 @@ public class SheetMonthRepository {
 			for (int i = month; i < 12; i++) {
 				c.set(Calendar.MONTH, i);
 				c.set(Calendar.YEAR, year);
+				
 				add(c.toInstant());
 			}
 
@@ -52,7 +51,7 @@ public class SheetMonthRepository {
 
 		try {
 
-			String query = "INSERT INTO sheetmonth(current) VALUES(?);";
+			String query = "INSERT INTO sheetrow(current) VALUES(?);";
 
 			stmt = conn.prepareStatement(query);
 			stmt.setTimestamp(1, Timestamp.from(inst));
@@ -87,7 +86,7 @@ public class SheetMonthRepository {
 
 		sheet.setDate(inst);
 
-		Set<SheetRow> set = new TreeSet<SheetRow>();
+		List<SheetRow> set = new ArrayList<SheetRow>();
 
 		set = sheetRowService.getByYearMonth(year, month);
 

@@ -1,7 +1,6 @@
 package service;
 
 import java.util.List;
-import java.util.Set;
 
 import model.SheetRow;
 import repository.SheetRowRepository;
@@ -38,7 +37,7 @@ public class SheetRowService implements CrudServiceI<SheetRow>{
 		return repo.getByMonth(month);
 	}
 	
-	public Set<SheetRow> getByYearMonth(int year, int month) {
+	public List<SheetRow> getByYearMonth(int year, int month) {
 		return repo.getByYearMonth(year, month);
 	}
 	
