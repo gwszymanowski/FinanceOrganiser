@@ -11,7 +11,7 @@ public class PreparedMenu extends JMenuBar {
 	private static final long serialVersionUID = 1L;
 
 	JMenu file, options, advanced, help;
-	public JMenuItem categoriesSubmenu, branchesSubmenu, general, exceptional;
+	public JMenuItem categoriesSubmenu, itemSubmenu, general, exceptional;
 
 	public PreparedMenu() {
 
@@ -48,11 +48,11 @@ public class PreparedMenu extends JMenuBar {
 
 		JMenu configure = new JMenu("Configure");
 
-			categoriesSubmenu = new JMenuItem("categories");
+			categoriesSubmenu = new JMenuItem("Categories");
 			configure.add(categoriesSubmenu);
 	
-			branchesSubmenu = new JMenuItem("static items");
-			configure.add(branchesSubmenu);
+			itemSubmenu = new JMenuItem("Static items");
+			configure.add(itemSubmenu);
 
 		advanced.add(configure);
 
@@ -68,7 +68,7 @@ public class PreparedMenu extends JMenuBar {
 		general.addActionListener(listener);
 		exceptional.addActionListener(listener);
 		categoriesSubmenu.addActionListener(listener);
-		branchesSubmenu.addActionListener(listener);
+		itemSubmenu.addActionListener(listener);
 	}
 
 }

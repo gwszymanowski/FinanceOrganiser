@@ -4,6 +4,7 @@ public class Item implements Comparable<Item> {
 
 	private int id;
 	private String title;
+	private Category category;
 	private int order;
 
 	public Item() {
@@ -43,11 +44,19 @@ public class Item implements Comparable<Item> {
 		this.title = title;
 	}
 
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + order;
+		result = prime * result + ((category == null) ? 0 : category.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		return result;
 	}
@@ -61,7 +70,10 @@ public class Item implements Comparable<Item> {
 		if (getClass() != obj.getClass())
 			return false;
 		Item other = (Item) obj;
-		if (order != other.order)
+		if (category == null) {
+			if (other.category != null)
+				return false;
+		} else if (!category.equals(other.category))
 			return false;
 		if (title == null) {
 			if (other.title != null)

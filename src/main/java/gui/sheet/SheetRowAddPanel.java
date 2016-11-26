@@ -92,6 +92,7 @@ public class SheetRowAddPanel extends JPanel {
 				Category t = (Category) categoryBox.getSelectedItem();
 				sheetrow.setCategory(t);
 				sheetrow.setTitle(title);
+				sheetrow.setStatic(false);
 
 				String chosenDate = datePickLabel.getText();
 

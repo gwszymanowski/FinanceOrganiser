@@ -9,6 +9,7 @@ public class SheetRow implements Comparable<SheetRow> {
 	private Category category;
 	private int order;
 	private Price price;
+	private boolean isStatic;
 	private Instant createdAt;
 	private Instant lastModified;
 	private Instant current;
@@ -78,6 +79,14 @@ public class SheetRow implements Comparable<SheetRow> {
 	public void setPrice(Price price) {
 		this.price = price;
 		this.lastModified = Instant.now();
+	}
+
+	public boolean isStatic() {
+		return isStatic;
+	}
+
+	public void setStatic(boolean isStatic) {
+		this.isStatic = isStatic;
 	}
 
 	public Instant getCreatedAt() {

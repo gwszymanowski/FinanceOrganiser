@@ -16,14 +16,14 @@ public class SheetRowTableModel extends AbstractTableModel {
 	private SheetRowService service;
 	private String[] colNames = { "Item", "Category", "Estimated price", "Actual price" };
 
-	@Override
-	public String getColumnName(int col) {
-		return colNames[col];
-	}
-
 	public SheetRowTableModel(int monthNum, int yearNum) {
 		service = new SheetRowService();
 		list = getRows(monthNum, yearNum);
+	}
+
+	@Override
+	public String getColumnName(int col) {
+		return colNames[col];
 	}
 
 	public int getColumnCount() {
@@ -54,7 +54,7 @@ public class SheetRowTableModel extends AbstractTableModel {
 
 	public List<SheetRow> getRows(int monthNum, int yearNum) {
 		List<SheetRow> list = new LinkedList<SheetRow>();
-		
+
 		list = service.getByYearMonth(yearNum, monthNum);
 		return list;
 
@@ -68,7 +68,5 @@ public class SheetRowTableModel extends AbstractTableModel {
 	public List<SheetRow> getList() {
 		return list;
 	}
-	
-	
 
 }

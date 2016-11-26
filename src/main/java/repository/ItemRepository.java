@@ -20,10 +20,11 @@ public class ItemRepository implements CrudRepositoryI<Item> {
 
 		try {
 
-			String insertSql = "INSERT INTO item(title) VALUES(?)";
+			String insertSql = "INSERT INTO item(title, category_id) VALUES(?, ?)";
 
 			stmt = conn.prepareStatement(insertSql);
 			stmt.setString(1, item.getTitle());
+			stmt.setInt(2, item.getCategory().getId());
 
 			stmt.executeUpdate();
 
@@ -43,12 +44,13 @@ public class ItemRepository implements CrudRepositoryI<Item> {
 
 		try {
 
-			String updateSql = "UPDATE item SET title=? WHERE id=?";
+			String updateSql = "UPDATE item SET title=?, category_id=? WHERE id=?";
 
 			stmt = conn.prepareStatement(updateSql);
 
 			stmt.setString(1, item.getTitle());
-			stmt.setInt(2, item.getId());
+			stmt.setInt(2, item.getCategory().getId());
+			stmt.setInt(3, item.getId());
 
 			stmt.executeUpdate();
 			stmt.close();

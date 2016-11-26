@@ -6,26 +6,33 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import listener.CompositeActionListener;
 import listener.ConfirmListener;
+import model.Category;
 import model.Item;
+import service.CategoryService;
 import service.ItemService;
 
 public class ItemAddPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
+	JTextField field;
+	JButton submit;
+	JComboBox<Category> categoryBox;
 	private Item item;
-	private JTextField field;
-	private JButton submit;
+	private CategoryService categoryService;
 
 	public ItemAddPanel() {
+		categoryService = new CategoryService();
 		setLayout(new BorderLayout());
 
 		JPanel topPanel = new JPanel(new GridBagLayout());
@@ -43,6 +50,13 @@ public class ItemAddPanel extends JPanel {
 		field = new JTextField(10);
 		body.add(field, c);
 		add(body, BorderLayout.CENTER);
+
+		c.gridx = 0;
+		c.gridy++;
+		body.add(new JLabel("Category: "), c);
+		c.gridx++;
+		categoryBox = getCategoryComboBox();
+		body.add(categoryBox, c);
 
 		submit = new JButton("Submit");
 
@@ -70,6 +84,17 @@ public class ItemAddPanel extends JPanel {
 		listener.addActionListener(new ConfirmListener(new ItemService(), item), 2);
 
 		submit.addActionListener(listener);
+	}
+
+	private JComboBox<Category> getCategoryComboBox() {
+		JComboBox<Category> box = new JComboBox<Category>();
+
+		List<Category> categories = categoryService.getAll();
+
+		for (Category cat : categories)
+			box.addItem(cat);
+
+		return box;
 	}
 
 }
