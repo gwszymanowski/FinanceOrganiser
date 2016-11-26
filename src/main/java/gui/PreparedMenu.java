@@ -6,12 +6,14 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import listener.FillListener;
+
 public class PreparedMenu extends JMenuBar {
 
 	private static final long serialVersionUID = 1L;
 
 	JMenu file, options, advanced, help;
-	public JMenuItem categoriesSubmenu, itemSubmenu, general, exceptional;
+	public JMenuItem categoriesSubmenu, itemSubmenu, general, exceptional, fill;
 
 	public PreparedMenu() {
 
@@ -31,13 +33,13 @@ public class PreparedMenu extends JMenuBar {
 		options = new JMenu("Options");
 
 		JMenu mode = new JMenu("Choose mode");
-		
-			general = new JMenuItem("General");
-			mode.add(general);
-			
-			exceptional = new JMenuItem("Exceptional");
-			mode.add(exceptional);
-		
+
+		general = new JMenuItem("General");
+		mode.add(general);
+
+		exceptional = new JMenuItem("Exceptional");
+		mode.add(exceptional);
+
 		options.add(mode);
 
 		add(options);
@@ -46,15 +48,21 @@ public class PreparedMenu extends JMenuBar {
 	private void addAdvanced() {
 		advanced = new JMenu("Advanced");
 
-		JMenu configure = new JMenu("Configure");
+		JMenu addConfigure = new JMenu("Configure");
 
 			categoriesSubmenu = new JMenuItem("Categories");
-			configure.add(categoriesSubmenu);
+			addConfigure.add(categoriesSubmenu);
 	
 			itemSubmenu = new JMenuItem("Static items");
-			configure.add(itemSubmenu);
+			addConfigure.add(itemSubmenu);
 
-		advanced.add(configure);
+		advanced.add(addConfigure);
+
+			fill = new JMenuItem("Fill");
+			
+			fill.addActionListener(new FillListener());
+
+		advanced.add(fill);
 
 		add(advanced);
 	}

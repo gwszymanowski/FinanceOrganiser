@@ -77,6 +77,9 @@ public class ItemAddPanel extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				String title = field.getText();
 				item.setTitle(title);
+				Category t = (Category) categoryBox.getSelectedItem();
+				item.setCategory(t);
+				
 			}
 
 		}, 1);

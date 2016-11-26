@@ -41,4 +41,8 @@ public class SheetRowService implements CrudServiceI<SheetRow>{
 		return repo.getByYearMonth(year, month);
 	}
 	
+	public void fill(int lastYear) {
+		repo.fill(lastYear);
+	}
+	
 }

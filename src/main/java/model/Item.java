@@ -14,10 +14,11 @@ public class Item implements Comparable<Item> {
 		this.title = title;
 	}
 
-	public Item(int id, String title, int order) {
+	public Item(int id, String title, int order, Category category) {
 		this.id = id;
 		this.title = title;
 		this.order = order;
+		this.category = category;
 	}
 
 	public int getId() {

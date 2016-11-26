@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import general.Database;
+import model.Category;
 import model.Item;
 
 public class ItemRepository implements CrudRepositoryI<Item> {
@@ -87,19 +88,23 @@ public class ItemRepository implements CrudRepositoryI<Item> {
 		Connection conn = db.getConnection();
 		try {
 
-			String selectSql = "SELECT * FROM item";
-
-			stmt = conn.prepareStatement(selectSql);
+			StringBuilder sb = new StringBuilder();
+			sb.append("SELECT i.id, i.title, i.order_num, c.title FROM item i ");
+			sb.append("INNER JOIN category c ON(i.category_id=c.id)");
+			
+			stmt = conn.prepareStatement(sb.toString());
 
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 
-				Integer id = rs.getInt("id");
-				String title = rs.getString("title");
-				int order = rs.getInt("order_num");
+				Integer id = rs.getInt(1);
+				String title = rs.getString(2);
+				int order = rs.getInt(3);
+				String category_title = rs.getString(4);
+				Category c = new Category(category_title);
 
-				Item s = new Item(id, title, order);
+				Item s = new Item(id, title, order, c);
 				items.add(s);
 
 			}
