@@ -10,6 +10,7 @@ import gui.category.CategoryView;
 import gui.item.ItemView;
 import gui.sheet.SheetRowView;
 import gui.staticsheet.StaticSheetView;
+import listener.DeleteListener;
 import listener.MenuListener;
 
 
@@ -55,7 +56,8 @@ public class MainFrame extends JFrame {
 	private void initMenu() {
 
 		menu = new PreparedMenu();
-		menu.addActionListener(new MenuListener(menu, cards));
+		menu.addInsertListener(new MenuListener(menu, cards));
+		menu.addDeleteListener(new DeleteListener(menu));
 
 		setJMenuBar(menu);
 	}

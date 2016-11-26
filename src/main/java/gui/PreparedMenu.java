@@ -14,6 +14,7 @@ public class PreparedMenu extends JMenuBar {
 
 	JMenu file, options, advanced, help;
 	public JMenuItem categoriesSubmenu, itemSubmenu, general, exceptional, fill;
+	public JMenuItem deleteAll, deleteTrues, deleteFalses;
 
 	public PreparedMenu() {
 
@@ -48,6 +49,14 @@ public class PreparedMenu extends JMenuBar {
 	private void addAdvanced() {
 		advanced = new JMenu("Advanced");
 
+		addConfigurations();
+		addDeletes();
+		addFill();
+	
+		add(advanced);
+	}
+	
+	private void addConfigurations() {
 		JMenu addConfigure = new JMenu("Configure");
 
 		categoriesSubmenu = new JMenuItem("Categories");
@@ -57,14 +66,30 @@ public class PreparedMenu extends JMenuBar {
 		addConfigure.add(itemSubmenu);
 
 		advanced.add(addConfigure);
+	}
+	
+	private void addDeletes() {
+		JMenu deleteConfigure = new JMenu("Delete");
 
+			deleteAll = new JMenuItem("all");
+			deleteConfigure.add(deleteAll);
+	
+			deleteTrues = new JMenuItem("general sheets");
+			deleteConfigure.add(deleteTrues);
+			
+			deleteFalses = new JMenuItem("exceptional sheets");
+			deleteConfigure.add(deleteFalses);
+
+		advanced.add(deleteConfigure);
+	}
+	
+	private void addFill() {
 		fill = new JMenuItem("Fill");
 
 		fill.addActionListener(new FillListener());
 
 		advanced.add(fill);
 
-		add(advanced);
 	}
 
 	private void addHelp() {
@@ -72,11 +97,17 @@ public class PreparedMenu extends JMenuBar {
 		add(help);
 	}
 
-	public void addActionListener(ActionListener listener) {
+	public void addInsertListener(ActionListener listener) {
 		general.addActionListener(listener);
 		exceptional.addActionListener(listener);
 		categoriesSubmenu.addActionListener(listener);
 		itemSubmenu.addActionListener(listener);
+	}
+	
+	public void addDeleteListener(ActionListener listener) {
+		deleteAll.addActionListener(listener);
+		deleteTrues.addActionListener(listener);
+		deleteFalses.addActionListener(listener);
 	}
 
 }

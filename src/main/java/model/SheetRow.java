@@ -31,6 +31,9 @@ public class SheetRow implements Comparable<SheetRow> {
 	}
 
 	public SheetRow(String title, Category category, int order, boolean isStatic, Instant current) {
+		this.price = new Price(0, 0);
+		this.createdAt = Instant.now();
+		this.lastModified = Instant.now();
 		this.title = title;
 		this.category = category;
 		this.order = order;
@@ -155,6 +158,13 @@ public class SheetRow implements Comparable<SheetRow> {
 
 	public int compareTo(SheetRow s) {
 		return Integer.compare(this.order, s.getOrder());
+	}
+
+	@Override
+	public String toString() {
+		return "SheetRow [id=" + id + ", title=" + title + ", category=" + category.getFullString() + ", order=" + order + ", price="
+				+ price + ", isStatic=" + isStatic + ", createdAt=" + createdAt + ", lastModified=" + lastModified
+				+ ", current=" + current + "]";
 	}
 
 }

@@ -22,7 +22,7 @@ import service.ItemService;
 public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 	public void add(SheetRow s) {
-
+		System.out.println(s);
 		PreparedStatement stmt = null;
 		Database db = Database.getInstance();
 		Connection conn = db.getConnection();
@@ -97,6 +97,40 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 	}
 
+	public void deleteAll() {
+		
+		PreparedStatement stmt = null;
+		Database db = Database.getInstance();
+		Connection conn = db.getConnection();
+		try {
+			String deleteSql = "DELETE FROM sheetrow";
+			stmt = conn.prepareStatement(deleteSql);
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void delete(boolean isStatic) {
+
+		PreparedStatement stmt = null;
+		Database db = Database.getInstance();
+		Connection conn = db.getConnection();
+		try {
+
+			String deleteSql = "DELETE FROM sheetrow WHERE isStatic=?";
+			stmt = conn.prepareStatement(deleteSql);
+			stmt.setBoolean(1, isStatic);
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
 	public List<SheetRow> getAll() {
 
 		List<SheetRow> categories = new ArrayList<SheetRow>();
@@ -112,7 +146,6 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
 			sb.append("WHERE c.isStatic=false");
 			sb.append("ORDER BY s.order_num, c.title");
-			
 
 			stmt = conn.prepareStatement(sb.toString());
 			ResultSet rs = stmt.executeQuery();
@@ -144,7 +177,7 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 		return categories;
 	}
-	
+
 	public List<SheetRow> getAll(boolean isStatic) {
 
 		List<SheetRow> categories = new ArrayList<SheetRow>();
@@ -160,7 +193,6 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
 			sb.append("WHERE c.isStatic=?");
 			sb.append("ORDER BY s.order_num, c.title");
-			
 
 			stmt = conn.prepareStatement(sb.toString());
 			stmt.setBoolean(1, isStatic);
@@ -335,8 +367,7 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 				for (Item item : items) {
 
-					SheetRow s = new SheetRow(item.getTitle(), item.getCategory(), item.getOrder(), 
-							true, givenDate);
+					SheetRow s = new SheetRow(item.getTitle(), item.getCategory(), item.getOrder(), true, givenDate);
 
 					add(s);
 				}
