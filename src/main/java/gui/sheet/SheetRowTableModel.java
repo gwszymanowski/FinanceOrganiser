@@ -13,8 +13,8 @@ public class SheetRowTableModel extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 
 	private List<SheetRow> list;
-	private SheetRowService service;
 	private String[] colNames = { "Item", "Category", "Estimated price", "Actual price" };
+	protected SheetRowService service;
 
 	public SheetRowTableModel(int monthNum, int yearNum) {
 		service = new SheetRowService();
@@ -55,7 +55,7 @@ public class SheetRowTableModel extends AbstractTableModel {
 	public List<SheetRow> getRows(int monthNum, int yearNum) {
 		List<SheetRow> list = new LinkedList<SheetRow>();
 
-		list = service.getByYearMonth(yearNum, monthNum);
+		list = service.getByYearMonth(yearNum, monthNum, false);
 		return list;
 
 	}

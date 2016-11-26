@@ -37,8 +37,8 @@ public class SheetRowService implements CrudServiceI<SheetRow>{
 		return repo.getByMonth(month);
 	}
 	
-	public List<SheetRow> getByYearMonth(int year, int month) {
-		return repo.getByYearMonth(year, month);
+	public List<SheetRow> getByYearMonth(int year, int month, boolean isStatic) {
+		return repo.getByYearMonth(year, month, isStatic);
 	}
 	
 	public void fill(int lastYear) {

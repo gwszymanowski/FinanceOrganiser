@@ -50,17 +50,17 @@ public class PreparedMenu extends JMenuBar {
 
 		JMenu addConfigure = new JMenu("Configure");
 
-			categoriesSubmenu = new JMenuItem("Categories");
-			addConfigure.add(categoriesSubmenu);
-	
-			itemSubmenu = new JMenuItem("Static items");
-			addConfigure.add(itemSubmenu);
+		categoriesSubmenu = new JMenuItem("Categories");
+		addConfigure.add(categoriesSubmenu);
+
+		itemSubmenu = new JMenuItem("Static items");
+		addConfigure.add(itemSubmenu);
 
 		advanced.add(addConfigure);
 
-			fill = new JMenuItem("Fill");
-			
-			fill.addActionListener(new FillListener());
+		fill = new JMenuItem("Fill");
+
+		fill.addActionListener(new FillListener());
 
 		advanced.add(fill);
 

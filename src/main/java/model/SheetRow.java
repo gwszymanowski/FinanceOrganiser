@@ -18,20 +18,31 @@ public class SheetRow implements Comparable<SheetRow> {
 		this.price = new Price(0, 0);
 		this.createdAt = Instant.now();
 		this.lastModified = Instant.now();
+		this.isStatic = false;
 	}
 
 	public SheetRow(String title, Category category, Price price) {
 		this.title = title;
 		this.category = category;
 		this.price = price;
+		this.isStatic = false;
 		this.createdAt = Instant.now();
 		this.lastModified = Instant.now();
+	}
+
+	public SheetRow(String title, Category category, int order, boolean isStatic, Instant current) {
+		this.title = title;
+		this.category = category;
+		this.order = order;
+		this.isStatic = isStatic;
+		this.current = current;
 	}
 
 	public SheetRow(int id, String title, int order, Category category, Price price) {
 		this.id = id;
 		this.title = title;
 		this.order = order;
+		this.isStatic = false;
 		this.category = category;
 		this.price = price;
 		this.createdAt = Instant.now();

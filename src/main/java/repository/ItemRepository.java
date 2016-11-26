@@ -28,7 +28,6 @@ public class ItemRepository implements CrudRepositoryI<Item> {
 			stmt.setInt(2, item.getCategory().getId());
 
 			stmt.executeUpdate();
-
 			stmt.close();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
