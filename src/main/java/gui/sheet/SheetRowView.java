@@ -33,4 +33,8 @@ public class SheetRowView extends JPanel {
 		add(options, BorderLayout.NORTH);
 		add(cards, BorderLayout.CENTER);
 	}
+	
+	public void refresh(int m, int y) {
+		listPanel.refresh(m, y);
+	}
 }

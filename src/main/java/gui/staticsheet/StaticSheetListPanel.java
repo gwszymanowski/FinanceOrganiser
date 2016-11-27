@@ -149,7 +149,7 @@ public class StaticSheetListPanel extends JPanel {
 		this.year = year;
 	}
 
-	private void refresh(int monthNum, int yearNum) {
+	public void refresh(int monthNum, int yearNum) {
 		table.refresh(monthNum, yearNum);
 	}
 

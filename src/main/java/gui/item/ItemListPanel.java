@@ -10,7 +10,7 @@ public class ItemListPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private ItemTable table;
+	ItemTable table;
 	
 	public ItemListPanel() {
 		setLayout(new BorderLayout());

@@ -26,7 +26,7 @@ public class ItemView extends JPanel {
 		listPanel = new ItemListPanel();
 		cards.add(listPanel, "list");
 
-		addPanel = new ItemAddPanel();
+		addPanel = new ItemAddPanel(listPanel.table);
 		cards.add(addPanel, "add");
 
 		options.addCardListeners(new BasicOptionsListener(options, cards));

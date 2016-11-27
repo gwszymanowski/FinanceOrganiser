@@ -30,8 +30,10 @@ public class ItemAddPanel extends JPanel {
 	JComboBox<Category> categoryBox;
 	private Item item;
 	private CategoryService categoryService;
-
-	public ItemAddPanel() {
+	private ItemTable table;
+	
+	public ItemAddPanel(ItemTable table) {
+		this.table = table;
 		categoryService = new CategoryService();
 		setLayout(new BorderLayout());
 
@@ -85,6 +87,15 @@ public class ItemAddPanel extends JPanel {
 		}, 1);
 
 		listener.addActionListener(new ConfirmListener(new ItemService(), item), 2);
+		
+		listener.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				table.refresh();			
+			}
+			
+		}, 3);
 
 		submit.addActionListener(listener);
 	}

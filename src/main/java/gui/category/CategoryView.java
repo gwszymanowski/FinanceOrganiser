@@ -32,8 +32,6 @@ public class CategoryView extends JPanel {
 		options.addCardListeners(new BasicOptionsListener(options, cards));
 
 		add(options, BorderLayout.NORTH);
-		
-
 		add(cards, BorderLayout.CENTER);
 
 	}

@@ -19,25 +19,27 @@ public class DeleteListener implements ActionListener {
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
-		int dialogButton = JOptionPane.YES_NO_OPTION;
-		int dialogResult = JOptionPane.showConfirmDialog(null, 
-				"Are you sure? It is irreversable."
-        		, "Confirm", dialogButton);
 
-        if(dialogResult == JOptionPane.YES_OPTION) {
-        	if (e.getSource() == menu.deleteAll) 
-    			service.deleteAll();
-    		else if (e.getSource() == menu.deleteTrues)
-    			service.delete(true);
-    		else if (e.getSource() == menu.deleteFalses) 
-    			service.delete(false);
-    		else throw new IllegalAccessError();
-        }
-        	
-		
-		
-		
+		int dialogButton = JOptionPane.YES_NO_OPTION;
+		int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure? It is irreversable.", "Confirm",
+				dialogButton);
+
+		if (dialogResult == JOptionPane.YES_OPTION) {
+			if (e.getSource() == menu.deleteAll) {
+				service.deleteAll();
+				JOptionPane.showMessageDialog(null, "Action finished");
+			}
+			else if (e.getSource() == menu.deleteTrues) {
+				service.delete(true);
+				JOptionPane.showMessageDialog(null, "Action finished");
+			}				
+			else if (e.getSource() == menu.deleteFalses) {
+				service.delete(false);
+				service.delete(false);
+			}			
+			else
+				throw new IllegalAccessError();
+		}
 
 	}
 

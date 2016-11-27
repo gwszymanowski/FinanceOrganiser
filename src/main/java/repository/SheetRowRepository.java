@@ -356,14 +356,14 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		ZonedDateTime zdt = ZonedDateTime.ofInstant(lastDate, ZoneId.systemDefault());
 		int year = zdt.getYear();
 		int month = zdt.getMonthValue();
-		
-		if(month !=0)
+
+		if (month != 0)
 			month--;
-		
+
 		for (int i = year; i <= lastYear; i++) {
 
 			for (int j = month; j < 12; j++) {
-		
+
 				Calendar c = Calendar.getInstance();
 				c.set(Calendar.YEAR, i);
 				c.set(Calendar.MONTH, j);
@@ -373,7 +373,8 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 					SheetRow s = new SheetRow(item.getTitle(), item.getCategory(), item.getOrder(), true, givenDate);
 
-					add(s);
+					if (isAdded(s) == false)
+						add(s);
 				}
 			}
 			month = 0;
@@ -429,7 +430,6 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 			stmt.close();
 			rs.close();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -437,6 +437,48 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 			return Instant.now();
 
 		return time.toInstant();
+	}
+
+	private boolean isAdded(SheetRow s) {
+
+		PreparedStatement stmt = null;
+		Database db = Database.getInstance();
+		Connection conn = db.getConnection();
+
+		int count = 0;
+
+		try {
+
+			StringBuilder sb = new StringBuilder();
+			sb.append("SELECT count(*) FROM sheetrow s WHERE ");
+			sb.append("YEAR(s.current)=? AND MONTH(s.current)=? ");
+			sb.append("AND isStatic=true AND title=? AND category_id=?");
+			stmt = conn.prepareStatement(sb.toString());
+
+			ZonedDateTime zdt = ZonedDateTime.ofInstant(s.getCurrent(), ZoneId.systemDefault());
+			int year = zdt.getYear();
+			int month = zdt.getMonthValue();
+
+			stmt.setInt(1, year);
+			stmt.setInt(2, month);
+			stmt.setString(3, s.getTitle());
+			stmt.setInt(4, s.getCategory().getId());
+
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+
+			count = rs.getInt(1);
+
+			stmt.close();
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		if (count == 0)
+			return false;
+
+		return true;
 	}
 
 }

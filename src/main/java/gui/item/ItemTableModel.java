@@ -45,5 +45,9 @@ public class ItemTableModel extends AbstractTableModel {
 		}
 		return null;
 	}
+	
+	public void reloadData() {
+		list = service.getAll();
+	}
 
 }

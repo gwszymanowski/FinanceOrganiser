@@ -17,5 +17,9 @@ public class StaticSheetView extends JPanel {
 
 		add(listPanel, BorderLayout.CENTER);
 	}
+	
+	public void refresh(int m, int y) {
+		listPanel.refresh(m, y);
+	}
 
 }

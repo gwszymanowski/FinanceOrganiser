@@ -11,7 +11,7 @@ public class ItemTable extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	private JTable table;
-	private ItemTableModel model;
+	ItemTableModel model;
 	
 	public ItemTable() {
 		model = new ItemTableModel();
@@ -22,6 +22,11 @@ public class ItemTable extends JPanel {
 		JScrollPane scroll = new JScrollPane(table);  
 		add(scroll, BorderLayout.CENTER);
 	
+	}
+	
+	public void refresh() {
+		model.reloadData();
+		model.fireTableDataChanged();
 	}
 
 }
