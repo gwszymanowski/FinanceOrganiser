@@ -4,7 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -13,6 +18,8 @@ import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import service.SheetRowService;
 
 public class StaticSheetListPanel extends JPanel {
 
@@ -80,8 +87,10 @@ public class StaticSheetListPanel extends JPanel {
 		JPanel yearBoxPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
 		yearBox = new JComboBox<>();
-		yearBox.addItem(new String("2016"));
-		yearBox.addItem(new String("2017"));
+
+		for (String k : getYears())
+			yearBox.addItem(k);
+
 		yearBox.setToolTipText(new String("Choose year"));
 		yearBox.setBorder(BorderFactory.createEmptyBorder(10, 30, 0, 0));
 
@@ -147,6 +156,23 @@ public class StaticSheetListPanel extends JPanel {
 	private void setSumLabel() {
 		double sum = table.getList().stream().mapToDouble(x -> x.getPrice().getActual()).sum();
 		actualPriceLabel.setText(String.valueOf(sum));
+	}
+
+	private List<String> getYears() {
+		List<String> years = new LinkedList<>();
+
+		SheetRowService service = new SheetRowService();
+		Instant inst = service.getEarliestDate();
+		ZonedDateTime zdt = ZonedDateTime.ofInstant(inst, ZoneId.systemDefault());
+
+		int year = zdt.getYear();
+
+		for (int i = 0; i < 10; i++) {
+			years.add(String.valueOf(year));
+			year++;
+		}
+
+		return years;
 	}
 
 }

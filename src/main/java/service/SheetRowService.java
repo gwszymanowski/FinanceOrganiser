@@ -1,5 +1,6 @@
 package service;
 
+import java.time.Instant;
 import java.util.List;
 
 import model.SheetRow;
@@ -51,6 +52,10 @@ public class SheetRowService implements CrudServiceI<SheetRow> {
 
 	public void fill(int lastYear) {
 		repo.fill(lastYear);
+	}
+	
+	public Instant getEarliestDate() {
+		return repo.getEarliestDate();
 	}
 
 }

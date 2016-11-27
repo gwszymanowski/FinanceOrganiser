@@ -4,7 +4,12 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Calendar;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComboBox;
@@ -14,16 +19,18 @@ import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import service.SheetRowService;
+
 public class SheetRowListPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private SheetRowTable table;
 	JPanel bottomPanel;
 	JSlider slider;
 	JComboBox<String> yearBox;
 	SheetRowAddPanel sheetrowPanel;
 	JLabel actualPriceLabel;
+	private SheetRowTable table;
 	private String month, year, pickDate;
 
 	public SheetRowListPanel(SheetRowAddPanel sheetrowPanel) {
@@ -74,23 +81,25 @@ public class SheetRowListPanel extends JPanel {
 	private void setYearBoxPanel() {
 
 		JPanel mainPanel = new JPanel(new BorderLayout());
-		
+
 		JPanel yearBoxPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-			yearBox = new JComboBox<>();
-			yearBox.addItem(new String("2016"));
-			yearBox.addItem(new String("2017"));
-			yearBox.setToolTipText(new String("Choose year"));
-			yearBox.setBorder(BorderFactory.createEmptyBorder(10, 30, 0, 0));
+		yearBox = new JComboBox<>();
+
+		for (String k : getYears())
+			yearBox.addItem(k);
+
+		yearBox.setToolTipText(new String("Choose year"));
+		yearBox.setBorder(BorderFactory.createEmptyBorder(10, 30, 0, 0));
 
 		yearBoxPanel.add(yearBox);
-		
+
 		mainPanel.add(yearBoxPanel, BorderLayout.WEST);
 
 		JPanel pricePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
-			actualPriceLabel = new JLabel("");
-			actualPriceLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 10, 40));
+		actualPriceLabel = new JLabel("");
+		actualPriceLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 10, 40));
 
 		pricePanel.add(actualPriceLabel);
 
@@ -162,6 +171,23 @@ public class SheetRowListPanel extends JPanel {
 		sb.append(this.year + "/");
 		sb.append(this.month);
 		this.pickDate = sb.toString();
+	}
+
+	private List<String> getYears() {
+		List<String> years = new LinkedList<>();
+
+		SheetRowService service = new SheetRowService();
+		Instant inst = service.getEarliestDate();
+		ZonedDateTime zdt = ZonedDateTime.ofInstant(inst, ZoneId.systemDefault());
+
+		int year = zdt.getYear();
+
+		for (int i = 0; i < 10; i++) {
+			years.add(String.valueOf(year));
+			year++;
+		}
+
+		return years;
 	}
 
 }

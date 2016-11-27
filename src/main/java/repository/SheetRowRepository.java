@@ -98,7 +98,7 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 	}
 
 	public void deleteAll() {
-		
+
 		PreparedStatement stmt = null;
 		Database db = Database.getInstance();
 		Connection conn = db.getConnection();
@@ -110,9 +110,9 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
+
 	public void delete(boolean isStatic) {
 
 		PreparedStatement stmt = null;
@@ -356,13 +356,17 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		ZonedDateTime zdt = ZonedDateTime.ofInstant(lastDate, ZoneId.systemDefault());
 		int year = zdt.getYear();
 		int month = zdt.getMonthValue();
-
+		
+		if(month !=0)
+			month--;
+		
 		for (int i = year; i <= lastYear; i++) {
 
-			for (int j = month; j <= 12; j++) {
+			for (int j = month; j < 12; j++) {
+		
 				Calendar c = Calendar.getInstance();
-				c.set(Calendar.YEAR, year);
-				c.set(Calendar.MONTH, month);
+				c.set(Calendar.YEAR, i);
+				c.set(Calendar.MONTH, j);
 				Instant givenDate = c.toInstant();
 
 				for (Item item : items) {
@@ -372,7 +376,7 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 					add(s);
 				}
 			}
-			month = 1;
+			month = 0;
 		}
 	}
 
@@ -385,7 +389,36 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 		try {
 
-			String select = "SELECT MAX(current) FROM sheetrow";
+			String select = "SELECT MAX(current) FROM sheetrow s where s.isStatic=true";
+			stmt = conn.prepareStatement(select);
+
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+
+			time = rs.getTimestamp(1);
+
+			stmt.close();
+			rs.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (time == null)
+			return Instant.now();
+
+		return time.toInstant();
+	}
+
+	public Instant getEarliestDate() {
+		PreparedStatement stmt = null;
+		Database db = Database.getInstance();
+		Connection conn = db.getConnection();
+		Timestamp time = null;
+
+		try {
+
+			String select = "SELECT MIN(current) FROM sheetrow s where s.isStatic=true";
 			stmt = conn.prepareStatement(select);
 
 			ResultSet rs = stmt.executeQuery();
