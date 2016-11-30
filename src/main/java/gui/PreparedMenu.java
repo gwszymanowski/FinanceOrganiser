@@ -7,6 +7,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 import listener.FillListener;
+import listener.ParserListener;
+import parser.JSONParser;
+import parser.XMLParser;
 
 public class PreparedMenu extends JMenuBar {
 
@@ -15,6 +18,7 @@ public class PreparedMenu extends JMenuBar {
 	JMenu file, options, advanced, help;
 	public JMenuItem categoriesSubmenu, itemSubmenu, general, exceptional, fill;
 	public JMenuItem deleteAll, deleteTrues, deleteFalses;
+	public JMenuItem toJSON, toXML, fromJSON, fromXML;
 
 	public PreparedMenu() {
 
@@ -27,6 +31,29 @@ public class PreparedMenu extends JMenuBar {
 
 	private void addFile() {
 		file = new JMenu("File");
+
+		JMenu exportMenu = new JMenu("Export");
+
+		toJSON = new JMenuItem("JSON");	
+		toJSON.addActionListener(new ParserListener(new JSONParser()));	
+		exportMenu.add(toJSON);
+
+		toXML = new JMenuItem("XML");
+		toXML.addActionListener(new ParserListener(new XMLParser()));	
+		exportMenu.add(toXML);
+
+		file.add(exportMenu);
+
+		JMenu importMenu = new JMenu("Import");
+
+		fromJSON = new JMenuItem("JSON");
+		importMenu.add(fromJSON);
+
+		fromXML = new JMenuItem("XML");
+		importMenu.add(fromXML);
+		
+		file.add(importMenu);
+
 		add(file);
 	}
 
@@ -52,10 +79,10 @@ public class PreparedMenu extends JMenuBar {
 		addConfigurations();
 		addDeletes();
 		addFill();
-	
+
 		add(advanced);
 	}
-	
+
 	private void addConfigurations() {
 		JMenu addConfigure = new JMenu("Configure");
 
@@ -67,29 +94,26 @@ public class PreparedMenu extends JMenuBar {
 
 		advanced.add(addConfigure);
 	}
-	
+
 	private void addDeletes() {
 		JMenu deleteConfigure = new JMenu("Delete");
 
-			deleteAll = new JMenuItem("all");
-			deleteConfigure.add(deleteAll);
-	
-			deleteTrues = new JMenuItem("general sheets");
-			deleteConfigure.add(deleteTrues);
-			
-			deleteFalses = new JMenuItem("exceptional sheets");
-			deleteConfigure.add(deleteFalses);
+		deleteAll = new JMenuItem("all");
+		deleteConfigure.add(deleteAll);
+
+		deleteTrues = new JMenuItem("general sheets");
+		deleteConfigure.add(deleteTrues);
+
+		deleteFalses = new JMenuItem("exceptional sheets");
+		deleteConfigure.add(deleteFalses);
 
 		advanced.add(deleteConfigure);
 	}
-	
+
 	private void addFill() {
 		fill = new JMenuItem("Fill");
-
 		fill.addActionListener(new FillListener());
-
 		advanced.add(fill);
-
 	}
 
 	private void addHelp() {
@@ -103,7 +127,7 @@ public class PreparedMenu extends JMenuBar {
 		categoriesSubmenu.addActionListener(listener);
 		itemSubmenu.addActionListener(listener);
 	}
-	
+
 	public void addDeleteListener(ActionListener listener) {
 		deleteAll.addActionListener(listener);
 		deleteTrues.addActionListener(listener);
