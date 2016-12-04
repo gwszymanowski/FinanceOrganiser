@@ -11,9 +11,11 @@ import parser.Parsing;
 public class ParserListener implements ActionListener {
 
 	private Parsing parser;
+	private boolean isXML;
 	
-	public ParserListener(Parsing parser) {
-		this.parser = parser;
+	public ParserListener(boolean isXML) {
+
+		this.isXML = isXML;
 	}
 	
 	@Override
@@ -23,8 +25,16 @@ public class ParserListener implements ActionListener {
 
 		int result = chooser.showOpenDialog(null);
 		
-		if (result == JFileChooser.APPROVE_OPTION)		
-			parser.parseTo(chooser.getCurrentDirectory().getAbsolutePath());
+		if (result == JFileChooser.APPROVE_OPTION) {
+			
+			String fileDirectory = chooser.getSelectedFile().getAbsolutePath();
+			
+			if(isXML == true)
+				parser.parseToXML(fileDirectory);
+			else
+				parser.parseToJSON(fileDirectory);
+		}	
+			
 		
 	
 		

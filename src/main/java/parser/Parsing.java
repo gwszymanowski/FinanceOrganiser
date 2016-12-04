@@ -1,5 +1,6 @@
 package parser;
 
 public interface Parsing {
-	void parseTo(String fileDirectory);
+	void parseToJSON(String fileDirectory);
+	void parseToXML(String fileDirectory);
 }

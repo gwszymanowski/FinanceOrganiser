@@ -1,7 +1,10 @@
 package model;
 
-public class Price {
+import java.io.Serializable;
 
+public class Price implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private double estimated;
 	private double actual;
 

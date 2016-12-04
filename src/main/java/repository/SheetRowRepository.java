@@ -21,8 +21,17 @@ import service.ItemService;
 
 public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
+	boolean constrStatic;
+	
+	public SheetRowRepository() {
+		this.constrStatic = false;
+	}
+	
+	public SheetRowRepository(boolean isStatic) {
+		this.constrStatic = isStatic;
+	}
+	
 	public void add(SheetRow s) {
-		System.out.println(s);
 		PreparedStatement stmt = null;
 		Database db = Database.getInstance();
 		Connection conn = db.getConnection();
@@ -53,7 +62,6 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 	}
 
 	public void update(SheetRow s) {
-
 		PreparedStatement stmt = null;
 		Database db = Database.getInstance();
 		Connection conn = db.getConnection();
@@ -80,7 +88,6 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 	}
 
 	public void delete(int id) {
-
 		PreparedStatement stmt = null;
 		Database db = Database.getInstance();
 		Connection conn = db.getConnection();
@@ -94,7 +101,6 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	public void deleteAll() {
@@ -144,7 +150,7 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 			sb.append("SELECT s.id, s.title, s.order_num, s.estimated, s.actual, ");
 			sb.append("c.id, c.title FROM sheetrow s ");
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
-			sb.append("WHERE c.isStatic=false");
+			sb.append("WHERE c.isStatic=" + this.constrStatic);
 			sb.append("ORDER BY s.order_num, c.title");
 
 			stmt = conn.prepareStatement(sb.toString());

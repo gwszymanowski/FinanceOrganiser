@@ -1,7 +1,10 @@
 package model;
 
-public class Item implements Comparable<Item> {
+import java.io.Serializable;
 
+public class Item implements Comparable<Item>, Serializable {
+
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String title;
 	private Category category;

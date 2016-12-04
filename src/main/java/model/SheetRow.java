@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.time.Instant;
 
-public class SheetRow implements Comparable<SheetRow> {
+public class SheetRow implements Comparable<SheetRow>, Serializable {
 
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String title;
 	private Category category;

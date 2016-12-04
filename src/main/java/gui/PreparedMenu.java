@@ -1,15 +1,16 @@
 package gui;
 
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import listener.CompositeActionListener;
 import listener.FillListener;
-import listener.ParserListener;
-import parser.JSONParser;
-import parser.XMLParser;
+import listener.ParserPropertiesListener;
+import service.CrudServiceI;
 
 public class PreparedMenu extends JMenuBar {
 
@@ -19,14 +20,14 @@ public class PreparedMenu extends JMenuBar {
 	public JMenuItem categoriesSubmenu, itemSubmenu, general, exceptional, fill;
 	public JMenuItem deleteAll, deleteTrues, deleteFalses;
 	public JMenuItem toJSON, toXML, fromJSON, fromXML;
+	@SuppressWarnings("rawtypes")
+	private List<CrudServiceI> parsingServices;
 
 	public PreparedMenu() {
-
 		addFile();
 		addOptions();
 		addAdvanced();
 		addHelp();
-
 	}
 
 	private void addFile() {
@@ -34,12 +35,15 @@ public class PreparedMenu extends JMenuBar {
 
 		JMenu exportMenu = new JMenu("Export");
 
-		toJSON = new JMenuItem("JSON");	
-		toJSON.addActionListener(new ParserListener(new JSONParser()));	
+		toJSON = new JMenuItem("JSON");
+		
+		CompositeActionListener toJsonListeners = new CompositeActionListener();
+	//	toJsonListeners.addActionListener(new ParserPropertiesListener(props), 1);
+		toJSON.addActionListener(toJsonListeners);
 		exportMenu.add(toJSON);
 
 		toXML = new JMenuItem("XML");
-		toXML.addActionListener(new ParserListener(new XMLParser()));	
+		//toXML.addActionListener(new ParserListener(new XMLParser(), true));
 		exportMenu.add(toXML);
 
 		file.add(exportMenu);
@@ -51,7 +55,7 @@ public class PreparedMenu extends JMenuBar {
 
 		fromXML = new JMenuItem("XML");
 		importMenu.add(fromXML);
-		
+
 		file.add(importMenu);
 
 		add(file);

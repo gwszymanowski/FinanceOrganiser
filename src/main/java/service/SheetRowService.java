@@ -13,6 +13,10 @@ public class SheetRowService implements CrudServiceI<SheetRow> {
 	public SheetRowService() {
 		this.repo = new SheetRowRepository();
 	}
+	
+	public SheetRowService(boolean isStatic) {
+		this.repo = new SheetRowRepository();
+	}
 
 	public void add(SheetRow object) {
 		repo.add(object);
