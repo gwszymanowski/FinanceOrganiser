@@ -5,7 +5,7 @@ import java.util.List;
 import model.Category;
 import repository.CategoryRepository;
 
-public class CategoryService implements CrudServiceI<Category>{
+public class CategoryService implements CrudServiceI<Category> {
 
 	private CategoryRepository repo;
 
@@ -28,9 +28,14 @@ public class CategoryService implements CrudServiceI<Category>{
 	public List<Category> getAll() {
 		return repo.getAll();
 	}
-	
+
 	public int getCount() {
 		return repo.getCount();
+	}
+
+	@Override
+	public String toString() {
+		return "CategoryService []";
 	}
 
 }

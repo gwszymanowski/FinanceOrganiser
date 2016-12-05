@@ -28,9 +28,14 @@ public class ItemService implements CrudServiceI<Item> {
 	public List<Item> getAll() {
 		return repo.getAll();
 	}
-	
+
 	public int getCount() {
 		return repo.getCount();
+	}
+
+	@Override
+	public String toString() {
+		return "ItemService []";
 	}
 
 }

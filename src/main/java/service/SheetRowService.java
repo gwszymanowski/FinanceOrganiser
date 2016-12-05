@@ -62,4 +62,11 @@ public class SheetRowService implements CrudServiceI<SheetRow> {
 		return repo.getEarliestDate();
 	}
 
+	@Override
+	public String toString() {
+		return "SheetRowService []";
+	}
+	
+	
+
 }

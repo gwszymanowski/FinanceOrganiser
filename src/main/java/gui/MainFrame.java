@@ -57,10 +57,10 @@ public class MainFrame extends JFrame {
 		menu = new PreparedMenu();
 		menu.addInsertListener(new MenuListener(menu, cards));
 		
-		CompositeActionListener deleteListener = new CompositeActionListener();
-		deleteListener.addActionListener(new DeleteListener(menu), 1);
+		CompositeActionListener compositeListener = new CompositeActionListener();
+		compositeListener.addActionListener(new DeleteListener(menu), 1);
 		
-		deleteListener.addActionListener(new ActionListener() {
+		compositeListener.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -78,7 +78,7 @@ public class MainFrame extends JFrame {
 			
 		}, 2);
 		
-		menu.addDeleteListener(deleteListener);
+		menu.addDeleteListener(compositeListener);
 
 		setJMenuBar(menu);
 	}
