@@ -8,22 +8,22 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import model.SheetRow;
-import service.SheetRowService;
+import model.Item;
+import service.ItemService;
 
-public class GeneralParser implements Parsing {
+public class ItemParser implements Parsing {
 
-	private SheetRowService service;
+	private ItemService service;
 
-	public GeneralParser() {
-		this.service = new SheetRowService(false);
+	public ItemParser() {
+		this.service = new ItemService();
 	}
 
 	@Override
 	public void parseToJSON(String fileDirectory) {
 		ObjectMapper mapper = new ObjectMapper();
 
-		List<SheetRow> list = service.getAll();
+		List<Item> list = service.getAll();
 
 		StringBuilder sb = getFilePath(fileDirectory);
 		sb.append(".json");
@@ -37,7 +37,6 @@ public class GeneralParser implements Parsing {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -49,7 +48,7 @@ public class GeneralParser implements Parsing {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(fileDirectory);
-		sb.append("general");
+		sb.append("item");
 
 		return sb;
 	}

@@ -11,12 +11,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import model.SheetRow;
 import service.SheetRowService;
 
-public class GeneralParser implements Parsing {
+public class ExceptionalParser implements Parsing {
 
 	private SheetRowService service;
 
-	public GeneralParser() {
-		this.service = new SheetRowService(false);
+	public ExceptionalParser() {
+		this.service = new SheetRowService(true);
 	}
 
 	@Override
@@ -37,7 +37,6 @@ public class GeneralParser implements Parsing {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
@@ -49,7 +48,7 @@ public class GeneralParser implements Parsing {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(fileDirectory);
-		sb.append("general");
+		sb.append("exceptional");
 
 		return sb;
 	}

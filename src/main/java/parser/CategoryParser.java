@@ -8,22 +8,22 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import model.SheetRow;
-import service.SheetRowService;
+import model.Category;
+import service.CategoryService;
 
-public class GeneralParser implements Parsing {
+public class CategoryParser implements Parsing {
 
-	private SheetRowService service;
+	private CategoryService service;
 
-	public GeneralParser() {
-		this.service = new SheetRowService(false);
+	public CategoryParser() {
+		this.service = new CategoryService();
 	}
 
 	@Override
 	public void parseToJSON(String fileDirectory) {
 		ObjectMapper mapper = new ObjectMapper();
 
-		List<SheetRow> list = service.getAll();
+		List<Category> list = service.getAll();
 
 		StringBuilder sb = getFilePath(fileDirectory);
 		sb.append(".json");
@@ -37,19 +37,18 @@ public class GeneralParser implements Parsing {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	@Override
 	public void parseToXML(String fileDirectory) {
-
+		
 	}
 
 	private StringBuilder getFilePath(String fileDirectory) {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(fileDirectory);
-		sb.append("general");
+		sb.append("category");
 
 		return sb;
 	}

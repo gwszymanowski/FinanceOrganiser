@@ -19,6 +19,10 @@ public class PropertiesManager {
 
 			input = classloader.getResourceAsStream("export.properties");
 			prop.load(input);
+			System.out.println(prop.getProperty("category"));
+			System.out.println(prop.getProperty("item"));
+			System.out.println(prop.getProperty("exceptional"));
+			System.out.println(prop.getProperty("general"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -39,11 +43,14 @@ public class PropertiesManager {
 
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("export.properties").getFile());
-
+		System.out.println("WRITING");
+		System.out.println(content);
+		System.out.println();
+		System.out.println(file.exists());
 		PrintWriter writer = null;
 		try {
 			writer = new PrintWriter(file);
-			writer.print("");
+			writer.print("dupa");
 			writer.print(content);
 			writer.close();
 		} catch (FileNotFoundException e1) {
