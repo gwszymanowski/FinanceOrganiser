@@ -41,7 +41,7 @@ public class ExceptionalParser implements Parsing {
 
 	@Override
 	public void parseToXML(String fileDirectory) {
-
+		System.out.println("EXCEPTIONAL XML " + fileDirectory);
 	}
 
 	private StringBuilder getFilePath(String fileDirectory) {
@@ -51,6 +51,11 @@ public class ExceptionalParser implements Parsing {
 		sb.append("exceptional");
 
 		return sb;
+	}
+
+	@Override
+	public String toString() {
+		return "ExceptionalParser";
 	}
 
 }

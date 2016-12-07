@@ -6,7 +6,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
+import listener.CompositeParserListener;
 import listener.FillListener;
+import listener.ParserListener;
 import listener.ParserPropertiesListener;
 
 public class PreparedMenu extends JMenuBar {
@@ -41,7 +43,7 @@ public class PreparedMenu extends JMenuBar {
 		exportMenu.add(toJSON);
 
 		toXML = new JMenuItem("XML");
-		// toXML.addActionListener(new ParserListener(new XMLParser(), true));
+		toXML.addActionListener(new CompositeParserListener(true));
 		exportMenu.add(toXML);
 
 		file.add(exportMenu);

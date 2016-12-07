@@ -5,7 +5,11 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 public class PropertiesManager {
 
@@ -19,10 +23,6 @@ public class PropertiesManager {
 
 			input = classloader.getResourceAsStream("export.properties");
 			prop.load(input);
-			System.out.println(prop.getProperty("category"));
-			System.out.println(prop.getProperty("item"));
-			System.out.println(prop.getProperty("exceptional"));
-			System.out.println(prop.getProperty("general"));
 
 		} catch (IOException ex) {
 			ex.printStackTrace();
@@ -39,22 +39,40 @@ public class PropertiesManager {
 		return prop;
 	}
 
+	public Map<String, String> getPropertiesMap() {
+		Map<String, String> propertiesMap = new HashMap<String, String>();
+
+		Properties props = this.readExportProperties();
+
+		propertiesMap.put("category", props.getProperty("category"));
+		propertiesMap.put("item", props.getProperty("item"));
+		propertiesMap.put("exceptional", props.getProperty("exceptional"));
+		propertiesMap.put("general", props.getProperty("general"));
+
+		return propertiesMap;
+	}
+
+	public List<String> getPropertiesValues() {
+
+		Map<String, String> valuesMap = this.getPropertiesMap();
+
+		List<String> trueValues = valuesMap.entrySet().stream().filter(x -> "true".equals(x.getValue()))
+				.map(x -> x.getKey()).collect(Collectors.toList());
+
+		return trueValues;
+	}
+
 	public void writeExportProperties(String content) {
 
 		ClassLoader classLoader = getClass().getClassLoader();
 		File file = new File(classLoader.getResource("export.properties").getFile());
-		System.out.println("WRITING");
-		System.out.println(content);
-		System.out.println();
-		System.out.println(file.exists());
+
 		PrintWriter writer = null;
 		try {
 			writer = new PrintWriter(file);
-			writer.print("dupa");
 			writer.print(content);
 			writer.close();
 		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
 

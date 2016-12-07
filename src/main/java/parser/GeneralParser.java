@@ -42,7 +42,7 @@ public class GeneralParser implements Parsing {
 
 	@Override
 	public void parseToXML(String fileDirectory) {
-
+		System.out.println("GENERAL XML " + fileDirectory);
 	}
 
 	private StringBuilder getFilePath(String fileDirectory) {
@@ -52,6 +52,11 @@ public class GeneralParser implements Parsing {
 		sb.append("general");
 
 		return sb;
+	}
+
+	@Override
+	public String toString() {
+		return "GeneralParser";
 	}
 
 }

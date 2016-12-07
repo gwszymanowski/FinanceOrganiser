@@ -41,7 +41,7 @@ public class CategoryParser implements Parsing {
 
 	@Override
 	public void parseToXML(String fileDirectory) {
-		
+		System.out.println("CATEGORY XML " + fileDirectory);
 	}
 
 	private StringBuilder getFilePath(String fileDirectory) {
@@ -52,5 +52,12 @@ public class CategoryParser implements Parsing {
 
 		return sb;
 	}
+
+	@Override
+	public String toString() {
+		return "CategoryParser";
+	}
+	
+	
 
 }

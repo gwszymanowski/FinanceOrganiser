@@ -41,7 +41,7 @@ public class ItemParser implements Parsing {
 
 	@Override
 	public void parseToXML(String fileDirectory) {
-
+		System.out.println("ITEM XML " + fileDirectory);
 	}
 
 	private StringBuilder getFilePath(String fileDirectory) {
@@ -51,6 +51,11 @@ public class ItemParser implements Parsing {
 		sb.append("item");
 
 		return sb;
+	}
+
+	@Override
+	public String toString() {
+		return "ItemParser";
 	}
 
 }
