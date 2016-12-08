@@ -70,6 +70,18 @@ public class CategoryParser implements Parsing {
 
 	}
 
+	@Override
+	public void parseFromJSON() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void parseFromXML() {
+		// TODO Auto-generated method stub
+
+	}
+
 	private StringBuilder getFilePath(String fileDirectory) {
 		StringBuilder sb = new StringBuilder();
 
