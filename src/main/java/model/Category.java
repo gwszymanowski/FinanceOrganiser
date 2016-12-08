@@ -2,6 +2,11 @@ package model;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Category implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -24,6 +29,7 @@ public class Category implements Serializable {
 		return id;
 	}
 
+	@XmlAttribute
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -32,6 +38,7 @@ public class Category implements Serializable {
 		return title;
 	}
 
+	@XmlElement
 	public void setTitle(String title) {
 		this.title = title;
 	}

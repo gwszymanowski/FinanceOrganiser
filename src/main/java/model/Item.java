@@ -2,6 +2,11 @@ package model;
 
 import java.io.Serializable;
 
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Item implements Comparable<Item>, Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -28,6 +33,7 @@ public class Item implements Comparable<Item>, Serializable {
 		return id;
 	}
 
+	@XmlAttribute
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -36,6 +42,7 @@ public class Item implements Comparable<Item>, Serializable {
 		return order;
 	}
 
+	@XmlElement
 	public void setOrder(int order) {
 		this.order = order;
 	}
@@ -44,6 +51,7 @@ public class Item implements Comparable<Item>, Serializable {
 		return title;
 	}
 
+	@XmlElement
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -52,6 +60,7 @@ public class Item implements Comparable<Item>, Serializable {
 		return category;
 	}
 
+	@XmlElement
 	public void setCategory(Category category) {
 		this.category = category;
 	}

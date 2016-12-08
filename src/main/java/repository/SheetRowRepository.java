@@ -150,8 +150,9 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 			sb.append("SELECT s.id, s.title, s.order_num, s.estimated, s.actual, ");
 			sb.append("c.id, c.title FROM sheetrow s ");
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
-			sb.append("WHERE c.isStatic=" + this.constrStatic);
-			sb.append("ORDER BY s.order_num, c.title");
+			sb.append("WHERE s.isStatic=");
+			sb.append(this.constrStatic);
+			sb.append(" ORDER BY s.order_num, c.title");
 
 			stmt = conn.prepareStatement(sb.toString());
 			ResultSet rs = stmt.executeQuery();

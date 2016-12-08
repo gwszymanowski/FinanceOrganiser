@@ -3,6 +3,9 @@ package model;
 import java.io.Serializable;
 import java.time.Instant;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class SheetRow implements Comparable<SheetRow>, Serializable {
 
 	private static final long serialVersionUID = 1L;

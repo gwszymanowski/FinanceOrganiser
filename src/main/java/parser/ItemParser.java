@@ -4,11 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import model.Item;
+import model.Items;
+import model.SheetRows;
 import service.ItemService;
 
 public class ItemParser implements Parsing {
@@ -29,6 +35,7 @@ public class ItemParser implements Parsing {
 		sb.append(".json");
 
 		try {
+			System.out.println(sb.toString());
 			mapper.writeValue(new File(sb.toString()), list);
 		} catch (JsonGenerationException e) {
 			e.printStackTrace();
@@ -41,14 +48,33 @@ public class ItemParser implements Parsing {
 
 	@Override
 	public void parseToXML(String fileDirectory) {
-		System.out.println("ITEM XML " + fileDirectory);
+		StringBuilder sb = getFilePath(fileDirectory);
+		sb.append(".xml");
+
+		Items items = new Items();
+		items.setItems(service.getAll());
+
+		try {
+
+			File file = new File(sb.toString());
+			JAXBContext jaxbContext = JAXBContext.newInstance(SheetRows.class);
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+			jaxbMarshaller.marshal(items, file);
+			jaxbMarshaller.marshal(items, System.out);
+
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private StringBuilder getFilePath(String fileDirectory) {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(fileDirectory);
-		sb.append("item");
+		sb.append("\\item");
 
 		return sb;
 	}

@@ -4,10 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import model.Categories;
 import model.Category;
 import service.CategoryService;
 
@@ -41,14 +46,35 @@ public class CategoryParser implements Parsing {
 
 	@Override
 	public void parseToXML(String fileDirectory) {
-		System.out.println("CATEGORY XML " + fileDirectory);
+
+		StringBuilder sb = getFilePath(fileDirectory);
+		sb.append(".xml");
+
+		Categories categories = new Categories();
+		categories.setCategories(service.getAll());
+
+		try {
+
+			File file = new File(sb.toString());
+			JAXBContext jaxbContext = JAXBContext.newInstance(Categories.class);
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+
+			jaxbMarshaller.marshal(categories, file);
+			jaxbMarshaller.marshal(categories, System.out);
+
+		} catch (JAXBException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	private StringBuilder getFilePath(String fileDirectory) {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(fileDirectory);
-		sb.append("category");
+		sb.append("\\category");
 
 		return sb;
 	}
@@ -57,7 +83,5 @@ public class CategoryParser implements Parsing {
 	public String toString() {
 		return "CategoryParser";
 	}
-	
-	
 
 }
