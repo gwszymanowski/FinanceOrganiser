@@ -1,6 +1,5 @@
 package gui.staticsheet;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import gui.sheet.SheetRowTableModel;
@@ -12,14 +11,12 @@ public class StaticSheetTableModel extends SheetRowTableModel {
 
 	public StaticSheetTableModel(int monthNum, int yearNum) {
 		super(monthNum, yearNum);
+
 	}
 
 	@Override
 	public List<SheetRow> getRows(int monthNum, int yearNum) {
-		List<SheetRow> list = new LinkedList<SheetRow>();
-
-		list = service.getByYearMonth(yearNum, monthNum, true);
-		return list;
+		return service.getByYearMonth(yearNum, monthNum, true);
 	}
 
 }

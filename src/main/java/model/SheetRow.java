@@ -12,7 +12,6 @@ public class SheetRow implements Comparable<SheetRow>, Serializable {
 	private int id;
 	private String title;
 	private Category category;
-	private int order;
 	private Price price;
 	private boolean isStatic;
 	private Instant createdAt;
@@ -35,21 +34,19 @@ public class SheetRow implements Comparable<SheetRow>, Serializable {
 		this.lastModified = Instant.now();
 	}
 
-	public SheetRow(String title, Category category, int order, boolean isStatic, Instant current) {
+	public SheetRow(String title, Category category, boolean isStatic, Instant current) {
 		this.price = new Price(0, 0);
 		this.createdAt = Instant.now();
 		this.lastModified = Instant.now();
 		this.title = title;
 		this.category = category;
-		this.order = order;
 		this.isStatic = isStatic;
 		this.current = current;
 	}
 
-	public SheetRow(int id, String title, int order, Category category, Price price) {
+	public SheetRow(int id, String title, Category category, Price price) {
 		this.id = id;
 		this.title = title;
-		this.order = order;
 		this.isStatic = false;
 		this.category = category;
 		this.price = price;
@@ -63,14 +60,6 @@ public class SheetRow implements Comparable<SheetRow>, Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getOrder() {
-		return order;
-	}
-
-	public void setOrder(int order) {
-		this.order = order;
 	}
 
 	public String getTitle() {
@@ -162,14 +151,14 @@ public class SheetRow implements Comparable<SheetRow>, Serializable {
 	}
 
 	public int compareTo(SheetRow s) {
-		return Integer.compare(this.order, s.getOrder());
+		return Integer.compare(getTitle().charAt(0), s.getTitle().charAt(0));
 	}
 
 	@Override
 	public String toString() {
-		return "SheetRow [id=" + id + ", title=" + title + ", category=" + category.getFullString() + ", order=" + order + ", price="
-				+ price + ", isStatic=" + isStatic + ", createdAt=" + createdAt + ", lastModified=" + lastModified
-				+ ", current=" + current + "]";
+		return "SheetRow [id=" + id + ", title=" + title + ", category=" + category.getFullString()
+				+ ", price=" + price + ", isStatic=" + isStatic + ", createdAt=" + createdAt + ", lastModified="
+				+ lastModified + ", current=" + current + "]";
 	}
 
 }

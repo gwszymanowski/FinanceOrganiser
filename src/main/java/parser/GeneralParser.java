@@ -29,12 +29,12 @@ public class GeneralParser implements Parsing {
 		ObjectMapper mapper = new ObjectMapper();
 
 		List<SheetRow> list = service.getAll();
-
+		System.out.println(list.size());
 		StringBuilder sb = getFilePath(fileDirectory);
 		sb.append(".json");
 
 		try {
-			System.out.println(sb.toString());
+	
 			mapper.writeValue(new File(sb.toString()), list);
 		} catch (JsonGenerationException e) {
 			e.printStackTrace();

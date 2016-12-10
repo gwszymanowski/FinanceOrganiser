@@ -13,7 +13,6 @@ public class Item implements Comparable<Item>, Serializable {
 	private int id;
 	private String title;
 	private Category category;
-	private int order;
 
 	public Item() {
 	}
@@ -22,10 +21,9 @@ public class Item implements Comparable<Item>, Serializable {
 		this.title = title;
 	}
 
-	public Item(int id, String title, int order, Category category) {
+	public Item(int id, String title, Category category) {
 		this.id = id;
 		this.title = title;
-		this.order = order;
 		this.category = category;
 	}
 
@@ -36,15 +34,6 @@ public class Item implements Comparable<Item>, Serializable {
 	@XmlAttribute
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getOrder() {
-		return order;
-	}
-
-	@XmlElement
-	public void setOrder(int order) {
-		this.order = order;
 	}
 
 	public String getTitle() {
@@ -97,7 +86,7 @@ public class Item implements Comparable<Item>, Serializable {
 	}
 
 	public int compareTo(Item e) {
-		return Integer.compare(this.order, e.getOrder());
+		return Integer.compare(getTitle().charAt(0), e.getTitle().charAt(0));
 	}
 
 	@Override

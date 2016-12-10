@@ -1,6 +1,5 @@
 package gui.sheet;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
@@ -17,7 +16,7 @@ public class SheetRowTableModel extends AbstractTableModel {
 	protected SheetRowService service;
 
 	public SheetRowTableModel(int monthNum, int yearNum) {
-		service = new SheetRowService();
+		service = new SheetRowService(false);
 		list = getRows(monthNum, yearNum);
 	}
 
@@ -53,11 +52,7 @@ public class SheetRowTableModel extends AbstractTableModel {
 	}
 
 	public List<SheetRow> getRows(int monthNum, int yearNum) {
-		List<SheetRow> list = new LinkedList<SheetRow>();
-
-		list = service.getByYearMonth(yearNum, monthNum, false);
-		return list;
-
+		return service.getByYearMonth(yearNum, monthNum, false);
 	}
 
 	public void reloadData(int monthNum, int yearNum) {

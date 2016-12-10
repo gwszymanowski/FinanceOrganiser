@@ -125,6 +125,8 @@ public class SheetRowListPanel extends JPanel {
 				int sliderVal = slider.getValue();
 				setMonth(String.valueOf(sliderVal));
 				setGeneralValues();
+
+				refresh(Integer.parseInt(getMonth()), Integer.parseInt(getYear()));
 			}
 
 		});
@@ -136,6 +138,8 @@ public class SheetRowListPanel extends JPanel {
 				String boxVal = (String) yearBox.getSelectedItem();
 				setYear(boxVal);
 				setGeneralValues();
+
+				refresh(Integer.parseInt(getMonth()), Integer.parseInt(getYear()));
 			}
 
 		});
@@ -153,8 +157,16 @@ public class SheetRowListPanel extends JPanel {
 		this.month = month;
 	}
 
+	public String getMonth() {
+		return month;
+	}
+
 	public void setYear(String year) {
 		this.year = year;
+	}
+
+	public String getYear() {
+		return year;
 	}
 
 	public void refresh(int monthNum, int yearNum) {

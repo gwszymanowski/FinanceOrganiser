@@ -35,7 +35,6 @@ public class ItemParser implements Parsing {
 		sb.append(".json");
 
 		try {
-			System.out.println(sb.toString());
 			mapper.writeValue(new File(sb.toString()), list);
 		} catch (JsonGenerationException e) {
 			e.printStackTrace();

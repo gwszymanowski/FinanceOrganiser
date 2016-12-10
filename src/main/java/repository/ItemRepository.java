@@ -88,7 +88,7 @@ public class ItemRepository implements CrudRepositoryI<Item> {
 		try {
 
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT i.id, i.title, i.order_num, c.id, c.title FROM item i ");
+			sb.append("SELECT i.id, i.title, c.id, c.title FROM item i ");
 			sb.append("INNER JOIN category c ON(i.category_id=c.id)");
 			
 			stmt = conn.prepareStatement(sb.toString());
@@ -99,12 +99,11 @@ public class ItemRepository implements CrudRepositoryI<Item> {
 
 				Integer id = rs.getInt(1);
 				String title = rs.getString(2);
-				int order = rs.getInt(3);
-				int category_id = rs.getInt(4);
-				String category_title = rs.getString(5);
+				int category_id = rs.getInt(3);
+				String category_title = rs.getString(4);
 				Category c = new Category(category_id, category_title);
 
-				Item s = new Item(id, title, order, c);
+				Item s = new Item(id, title, c);
 				items.add(s);
 
 			}

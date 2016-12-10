@@ -146,32 +146,32 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		Connection conn = db.getConnection();
 		try {
 
+			int myInt = (this.constrStatic) ? 0 : 1;
+			
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT s.id, s.title, s.order_num, s.estimated, s.actual, ");
+			sb.append("SELECT s.id, s.title, s.estimated, s.actual, ");
 			sb.append("c.id, c.title FROM sheetrow s ");
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
-			sb.append("WHERE s.isStatic=");
-			sb.append(this.constrStatic);
-			sb.append(" ORDER BY s.order_num, c.title");
-
+			sb.append("WHERE s.isStatic=? ");
+			sb.append("ORDER BY c.title");
+			
 			stmt = conn.prepareStatement(sb.toString());
+			stmt.setInt(1, myInt);
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 
 				int id = rs.getInt(1);
 				String title = rs.getString(2);
-				int order = rs.getInt(3);
-
-				double estimated = rs.getDouble(4);
-				double actual = rs.getDouble(5);
+				double estimated = rs.getDouble(3);
+				double actual = rs.getDouble(4);
 				Price p = new Price(estimated, actual);
 
 				int categoryId = rs.getInt(6);
 				String categoryTitle = rs.getString(7);
 				Category c = new Category(categoryId, categoryTitle);
 
-				SheetRow s = new SheetRow(id, title, order, c, p);
+				SheetRow s = new SheetRow(id, title, c, p);
 
 				categories.add(s);
 
@@ -195,11 +195,11 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		try {
 
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT s.id, s.title, s.order_num, s.estimated, s.actual, ");
+			sb.append("SELECT s.id, s.title, s.estimated, s.actual, ");
 			sb.append("c.id, c.title FROM sheetrow s ");
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
 			sb.append("WHERE c.isStatic=?");
-			sb.append("ORDER BY s.order_num, c.title");
+			sb.append("ORDER BY c.title");
 
 			stmt = conn.prepareStatement(sb.toString());
 			stmt.setBoolean(1, isStatic);
@@ -209,17 +209,16 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 				int id = rs.getInt(1);
 				String title = rs.getString(2);
-				int order = rs.getInt(3);
 
-				double estimated = rs.getDouble(4);
-				double actual = rs.getDouble(5);
+				double estimated = rs.getDouble(3);
+				double actual = rs.getDouble(4);
 				Price p = new Price(estimated, actual);
 
-				int categoryId = rs.getInt(6);
-				String categoryTitle = rs.getString(7);
+				int categoryId = rs.getInt(5);
+				String categoryTitle = rs.getString(6);
 				Category c = new Category(categoryId, categoryTitle);
 
-				SheetRow s = new SheetRow(id, title, order, c, p);
+				SheetRow s = new SheetRow(id, title, c, p);
 
 				categories.add(s);
 
@@ -267,10 +266,10 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		try {
 
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT s.id, s.title, s.order_num, s.estimated, s.actual, ");
+			sb.append("SELECT s.id, s.title, s.estimated, s.actual, ");
 			sb.append("c.id, c.title FROM sheetrow s ");
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
-			sb.append("ORDER BY s.order_num, c.title");
+			sb.append("ORDER BY c.title");
 
 			stmt = conn.prepareStatement(sb.toString());
 			ResultSet rs = stmt.executeQuery();
@@ -279,17 +278,16 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 				int id = rs.getInt(1);
 				String title = rs.getString(2);
-				int order = rs.getInt(3);
 
-				double estimated = rs.getDouble(4);
-				double actual = rs.getDouble(5);
+				double estimated = rs.getDouble(3);
+				double actual = rs.getDouble(4);
 				Price p = new Price(estimated, actual);
 
-				int categoryId = rs.getInt(6);
-				String categoryTitle = rs.getString(7);
+				int categoryId = rs.getInt(5);
+				String categoryTitle = rs.getString(6);
 				Category c = new Category(categoryId, categoryTitle);
 
-				SheetRow s = new SheetRow(id, title, order, c, p);
+				SheetRow s = new SheetRow(id, title, c, p);
 
 				categories.add(s);
 
@@ -312,8 +310,10 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		Connection conn = db.getConnection();
 		try {
 
+			int myInt = (this.constrStatic) ? 0 : 1;
+			
 			StringBuilder sb = new StringBuilder();
-			sb.append("SELECT s.id, s.title, s.order_num, s.estimated, s.actual, ");
+			sb.append("SELECT s.id, s.title, s.estimated, s.actual, ");
 			sb.append("c.id, c.title FROM sheetrow s ");
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
 			sb.append("WHERE YEAR(s.current)=? AND MONTH(s.current)=? AND s.isStatic=?");
@@ -321,24 +321,23 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 			stmt = conn.prepareStatement(sb.toString());
 			stmt.setInt(1, year);
 			stmt.setInt(2, month);
-			stmt.setBoolean(3, isStatic);
+			stmt.setInt(3, myInt);
 			ResultSet rs = stmt.executeQuery();
 
 			while (rs.next()) {
 
 				int id = rs.getInt(1);
 				String title = rs.getString(2);
-				int order = rs.getInt(3);
 
-				double estimated = rs.getDouble(4);
-				double actual = rs.getDouble(5);
+				double estimated = rs.getDouble(3);
+				double actual = rs.getDouble(4);
 				Price p = new Price(estimated, actual);
 
-				int categoryId = rs.getInt(6);
-				String categoryTitle = rs.getString(7);
+				int categoryId = rs.getInt(5);
+				String categoryTitle = rs.getString(6);
 				Category cat = new Category(categoryId, categoryTitle);
 
-				SheetRow s = new SheetRow(id, title, order, cat, p);
+				SheetRow s = new SheetRow(id, title, cat, p);
 
 				sheetRowSet.add(s);
 
@@ -378,7 +377,7 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 				for (Item item : items) {
 
-					SheetRow s = new SheetRow(item.getTitle(), item.getCategory(), item.getOrder(), true, givenDate);
+					SheetRow s = new SheetRow(item.getTitle(), item.getCategory(), true, givenDate);
 
 					if (isAdded(s) == false)
 						add(s);
