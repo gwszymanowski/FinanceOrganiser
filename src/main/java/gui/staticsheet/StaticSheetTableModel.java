@@ -2,16 +2,18 @@ package gui.staticsheet;
 
 import java.util.List;
 
-import gui.sheet.SheetRowTableModel;
+import gui.sheet.SheetRowBridge;
 import model.SheetRow;
+import service.SheetRowService;
 
-public class StaticSheetTableModel extends SheetRowTableModel {
+public class StaticSheetTableModel extends SheetRowBridge {
 
 	private static final long serialVersionUID = 1L;
 
 	public StaticSheetTableModel(int monthNum, int yearNum) {
-		super(monthNum, yearNum);
-
+		super();
+		this.service = new SheetRowService(true);
+		reloadData(monthNum, yearNum);
 	}
 
 	@Override
