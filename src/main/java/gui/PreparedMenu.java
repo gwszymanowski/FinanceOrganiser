@@ -124,7 +124,7 @@ public class PreparedMenu extends JMenuBar {
 		add(help);
 	}
 
-	public void addInsertListener(ActionListener listener) {
+	public void addMenuViewListener(ActionListener listener) {
 		general.addActionListener(listener);
 		exceptional.addActionListener(listener);
 		categoriesSubmenu.addActionListener(listener);

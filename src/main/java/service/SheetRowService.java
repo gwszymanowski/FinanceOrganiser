@@ -13,9 +13,9 @@ public class SheetRowService implements CrudServiceI<SheetRow> {
 	public SheetRowService() {
 		this.repo = new SheetRowRepository();
 	}
-	
+
 	public SheetRowService(boolean isStatic) {
-		this.repo = new SheetRowRepository();
+		this.repo = new SheetRowRepository(isStatic);
 	}
 
 	public void add(SheetRow object) {
@@ -29,11 +29,11 @@ public class SheetRowService implements CrudServiceI<SheetRow> {
 	public void delete(int id) {
 		repo.delete(id);
 	}
-	
+
 	public void delete(boolean isStatic) {
 		repo.delete(isStatic);
 	}
-	
+
 	public void deleteAll() {
 		repo.deleteAll();
 	}
@@ -57,16 +57,9 @@ public class SheetRowService implements CrudServiceI<SheetRow> {
 	public void fill(int lastYear) {
 		repo.fill(lastYear);
 	}
-	
+
 	public Instant getEarliestDate() {
 		return repo.getEarliestDate();
 	}
-
-	@Override
-	public String toString() {
-		return "SheetRowService []";
-	}
-	
-	
 
 }

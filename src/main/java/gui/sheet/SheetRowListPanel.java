@@ -108,7 +108,7 @@ public class SheetRowListPanel extends JPanel {
 		bottomPanel.add(mainPanel, BorderLayout.CENTER);
 	}
 
-	private void initializeYearMonthValues() {
+	public void initializeYearMonthValues() {
 		int sliderVal = slider.getValue();
 		setMonth(String.valueOf(sliderVal));
 		String boxVal = (String) yearBox.getSelectedItem();

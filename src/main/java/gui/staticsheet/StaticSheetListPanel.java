@@ -54,7 +54,7 @@ public class StaticSheetListPanel extends JPanel {
 
 	}
 
-	private void initializeYearMonthValues() {
+	public void initializeYearMonthValues() {
 		int sliderVal = slider.getValue();
 		setMonth(String.valueOf(sliderVal));
 		String boxVal = (String) yearBox.getSelectedItem();
@@ -173,6 +173,14 @@ public class StaticSheetListPanel extends JPanel {
 		}
 
 		return years;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public String getYear() {
+		return year;
 	}
 
 }

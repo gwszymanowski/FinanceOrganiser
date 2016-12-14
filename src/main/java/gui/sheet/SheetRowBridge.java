@@ -12,11 +12,11 @@ public abstract class SheetRowBridge extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 
-	protected List<SheetRow> list;
+	private List<SheetRow> list;
 	private String[] colNames = { "Item", "Category", "Estimated price", "Actual price" };
 	protected SheetRowService service;
 
-	protected SheetRowBridge() {
+	public SheetRowBridge() {
 		this.list = new LinkedList<SheetRow>();
 	}
 

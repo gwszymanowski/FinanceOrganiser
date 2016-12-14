@@ -303,7 +303,7 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 	public List<SheetRow> getByYearMonth(int year, int month, boolean isStatic) {
 
-		List<SheetRow> sheetRowSet = new ArrayList<SheetRow>();
+		List<SheetRow> sheetRows = new ArrayList<SheetRow>();
 
 		PreparedStatement stmt = null;
 		Database db = Database.getInstance();
@@ -317,7 +317,8 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 			sb.append("c.id, c.title FROM sheetrow s ");
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
 			sb.append("WHERE YEAR(s.current)=? AND MONTH(s.current)=? AND s.isStatic=?");
-
+			System.out.println(sb.toString());
+			System.out.println(year + " " + month + "  " + myInt);
 			stmt = conn.prepareStatement(sb.toString());
 			stmt.setInt(1, year);
 			stmt.setInt(2, month);
@@ -339,7 +340,7 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 				SheetRow s = new SheetRow(id, title, cat, p);
 
-				sheetRowSet.add(s);
+				sheetRows.add(s);
 
 			}
 			stmt.close();
@@ -348,7 +349,9 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 			e.printStackTrace();
 		}
 
-		return sheetRowSet;
+		System.out.println(sheetRows);
+		
+		return sheetRows;
 
 	}
 

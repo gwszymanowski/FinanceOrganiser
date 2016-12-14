@@ -16,25 +16,33 @@ public class SheetRowView extends JPanel {
 	private SheetRowListPanel listPanel;
 	private SheetRowAddPanel addPanel;
 	private JPanel cards;
-	
+
 	public SheetRowView() {
 		setLayout(new BorderLayout());
 		options = new BasicOptionsPanel();
 
 		cards = new JPanel(new CardLayout());
 
-			addPanel = new SheetRowAddPanel();
-			listPanel = new SheetRowListPanel(addPanel);
-			cards.add(listPanel, "list");	
-			cards.add(addPanel, "add");
+		addPanel = new SheetRowAddPanel();
+		listPanel = new SheetRowListPanel(addPanel);
+		cards.add(listPanel, "list");
+		cards.add(addPanel, "add");
 
 		options.addCardListeners(new BasicOptionsListener(options, cards));
 
 		add(options, BorderLayout.NORTH);
 		add(cards, BorderLayout.CENTER);
 	}
-	
+
 	public void refresh(int m, int y) {
 		listPanel.refresh(m, y);
+	}
+
+	public void refreshToCurrent() {
+		System.out.println("exceptional refresh");
+		listPanel.initializeYearMonthValues();
+		int month = Integer.valueOf(listPanel.getMonth());
+		int year = Integer.valueOf(listPanel.getYear());
+		refresh(month, year);
 	}
 }

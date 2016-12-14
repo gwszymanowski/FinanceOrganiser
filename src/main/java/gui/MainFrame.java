@@ -16,7 +16,6 @@ import listener.CompositeActionListener;
 import listener.DeleteListener;
 import listener.MenuListener;
 
-
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -55,30 +54,41 @@ public class MainFrame extends JFrame {
 
 	private void initMenu() {
 		menu = new PreparedMenu();
-		menu.addInsertListener(new MenuListener(menu, cards));
-		
-		CompositeActionListener compositeListener = new CompositeActionListener();
-		compositeListener.addActionListener(new DeleteListener(menu), 1);
-		
-		compositeListener.addActionListener(new ActionListener() {
+
+		CompositeActionListener compositeChange = new CompositeActionListener();
+
+		compositeChange.addActionListener(new MenuListener(menu, cards), 1);
+
+		compositeChange.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == menu.deleteAll) {
-					sheetRowView.refresh(0,0);		
-					staticSheetView.refresh(0, 0);
-				}
-				else if (e.getSource() == menu.deleteTrues) {
-					staticSheetView.refresh(0, 0);
-				}				
-				else if (e.getSource() == menu.deleteFalses) {
-					sheetRowView.refresh(0,0);	
-				}	
+				
+				if(e.getSource() == menu.general)		
+					staticSheetView.refreshToCurrent();
+				else if(e.getSource() == menu.exceptional)
+					sheetRowView.refreshToCurrent();
+				
 			}
-			
+
 		}, 2);
-		
-		menu.addDeleteListener(compositeListener);
+
+		menu.addMenuViewListener(compositeChange);
+
+		CompositeActionListener deleteComposite = new CompositeActionListener();
+		deleteComposite.addActionListener(new DeleteListener(menu), 1);
+
+		deleteComposite.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				sheetRowView.refreshToCurrent();
+				staticSheetView.refreshToCurrent();
+			}
+
+		}, 2);
+
+		menu.addDeleteListener(deleteComposite);
 
 		setJMenuBar(menu);
 	}
@@ -90,6 +100,5 @@ public class MainFrame extends JFrame {
 		setLocation(Settings.X, Settings.Y);
 		setVisible(true);
 	}
-
 
 }

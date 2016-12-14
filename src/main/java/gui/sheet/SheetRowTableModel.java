@@ -11,7 +11,7 @@ public class SheetRowTableModel extends SheetRowBridge {
 
 	public SheetRowTableModel(int monthNum, int yearNum) {
 		super();
-		this.service = new SheetRowService(false);
+		this.service = new SheetRowService(true);
 		reloadData(monthNum, yearNum);
 	}
 

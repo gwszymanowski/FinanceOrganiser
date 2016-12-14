@@ -12,7 +12,7 @@ public class StaticSheetTableModel extends SheetRowBridge {
 
 	public StaticSheetTableModel(int monthNum, int yearNum) {
 		super();
-		this.service = new SheetRowService(true);
+		this.service = new SheetRowService(false);
 		reloadData(monthNum, yearNum);
 	}
 
