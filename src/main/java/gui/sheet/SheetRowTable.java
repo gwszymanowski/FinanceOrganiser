@@ -27,8 +27,8 @@ public class SheetRowTable extends JPanel {
 
 		popmenu = new JPopupMenu();
 		
-		JMenuItem kek = new JMenuItem("KEK");
-		popmenu.add(kek);
+		JMenuItem deleteMenu = new JMenuItem("Delete");
+		popmenu.add(deleteMenu);
 		
 		table.addMouseListener(new MouseAdapter() {
 

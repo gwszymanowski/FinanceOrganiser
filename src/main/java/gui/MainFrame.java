@@ -56,9 +56,7 @@ public class MainFrame extends JFrame {
 		menu = new PreparedMenu();
 
 		CompositeActionListener compositeChange = new CompositeActionListener();
-
 		compositeChange.addActionListener(new MenuListener(menu, cards), 1);
-
 		compositeChange.addActionListener(new ActionListener() {
 
 			@Override
@@ -77,7 +75,6 @@ public class MainFrame extends JFrame {
 
 		CompositeActionListener deleteComposite = new CompositeActionListener();
 		deleteComposite.addActionListener(new DeleteListener(menu), 1);
-
 		deleteComposite.addActionListener(new ActionListener() {
 
 			@Override

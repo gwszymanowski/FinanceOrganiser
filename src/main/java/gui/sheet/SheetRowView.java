@@ -39,7 +39,6 @@ public class SheetRowView extends JPanel {
 	}
 
 	public void refreshToCurrent() {
-		System.out.println("exceptional refresh");
 		listPanel.initializeYearMonthValues();
 		int month = Integer.valueOf(listPanel.getMonth());
 		int year = Integer.valueOf(listPanel.getYear());

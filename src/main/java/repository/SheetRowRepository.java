@@ -22,15 +22,15 @@ import service.ItemService;
 public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 	boolean constrStatic;
-	
+
 	public SheetRowRepository() {
 		this.constrStatic = false;
 	}
-	
+
 	public SheetRowRepository(boolean isStatic) {
 		this.constrStatic = isStatic;
 	}
-	
+
 	public void add(SheetRow s) {
 		PreparedStatement stmt = null;
 		Database db = Database.getInstance();
@@ -147,14 +147,14 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		try {
 
 			int myInt = (this.constrStatic) ? 0 : 1;
-			
+
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT s.id, s.title, s.estimated, s.actual, ");
 			sb.append("c.id, c.title FROM sheetrow s ");
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
 			sb.append("WHERE s.isStatic=? ");
 			sb.append("ORDER BY c.title");
-			
+
 			stmt = conn.prepareStatement(sb.toString());
 			stmt.setInt(1, myInt);
 			ResultSet rs = stmt.executeQuery();
@@ -311,14 +311,13 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		try {
 
 			int myInt = (this.constrStatic) ? 0 : 1;
-			
+
 			StringBuilder sb = new StringBuilder();
 			sb.append("SELECT s.id, s.title, s.estimated, s.actual, ");
 			sb.append("c.id, c.title FROM sheetrow s ");
 			sb.append("INNER JOIN category c ON(s.category_id=c.id) ");
 			sb.append("WHERE YEAR(s.current)=? AND MONTH(s.current)=? AND s.isStatic=?");
-			System.out.println(sb.toString());
-			System.out.println(year + " " + month + "  " + myInt);
+
 			stmt = conn.prepareStatement(sb.toString());
 			stmt.setInt(1, year);
 			stmt.setInt(2, month);
@@ -332,6 +331,7 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 				double estimated = rs.getDouble(3);
 				double actual = rs.getDouble(4);
+
 				Price p = new Price(estimated, actual);
 
 				int categoryId = rs.getInt(5);
@@ -349,8 +349,6 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 			e.printStackTrace();
 		}
 
-		System.out.println(sheetRows);
-		
 		return sheetRows;
 
 	}

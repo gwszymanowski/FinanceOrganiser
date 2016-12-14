@@ -81,7 +81,7 @@ public class SheetRowAddPanel extends JPanel {
 
 	private void addListeners() {
 
-		sheetrow = new SheetRow();
+		this.sheetrow = new SheetRow();
 
 		CompositeActionListener listener = new CompositeActionListener();
 
@@ -94,17 +94,17 @@ public class SheetRowAddPanel extends JPanel {
 				sheetrow.setTitle(title);
 				sheetrow.setStatic(false);
 
-				String chosenDate = datePickLabel.getText();
-
+				String chosenDate = datePickLabel.getText();				
 				String[] yearmonth = chosenDate.split("/");
 
 				Calendar c = Calendar.getInstance();
-				
-				c.set(Calendar.YEAR, Integer.parseInt(yearmonth[0]));
-				c.set(Calendar.MONTH, Integer.parseInt(yearmonth[1]));
 
-			 	Instant inst = c.toInstant();				 
- 				sheetrow.setCurrent(inst);
+				c.set(Calendar.YEAR, Integer.parseInt(yearmonth[0]));
+				c.set(Calendar.MONTH, (Integer.parseInt(yearmonth[1]) - 1));
+
+				Instant inst = c.toInstant();
+
+				sheetrow.setCurrent(inst);
 
 			}
 		}, 1);
