@@ -1,6 +1,8 @@
 package gui.sheet;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -19,23 +21,36 @@ public class SheetRowTable extends JPanel {
 
 	private JTable table;
 	private SheetRowTableModel model;
-	private JPopupMenu popmenu;
+	private JPopupMenu mainpop, secondpop;
+	private int selectedRow, selectedCol;
 
 	public SheetRowTable(int monthNum, int yearNum) {
 		model = new SheetRowTableModel(monthNum, yearNum);
 		table = new JTable(model);
 
-		popmenu = new JPopupMenu();
-		
-		JMenuItem deleteMenu = new JMenuItem("Delete");
-		popmenu.add(deleteMenu);
-		
+		initializePopups();
+
 		table.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
-				if(e.getButton() == MouseEvent.BUTTON3) {
-					popmenu.show(table, e.getX(), e.getY());
+
+				int row = table.rowAtPoint(e.getPoint());
+				setSelectedRow(row);
+				int col = table.columnAtPoint(e.getPoint());
+				setSelectedCol(col);
+				
+				for (int i = 0; i < table.getColumnCount(); i++) {
+					System.out.println(table.getValueAt(row, i));
+				}
+				
+				
+				if (e.getButton() == MouseEvent.BUTTON3) {
+
+					if (col > 1)
+						secondpop.show(table, e.getX(), e.getY());
+					else
+						mainpop.show(table, e.getX(), e.getY());
 				}
 			}
 
@@ -48,6 +63,31 @@ public class SheetRowTable extends JPanel {
 
 	}
 
+	private void initializePopups() {
+		mainpop = new JPopupMenu();
+
+		JMenuItem deleteMenu = new JMenuItem("Delete");
+		mainpop.add(deleteMenu);
+
+		secondpop = new JPopupMenu();
+
+		JMenuItem editMenu = new JMenuItem("Edit");
+
+		editMenu.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+
+		});
+
+		secondpop.add(editMenu);
+
+		JMenuItem deleteTwoMenu = new JMenuItem("Delete");
+		secondpop.add(deleteTwoMenu);
+	}
+
 	public void refresh(int monthNum, int yearNum) {
 		model.reloadData(monthNum, yearNum);
 		model.fireTableDataChanged();
@@ -55,6 +95,14 @@ public class SheetRowTable extends JPanel {
 
 	public List<SheetRow> getList() {
 		return model.getList();
+	}
+
+	public void setSelectedRow(int selectedRow) {
+		this.selectedRow = selectedRow;
+	}
+
+	public void setSelectedCol(int selectedCol) {
+		this.selectedCol = selectedCol;
 	}
 
 }
