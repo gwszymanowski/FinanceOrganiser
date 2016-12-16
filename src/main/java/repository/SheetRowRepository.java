@@ -487,5 +487,9 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 		return true;
 	}
+	
+	public void editPrice(String name, double value, boolean isActual) {
+		System.out.println(name +  "   " + value + "   "  + isActual);
+	}
 
 }

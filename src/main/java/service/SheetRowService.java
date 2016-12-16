@@ -61,5 +61,9 @@ public class SheetRowService implements CrudServiceI<SheetRow> {
 	public Instant getEarliestDate() {
 		return repo.getEarliestDate();
 	}
+	
+	public void editPrice(String name, double value, boolean isActual){
+		repo.editPrice(name, value, isActual);
+	}
 
 }

@@ -21,19 +21,19 @@ public class FillListener implements ActionListener {
 		createPanel();
 
 	}
-	
+
 	private void createPanel() {
 		customPanel = new JPanel();
 
-			Calendar c = Calendar.getInstance();
-			int year = c.get(Calendar.YEAR);
-	
-			yearBox = new JComboBox<Integer>();
-	
-			for (int i = 0; i <= 5; i++) {
-				yearBox.addItem(new Integer(year));
-				year++;
-			}
+		Calendar c = Calendar.getInstance();
+		int year = c.get(Calendar.YEAR);
+
+		yearBox = new JComboBox<Integer>();
+
+		for (int i = 0; i <= 5; i++) {
+			yearBox.addItem(new Integer(year));
+			year++;
+		}
 
 		customPanel.add(yearBox);
 	}
@@ -41,14 +41,13 @@ public class FillListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		int input = JOptionPane.showConfirmDialog(null, customPanel, "Generate sheets till year:"
-                ,JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-		
-		if(input == JOptionPane.OK_OPTION) {
+		int input = JOptionPane.showConfirmDialog(null, customPanel, "Generate sheets till year:",
+				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+		if (input == JOptionPane.OK_OPTION) {
 			Integer lastYear = (Integer) yearBox.getSelectedItem();
 			service.fill(lastYear);
 		}
-        	
 
 	}
 

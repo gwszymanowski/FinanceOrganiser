@@ -1,8 +1,6 @@
 package gui.sheet;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -13,6 +11,7 @@ import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import listener.EditNumberListener;
 import model.SheetRow;
 
 public class SheetRowTable extends JPanel {
@@ -22,7 +21,8 @@ public class SheetRowTable extends JPanel {
 	private JTable table;
 	private SheetRowTableModel model;
 	private JPopupMenu mainpop, secondpop;
-	private int selectedRow, selectedCol;
+	private int selectedCol;
+	private String selectedName;
 
 	public SheetRowTable(int monthNum, int yearNum) {
 		model = new SheetRowTableModel(monthNum, yearNum);
@@ -36,17 +36,15 @@ public class SheetRowTable extends JPanel {
 			public void mousePressed(MouseEvent e) {
 
 				int row = table.rowAtPoint(e.getPoint());
-				setSelectedRow(row);
+
 				int col = table.columnAtPoint(e.getPoint());
 				setSelectedCol(col);
-				
-				for (int i = 0; i < table.getColumnCount(); i++) {
-					System.out.println(table.getValueAt(row, i));
-				}
-				
-				
-				if (e.getButton() == MouseEvent.BUTTON3) {
 
+				table.getSelectionModel().setSelectionInterval(row, row);
+
+				String tablevalue = (String) table.getValueAt(row, 0);
+				setSelectedName(tablevalue);
+				if (e.getButton() == MouseEvent.BUTTON3) {
 					if (col > 1)
 						secondpop.show(table, e.getX(), e.getY());
 					else
@@ -73,14 +71,7 @@ public class SheetRowTable extends JPanel {
 
 		JMenuItem editMenu = new JMenuItem("Edit");
 
-		editMenu.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-			}
-
-		});
+		editMenu.addActionListener(new EditNumberListener(getSelectedName(), selectedCol, false));
 
 		secondpop.add(editMenu);
 
@@ -97,12 +88,16 @@ public class SheetRowTable extends JPanel {
 		return model.getList();
 	}
 
-	public void setSelectedRow(int selectedRow) {
-		this.selectedRow = selectedRow;
-	}
-
 	public void setSelectedCol(int selectedCol) {
 		this.selectedCol = selectedCol;
+	}
+
+	public void setSelectedName(String selectedName) {
+		this.selectedName = selectedName;
+	}
+
+	public String getSelectedName() {
+		return selectedName;
 	}
 
 }
