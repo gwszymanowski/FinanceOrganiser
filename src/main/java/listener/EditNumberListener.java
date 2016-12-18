@@ -15,13 +15,14 @@ public class EditNumberListener implements ActionListener {
 
 	JPanel customPanel;
 	JTextField field;
-	private String name;
+	private int id;
 	private int col;
 	private SheetRowService service;
 	private String title;
 
-	public EditNumberListener(String name, int col, boolean isStatic) {
-		this.name = name;
+	public EditNumberListener(int id, int col, boolean isStatic) {
+		System.out.println("IN LISTENER CONSTRUCTOR " +id);
+		this.id = id;
 		this.col = col;
 		this.service = new SheetRowService(isStatic);
 
@@ -52,16 +53,20 @@ public class EditNumberListener implements ActionListener {
 				JOptionPane.PLAIN_MESSAGE);
 
 		if (input == JOptionPane.OK_OPTION) {
-			
+
 			Double val = Double.parseDouble(field.getText());
-			
-			if(col == 2)
-				service.editPrice(name, val, true);
+			System.out.println("IN LISTENER " + getId());
+			if (col == 2)
+				service.editPrice(getId(), val, true);
 			else
-				service.editPrice(name, val, false);
-		
+				service.editPrice(getId(), val, false);
+
 		}
 
+	}
+
+	public int getId() {
+		return id;
 	}
 
 }

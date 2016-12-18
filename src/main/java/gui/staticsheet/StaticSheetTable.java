@@ -19,6 +19,8 @@ public class StaticSheetTable extends JPanel {
 	public StaticSheetTable(int monthNum, int yearNum) {
 		model = new StaticSheetTableModel(monthNum, yearNum);
 		table = new JTable(model);
+		table.getColumnModel().getColumn(4).setMinWidth(0);
+		table.getColumnModel().getColumn(4).setMaxWidth(0);
 
 		setLayout(new BorderLayout());
 

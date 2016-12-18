@@ -22,12 +22,13 @@ public class SheetRowTable extends JPanel {
 	private SheetRowTableModel model;
 	private JPopupMenu mainpop, secondpop;
 	private int selectedCol;
-	private String selectedName;
+	private int selectedRowId;
 
 	public SheetRowTable(int monthNum, int yearNum) {
 		model = new SheetRowTableModel(monthNum, yearNum);
 		table = new JTable(model);
-
+		table.getColumnModel().getColumn(4).setMinWidth(0);
+		table.getColumnModel().getColumn(4).setMaxWidth(0);
 		initializePopups();
 
 		table.addMouseListener(new MouseAdapter() {
@@ -42,8 +43,10 @@ public class SheetRowTable extends JPanel {
 
 				table.getSelectionModel().setSelectionInterval(row, row);
 
-				String tablevalue = (String) table.getValueAt(row, 0);
-				setSelectedName(tablevalue);
+				int tablevalue = (int) table.getValueAt(row, 4);
+				System.out.println("TABLE VALUE " + tablevalue);
+				setSelectedRowId(tablevalue);
+				System.out.println("RETRIEVED VALUE " + getSelectedRowId());
 				if (e.getButton() == MouseEvent.BUTTON3) {
 					if (col > 1)
 						secondpop.show(table, e.getX(), e.getY());
@@ -55,7 +58,7 @@ public class SheetRowTable extends JPanel {
 		});
 
 		setLayout(new BorderLayout());
-
+		
 		JScrollPane scroll = new JScrollPane(table);
 		add(scroll, BorderLayout.CENTER);
 
@@ -71,7 +74,7 @@ public class SheetRowTable extends JPanel {
 
 		JMenuItem editMenu = new JMenuItem("Edit");
 
-		editMenu.addActionListener(new EditNumberListener(getSelectedName(), selectedCol, false));
+		editMenu.addActionListener(new EditNumberListener(getSelectedRowId(), selectedCol, false));
 
 		secondpop.add(editMenu);
 
@@ -92,12 +95,12 @@ public class SheetRowTable extends JPanel {
 		this.selectedCol = selectedCol;
 	}
 
-	public void setSelectedName(String selectedName) {
-		this.selectedName = selectedName;
+	public int getSelectedRowId() {
+		return selectedRowId;
 	}
 
-	public String getSelectedName() {
-		return selectedName;
+	public void setSelectedRowId(int selectedRowId) {
+		this.selectedRowId = selectedRowId;
 	}
 
 }

@@ -13,7 +13,7 @@ public abstract class SheetRowBridge extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 
 	private List<SheetRow> list;
-	private String[] colNames = { "Item", "Category", "Estimated price", "Actual price" };
+	private String[] colNames = { "Item", "Category", "Estimated price", "Actual price", "id" };
 	protected SheetRowService service;
 
 	public SheetRowBridge() {
@@ -26,7 +26,7 @@ public abstract class SheetRowBridge extends AbstractTableModel {
 	}
 
 	public int getColumnCount() {
-		return 4;
+		return 5;
 	}
 
 	public int getRowCount() {
@@ -46,6 +46,8 @@ public abstract class SheetRowBridge extends AbstractTableModel {
 			return sheetRow.getPrice().getEstimated();
 		case 3:
 			return sheetRow.getPrice().getActual();
+		case 4:
+			return sheetRow.getId();
 		}
 
 		return null;
