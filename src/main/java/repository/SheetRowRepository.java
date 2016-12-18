@@ -487,35 +487,34 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 		return true;
 	}
-	
+
 	public void editPrice(int id, double value, boolean isActual) {
-		
-		
+
 		PreparedStatement stmt = null;
 		Database db = Database.getInstance();
 		Connection conn = db.getConnection();
-		
+
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append("UPDATE sheetrow SET ");
-		
-		if(isActual){
+
+		if (isActual) {
 			sb.append("actual=? where id=?");
 		} else {
 			sb.append("estimated=? where id=?");
 		}
-		System.out.println(id + "  " + value);
+
 		try {
-			stmt = conn.prepareStatement(sb.toString());			
+			stmt = conn.prepareStatement(sb.toString());
 			stmt.setDouble(1, value);
 			stmt.setInt(2, id);
-			
+
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

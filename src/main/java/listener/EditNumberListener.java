@@ -21,7 +21,6 @@ public class EditNumberListener implements ActionListener {
 	private String title;
 
 	public EditNumberListener(int id, int col, boolean isStatic) {
-		System.out.println("IN LISTENER CONSTRUCTOR " +id);
 		this.id = id;
 		this.col = col;
 		this.service = new SheetRowService(isStatic);
@@ -55,14 +54,18 @@ public class EditNumberListener implements ActionListener {
 		if (input == JOptionPane.OK_OPTION) {
 
 			Double val = Double.parseDouble(field.getText());
-			System.out.println("IN LISTENER " + getId());
+
 			if (col == 2)
-				service.editPrice(getId(), val, true);
-			else
 				service.editPrice(getId(), val, false);
+			else
+				service.editPrice(getId(), val, true);
 
 		}
 
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public int getId() {
