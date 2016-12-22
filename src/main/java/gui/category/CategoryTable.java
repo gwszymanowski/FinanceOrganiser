@@ -1,13 +1,15 @@
 package gui.category;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JTable;
 
 import gui.abstr.AbstractGeneralTable;
+import listener.DeleteTitleableListener;
+import listener.EditTitleableListener;
+import model.Category;
+import service.CategoryService;
 
 public class CategoryTable extends AbstractGeneralTable {
 
@@ -21,6 +23,7 @@ public class CategoryTable extends AbstractGeneralTable {
 		this.table = new JTable(this.model);
 		this.table.getColumnModel().getColumn(1).setMinWidth(0);
 		this.table.getColumnModel().getColumn(1).setMaxWidth(0);
+
 	}
 
 	@Override
@@ -31,9 +34,13 @@ public class CategoryTable extends AbstractGeneralTable {
 			public void mousePressed(MouseEvent e) {
 
 				int row = table.rowAtPoint(e.getPoint());
-				// int col = table.columnAtPoint(e.getPoint());
-				// int tablevalue = (int) table.getValueAt(row, 4);
-
+				int col = table.columnAtPoint(e.getPoint());
+				setCol(col);
+				int tablevalue = (int) table.getValueAt(row, 1);
+				setTablevalue(tablevalue);
+				editTitleListener.setId(tablevalue);
+				deleteTitleableListener.setId(tablevalue);
+				
 				table.getSelectionModel().setSelectionInterval(row, row);
 
 				if (e.getButton() == MouseEvent.BUTTON3)
@@ -42,23 +49,13 @@ public class CategoryTable extends AbstractGeneralTable {
 			}
 		});
 
-		this.edit.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-
-		});
-
-		this.delete.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-			}
-
-		});
+		CategoryService service = new CategoryService();
+		
+		this.editTitleListener = new EditTitleableListener(service, new Category());	
+		this.edit.addActionListener(this.editTitleListener);
+		
+		this.deleteTitleableListener = new DeleteTitleableListener(service);
+		this.delete.addActionListener(this.deleteTitleableListener);
 	}
 
 	public void refresh() {

@@ -121,7 +121,7 @@ public class PreparedMenu extends JMenuBar {
 
 	private void addHelp() {
 		this.help = new JMenu("Help");
-		add(this.help);
+		this.add(this.help);
 	}
 
 	public void addMenuViewListener(ActionListener listener) {

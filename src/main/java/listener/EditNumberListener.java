@@ -20,17 +20,10 @@ public class EditNumberListener implements ActionListener {
 	private SheetRowService service;
 	private String title;
 
-	public EditNumberListener(int id, int col, boolean isStatic) {
-
-		this.id = id;
-		this.col = col;
+	public EditNumberListener(boolean isStatic) {
+		this.id = 0;
+		this.col = 0;
 		this.service = new SheetRowService(isStatic);
-
-		if (col == 2)
-			this.title = "Select new estimated price:";
-		else
-			this.title = "Select new actual price:";
-
 		createPanel();
 	}
 
@@ -48,6 +41,11 @@ public class EditNumberListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
+
+		if (col == 2)
+			this.title = "Select new estimated price:";
+		else if (col == 3)
+			this.title = "Select new actual price:";
 
 		int input = JOptionPane.showConfirmDialog(null, this.customPanel, this.title, JOptionPane.OK_CANCEL_OPTION,
 				JOptionPane.PLAIN_MESSAGE);
@@ -71,6 +69,14 @@ public class EditNumberListener implements ActionListener {
 
 	public int getId() {
 		return id;
+	}
+
+	public int getCol() {
+		return col;
+	}
+
+	public void setCol(int col) {
+		this.col = col;
 	}
 
 }

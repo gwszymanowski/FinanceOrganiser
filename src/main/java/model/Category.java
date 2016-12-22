@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Category implements Serializable {
+public class Category implements Serializable, Titleable {
 
 	private static final long serialVersionUID = 1L;
 	private int id;

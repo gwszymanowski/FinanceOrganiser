@@ -20,7 +20,7 @@ public abstract class AbstractSheetrowTable extends JPanel {
 	protected JMenuItem editMenu;
 	protected JPopupMenu mainpop, secondpop;
 	protected EditNumberListener editNumberListener;
-	protected int monthNum, yearNum;
+	protected int monthNum, yearNum, col, tablevalue;
 
 	public AbstractSheetrowTable(int monthNum, int yearNum) {
 		this.monthNum = monthNum;
@@ -29,6 +29,7 @@ public abstract class AbstractSheetrowTable extends JPanel {
 		this.initializeLayout();
 		this.initializePopups();
 		this.initializeTableListener();
+		this.initializeEditListener();
 	}
 
 	private void initializeLayout() {
@@ -38,11 +39,29 @@ public abstract class AbstractSheetrowTable extends JPanel {
 		this.add(scroll, BorderLayout.CENTER);
 	}
 
+	protected int getCol() {
+		return col;
+	}
+
+	protected void setCol(int col) {
+		this.col = col;
+	}
+
+	protected int getTablevalue() {
+		return tablevalue;
+	}
+
+	protected void setTablevalue(int tablevalue) {
+		this.tablevalue = tablevalue;
+	}
+
 	protected abstract void initializeBody();
 
 	protected abstract void initializePopups();
 
 	protected abstract void initializeTableListener();
+
+	protected abstract void initializeEditListener();
 
 	public abstract void refresh(int monthNum, int yearNum);
 

@@ -33,9 +33,4 @@ public class CategoryService implements CrudServiceI<Category> {
 		return this.repo.getCount();
 	}
 
-	@Override
-	public String toString() {
-		return "CategoryService []";
-	}
-
 }

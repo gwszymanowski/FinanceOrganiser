@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
-public class Item implements Comparable<Item>, Serializable {
+public class Item implements Comparable<Item>, Serializable, Titleable {
 
 	private static final long serialVersionUID = 1L;
 	private int id;

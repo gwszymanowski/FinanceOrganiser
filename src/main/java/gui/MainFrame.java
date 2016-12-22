@@ -13,7 +13,7 @@ import gui.item.ItemView;
 import gui.sheet.ExceptionalSheetView;
 import gui.staticsheet.GeneralSheetView;
 import listener.CompositeActionListener;
-import listener.DeleteListener;
+import listener.DeleteMenuListener;
 import listener.MenuListener;
 
 public class MainFrame extends JFrame {
@@ -75,7 +75,7 @@ public class MainFrame extends JFrame {
 		this.menu.addMenuViewListener(compositeChange);
 
 		CompositeActionListener deleteComposite = new CompositeActionListener();
-		deleteComposite.addActionListener(new DeleteListener(menu), 1);
+		deleteComposite.addActionListener(new DeleteMenuListener(menu), 1);
 		deleteComposite.addActionListener(new ActionListener() {
 
 			@Override

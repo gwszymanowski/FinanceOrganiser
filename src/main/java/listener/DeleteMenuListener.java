@@ -8,12 +8,12 @@ import javax.swing.JOptionPane;
 import gui.PreparedMenu;
 import service.SheetRowService;
 
-public class DeleteListener implements ActionListener {
+public class DeleteMenuListener implements ActionListener {
 
 	private SheetRowService service;
 	private PreparedMenu menu;
 
-	public DeleteListener(PreparedMenu menu) {
+	public DeleteMenuListener(PreparedMenu menu) {
 		this.menu = menu;
 		this.service = new SheetRowService();
 	}
@@ -28,16 +28,13 @@ public class DeleteListener implements ActionListener {
 			if (e.getSource() == this.menu.deleteAll) {
 				this.service.deleteAll();
 				JOptionPane.showMessageDialog(null, "Action finished");
-			}
-			else if (e.getSource() == this.menu.deleteTrues) {
+			} else if (e.getSource() == this.menu.deleteTrues) {
 				this.service.delete(true);
 				JOptionPane.showMessageDialog(null, "Action finished");
-			}				
-			else if (e.getSource() == this.menu.deleteFalses) {
+			} else if (e.getSource() == this.menu.deleteFalses) {
 				this.service.delete(false);
 				JOptionPane.showMessageDialog(null, "Action finished");
-			}			
-			else
+			} else
 				throw new IllegalAccessError();
 		}
 

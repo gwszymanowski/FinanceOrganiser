@@ -31,7 +31,7 @@ public class ExceptionalSheetTable extends AbstractSheetrowTable {
 		this.table = new JTable(model);
 		this.table.getColumnModel().getColumn(4).setMinWidth(0);
 		this.table.getColumnModel().getColumn(4).setMaxWidth(0);
-
+		this.table.getTableHeader().setReorderingAllowed(false);
 	}
 
 	@Override
@@ -58,25 +58,13 @@ public class ExceptionalSheetTable extends AbstractSheetrowTable {
 
 				int row = table.rowAtPoint(e.getPoint());
 				int col = table.columnAtPoint(e.getPoint());
+				setCol(col);
+				editNumberListener.setCol(col);
 				int tablevalue = (int) table.getValueAt(row, 4);
+				setTablevalue(tablevalue);
+				editNumberListener.setId(tablevalue);
 
 				table.getSelectionModel().setSelectionInterval(row, row);
-
-				CompositeActionListener composite = new CompositeActionListener();
-
-				editNumberListener = new EditNumberListener(tablevalue, col, false);
-
-				composite.addActionListener(editNumberListener, 1);
-				composite.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						refresh(monthNum, yearNum);
-					}
-
-				}, 2);
-
-				editMenu.addActionListener(composite);
 
 				if (e.getButton() == MouseEvent.BUTTON3) {
 					if (col > 1)
@@ -87,6 +75,25 @@ public class ExceptionalSheetTable extends AbstractSheetrowTable {
 			}
 
 		});
+	}
+
+	@Override
+	protected void initializeEditListener() {
+		CompositeActionListener composite = new CompositeActionListener();
+
+		editNumberListener = new EditNumberListener(false);
+
+		composite.addActionListener(editNumberListener, 1);
+		composite.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				refresh(monthNum, yearNum);
+			}
+
+		}, 2);
+
+		editMenu.addActionListener(composite);
 	}
 
 	@Override

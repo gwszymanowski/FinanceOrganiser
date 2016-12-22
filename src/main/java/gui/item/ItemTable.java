@@ -21,7 +21,7 @@ public class ItemTable extends AbstractGeneralTable {
 		this.table = new JTable(this.model);
 		this.table.getColumnModel().getColumn(2).setMinWidth(0);
 		this.table.getColumnModel().getColumn(2).setMaxWidth(0);
-
+		this.table.getTableHeader().setReorderingAllowed(false);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class ItemTable extends AbstractGeneralTable {
 
 				int row = table.rowAtPoint(e.getPoint());
 				int col = table.columnAtPoint(e.getPoint());
-				// int tablevalue = (int) table.getValueAt(row, 4);
+				int tablevalue = (int) table.getValueAt(row, 2);
 
 				table.getSelectionModel().setSelectionInterval(row, row);
 
