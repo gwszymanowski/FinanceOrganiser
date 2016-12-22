@@ -28,8 +28,7 @@ public class GeneralParser implements Parsing {
 	public void parseToJSON(String fileDirectory) {
 		ObjectMapper mapper = new ObjectMapper();
 
-		List<SheetRow> list = service.getAll();
-		System.out.println(list.size());
+		List<SheetRow> list = this.service.getAll();
 		StringBuilder sb = getFilePath(fileDirectory);
 		sb.append(".json");
 
@@ -52,7 +51,7 @@ public class GeneralParser implements Parsing {
 		sb.append(".xml");
 
 		SheetRows rows = new SheetRows();
-		rows.setSheetrows(service.getAll());
+		rows.setSheetrows(this.service.getAll());
 
 		try {
 

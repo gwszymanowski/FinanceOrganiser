@@ -12,36 +12,36 @@ public class SheetRowView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private BasicOptionsPanel options;
-	private SheetRowListPanel listPanel;
-	private SheetRowAddPanel addPanel;
-	private JPanel cards;
+	BasicOptionsPanel options;
+	SheetRowListPanel listPanel;
+	SheetRowAddPanel addPanel;
+	JPanel cards;
 
 	public SheetRowView() {
-		setLayout(new BorderLayout());
-		options = new BasicOptionsPanel();
+		this.setLayout(new BorderLayout());
+		this.options = new BasicOptionsPanel();
 
-		cards = new JPanel(new CardLayout());
+		this.cards = new JPanel(new CardLayout());
 
-		addPanel = new SheetRowAddPanel();
-		listPanel = new SheetRowListPanel(addPanel);
-		cards.add(listPanel, "list");
-		cards.add(addPanel, "add");
+		this.addPanel = new SheetRowAddPanel();
+		this.listPanel = new SheetRowListPanel(this.addPanel);
+		this.cards.add(this.listPanel, "list");
+		this.cards.add(this.addPanel, "add");
 
-		options.addCardListeners(new BasicOptionsListener(options, cards));
+		this.options.addCardListeners(new BasicOptionsListener(this.options, this.cards));
 
-		add(options, BorderLayout.NORTH);
-		add(cards, BorderLayout.CENTER);
+		this.add(options, BorderLayout.NORTH);
+		this.add(cards, BorderLayout.CENTER);
 	}
 
 	public void refresh(int m, int y) {
-		listPanel.refresh(m, y);
+		this.listPanel.refresh(m, y);
 	}
 
 	public void refreshToCurrent() {
-		listPanel.initializeYearMonthValues();
-		int month = Integer.valueOf(listPanel.getMonth());
-		int year = Integer.valueOf(listPanel.getYear());
-		refresh(month, year);
+		this.listPanel.initializeYearMonthValues();
+		int month = Integer.valueOf(this.listPanel.getMonth());
+		int year = Integer.valueOf(this.listPanel.getYear());
+		this.refresh(month, year);
 	}
 }

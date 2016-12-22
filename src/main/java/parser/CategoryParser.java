@@ -28,7 +28,7 @@ public class CategoryParser implements Parsing {
 	public void parseToJSON(String fileDirectory) {
 		ObjectMapper mapper = new ObjectMapper();
 
-		List<Category> list = service.getAll();
+		List<Category> list = this.service.getAll();
 
 		StringBuilder sb = getFilePath(fileDirectory);
 		sb.append(".json");
@@ -51,7 +51,7 @@ public class CategoryParser implements Parsing {
 		sb.append(".xml");
 
 		Categories categories = new Categories();
-		categories.setCategories(service.getAll());
+		categories.setCategories(this.service.getAll());
 
 		try {
 

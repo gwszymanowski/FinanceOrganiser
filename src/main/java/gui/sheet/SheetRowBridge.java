@@ -22,7 +22,7 @@ public abstract class SheetRowBridge extends AbstractTableModel {
 
 	@Override
 	public String getColumnName(int col) {
-		return colNames[col];
+		return this.colNames[col];
 	}
 
 	public int getColumnCount() {
@@ -30,12 +30,12 @@ public abstract class SheetRowBridge extends AbstractTableModel {
 	}
 
 	public int getRowCount() {
-		return list.size();
+		return this.list.size();
 	}
 
 	public Object getValueAt(int row, int col) {
 
-		SheetRow sheetRow = list.get(row);
+		SheetRow sheetRow = this.list.get(row);
 
 		switch (col) {
 		case 0:
@@ -54,12 +54,12 @@ public abstract class SheetRowBridge extends AbstractTableModel {
 	}
 
 	public void reloadData(int monthNum, int yearNum) {
-		list = getRows(monthNum, yearNum);
+		this.list = getRows(monthNum, yearNum);
 		fireTableDataChanged();
 	}
 
 	public List<SheetRow> getList() {
-		return list;
+		return this.list;
 	}
 
 	public abstract List<SheetRow> getRows(int monthNum, int yearNum);

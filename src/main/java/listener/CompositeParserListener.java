@@ -22,11 +22,12 @@ public class CompositeParserListener implements ActionListener {
 	public CompositeParserListener(boolean isXML) {
 		this.parsers = new TreeMap<String, Parsing>();
 		this.isXML = isXML;
+		
 		ParserFactory fc = new ParserFactory();
-		parsers.put("category", fc.getParser("CATEGORY"));
-		parsers.put("item", fc.getParser("ITEM"));
-		parsers.put("exceptional", fc.getParser("EXCEPTIONAL"));
-		parsers.put("general", fc.getParser("GENERAL"));
+		this.parsers.put("category", fc.getParser("CATEGORY"));
+		this.parsers.put("item", fc.getParser("ITEM"));
+		this.parsers.put("exceptional", fc.getParser("EXCEPTIONAL"));
+		this.parsers.put("general", fc.getParser("GENERAL"));
 	}
 
 	private List<Parsing> receiveParsers() {
@@ -34,7 +35,7 @@ public class CompositeParserListener implements ActionListener {
 		PropertiesManager mg = new PropertiesManager();
 		List<String> values = mg.getPropertiesValues();
 
-		List<Parsing> parserList = parsers.entrySet().stream().filter(x -> values.contains(x.getKey()) == true)
+		List<Parsing> parserList = this.parsers.entrySet().stream().filter(x -> values.contains(x.getKey()) == true)
 				.map(x -> x.getValue()).collect(Collectors.toList());
 
 		return parserList;
@@ -51,7 +52,7 @@ public class CompositeParserListener implements ActionListener {
 			String fileDirectory = chooser.getSelectedFile().getAbsolutePath();
 			
 			for (Parsing p : this.receiveParsers())
-				new ParserListener(p, fileDirectory, isXML).actionPerformed(e);
+				new ParserListener(p, fileDirectory, this.isXML).actionPerformed(e);
 			
 		}
 

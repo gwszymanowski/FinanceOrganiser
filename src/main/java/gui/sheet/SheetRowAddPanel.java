@@ -35,13 +35,17 @@ public class SheetRowAddPanel extends JPanel {
 	private CategoryService categoryService;
 
 	public SheetRowAddPanel() {
-		categoryService = new CategoryService();
-		setLayout(new BorderLayout());
+		initializeBody();
+	}
+
+	private void initializeBody() {
+		this.categoryService = new CategoryService();
+		this.setLayout(new BorderLayout());
 
 		JPanel topPanel = new JPanel(new GridBagLayout());
 		topPanel.add(new JLabel("ADD NEW ITEM"));
 
-		add(topPanel, BorderLayout.NORTH);
+		this.add(topPanel, BorderLayout.NORTH);
 
 		JPanel body = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -50,33 +54,33 @@ public class SheetRowAddPanel extends JPanel {
 		c.gridx = 0;
 		body.add(new JLabel("Name: "), c);
 		c.gridx++;
-		nameField = new JTextField(10);
-		body.add(nameField, c);
+		this.nameField = new JTextField(10);
+		body.add(this.nameField, c);
 
 		c.gridx = 0;
 		c.gridy++;
 		body.add(new JLabel("Category: "), c);
 
-		categoryBox = getCategoryComboBox();
+		this.categoryBox = getCategoryComboBox();
 		c.gridx++;
-		body.add(categoryBox, c);
+		body.add(this.categoryBox, c);
 
 		c.gridx = 0;
 		c.gridy++;
 		body.add(new JLabel("Date:"), c);
 
 		c.gridx++;
-		datePickLabel = new JLabel("");
-		body.add(datePickLabel, c);
-		add(body, BorderLayout.CENTER);
+		this.datePickLabel = new JLabel("");
+		body.add(this.datePickLabel, c);
+		this.add(body, BorderLayout.CENTER);
 
-		submit = new JButton("Submit");
+		this.submit = new JButton("Submit");
 
-		addListeners();
+		this.addListeners();
 
 		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		bottomPanel.add(submit);
-		add(bottomPanel, BorderLayout.SOUTH);
+		bottomPanel.add(this.submit);
+		this.add(bottomPanel, BorderLayout.SOUTH);
 	}
 
 	private void addListeners() {
@@ -94,7 +98,7 @@ public class SheetRowAddPanel extends JPanel {
 				sheetrow.setTitle(title);
 				sheetrow.setStatic(false);
 
-				String chosenDate = datePickLabel.getText();				
+				String chosenDate = datePickLabel.getText();
 				String[] yearmonth = chosenDate.split("/");
 
 				Calendar c = Calendar.getInstance();
@@ -117,7 +121,7 @@ public class SheetRowAddPanel extends JPanel {
 	private JComboBox<Category> getCategoryComboBox() {
 		JComboBox<Category> box = new JComboBox<Category>();
 
-		List<Category> categories = categoryService.getAll();
+		List<Category> categories = this.categoryService.getAll();
 
 		for (Category cat : categories)
 			box.addItem(cat);
@@ -126,7 +130,7 @@ public class SheetRowAddPanel extends JPanel {
 	}
 
 	public void setDatePick(String datePick) {
-		datePickLabel.setText(datePick);
+		this.datePickLabel.setText(datePick);
 	}
 
 }

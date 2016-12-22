@@ -10,8 +10,8 @@ import gui.BasicOptionsPanel;
 
 public class BasicOptionsListener implements ActionListener {
 
-	private BasicOptionsPanel options;
-	private JPanel cards;
+	BasicOptionsPanel options;
+	JPanel cards;
 
 	public BasicOptionsListener(BasicOptionsPanel options, JPanel cards) {
 		this.options = options;
@@ -22,10 +22,10 @@ public class BasicOptionsListener implements ActionListener {
 
 		CardLayout cardLayout = (CardLayout) cards.getLayout();
 
-		if (e.getSource() == options.persistView) {
-			cardLayout.show(cards, "add");
-		} else if (e.getSource() == options.listView) {
-			cardLayout.show(cards, "list");
+		if (e.getSource() == this.options.persistView) {
+			cardLayout.show(this.cards, "add");
+		} else if (e.getSource() == this.options.listView) {
+			cardLayout.show(this.cards, "list");
 		} else {
 			throw new IllegalAccessError();
 		}

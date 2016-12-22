@@ -12,11 +12,11 @@ public class SheetRowTableModel extends SheetRowBridge {
 	public SheetRowTableModel(int monthNum, int yearNum) {
 		super();
 		this.service = new SheetRowService(true);
-		reloadData(monthNum, yearNum);
+		this.reloadData(monthNum, yearNum);
 	}
 
 	public List<SheetRow> getRows(int monthNum, int yearNum) {
-		return service.getByYearMonth(yearNum, monthNum, false);
+		return this.service.getByYearMonth(yearNum, monthNum, false);
 	}
 
 }

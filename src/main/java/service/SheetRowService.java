@@ -19,51 +19,51 @@ public class SheetRowService implements CrudServiceI<SheetRow> {
 	}
 
 	public void add(SheetRow object) {
-		repo.add(object);
+		this.repo.add(object);
 	}
 
 	public void update(SheetRow object) {
-		repo.update(object);
+		this.repo.update(object);
 	}
 
 	public void delete(int id) {
-		repo.delete(id);
+		this.repo.delete(id);
 	}
 
 	public void delete(boolean isStatic) {
-		repo.delete(isStatic);
+		this.repo.delete(isStatic);
 	}
 
 	public void deleteAll() {
-		repo.deleteAll();
+		this.repo.deleteAll();
 	}
 
 	public List<SheetRow> getAll() {
-		return repo.getAll();
+		return this.repo.getAll();
 	}
 
 	public int getCount() {
-		return repo.getCount();
+		return this.repo.getCount();
 	}
 
 	public List<SheetRow> getByMonth(int month) {
-		return repo.getByMonth(month);
+		return this.repo.getByMonth(month);
 	}
 
 	public List<SheetRow> getByYearMonth(int year, int month, boolean isStatic) {
-		return repo.getByYearMonth(year, month, isStatic);
+		return this.repo.getByYearMonth(year, month, isStatic);
 	}
 
 	public void fill(int lastYear) {
-		repo.fill(lastYear);
+		this.repo.fill(lastYear);
 	}
 
 	public Instant getEarliestDate() {
-		return repo.getEarliestDate();
+		return this.repo.getEarliestDate();
 	}
 	
 	public void editPrice(int id, double value, boolean isActual){
-		repo.editPrice(id, value, isActual);
+		this.repo.editPrice(id, value, isActual);
 	}
 
 }

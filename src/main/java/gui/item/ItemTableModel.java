@@ -16,13 +16,13 @@ public class ItemTableModel extends AbstractTableModel {
 	private String[] colNames = { "Item", "Category" };
 
 	public ItemTableModel() {
-		service = new ItemService();
-		list = service.getAll();
+		this.service = new ItemService();
+		this.list = this.service.getAll();
 	}
 
 	@Override
 	public String getColumnName(int col) {
-		return colNames[col];
+		return this.colNames[col];
 	}
 
 	public int getColumnCount() {
@@ -30,12 +30,12 @@ public class ItemTableModel extends AbstractTableModel {
 	}
 
 	public int getRowCount() {
-		return list.size();
+		return this.list.size();
 	}
 
 	public Object getValueAt(int row, int col) {
 
-		Item item = list.get(row);
+		Item item = this.list.get(row);
 
 		switch (col) {
 		case 0:
@@ -47,7 +47,7 @@ public class ItemTableModel extends AbstractTableModel {
 	}
 	
 	public void reloadData() {
-		list = service.getAll();
+		this.list = this.service.getAll();
 	}
 
 }

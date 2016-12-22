@@ -33,32 +33,32 @@ public class StaticSheetListPanel extends JPanel {
 	private String month, year;
 
 	public StaticSheetListPanel() {
-		setLayout(new BorderLayout());
+		this.setLayout(new BorderLayout());
 
 		JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		topPanel.add(new JLabel("LIST OF EXPENSES:"));
-		add(topPanel, BorderLayout.NORTH);
+		this.add(topPanel, BorderLayout.NORTH);
 
-		bottomPanel = new JPanel(new BorderLayout());
-		setSlider();
+		this.bottomPanel = new JPanel(new BorderLayout());
+		this.setSlider();
 
-		table = new StaticSheetTable(slider.getValue(), 2016);
-		add(table, BorderLayout.CENTER);
+		this.table = new StaticSheetTable(this.slider.getValue(), 2016);
+		this.add(this.table, BorderLayout.CENTER);
 
-		setYearBoxPanel();
-		setSumLabel();
-		addListeners();
-		initializeYearMonthValues();
+		this.setYearBoxPanel();
+		this.setSumLabel();
+		this.addListeners();
+		this.initializeYearMonthValues();
 
-		add(bottomPanel, BorderLayout.SOUTH);
+		this.add(this.bottomPanel, BorderLayout.SOUTH);
 
 	}
 
 	public void initializeYearMonthValues() {
-		int sliderVal = slider.getValue();
-		setMonth(String.valueOf(sliderVal));
-		String boxVal = (String) yearBox.getSelectedItem();
-		setYear(boxVal);
+		int sliderVal = this.slider.getValue();
+		this.setMonth(String.valueOf(sliderVal));
+		String boxVal = (String) this.yearBox.getSelectedItem();
+		this.setYear(boxVal);
 	}
 
 	private void setSlider() {
@@ -66,18 +66,18 @@ public class StaticSheetListPanel extends JPanel {
 
 		int currentMonth = c.get(Calendar.MONTH) + 1;
 
-		slider = new JSlider(JSlider.HORIZONTAL, 1, 12, 1);
+		this.slider = new JSlider(JSlider.HORIZONTAL, 1, 12, 1);
 
-		slider.setMajorTickSpacing(3);
-		slider.setMinorTickSpacing(1);
-		slider.setPaintTicks(true);
-		slider.setPaintLabels(true);
-		slider.setValue(currentMonth);
+		this.slider.setMajorTickSpacing(3);
+		this.slider.setMinorTickSpacing(1);
+		this.slider.setPaintTicks(true);
+		this.slider.setPaintLabels(true);
+		this.slider.setValue(currentMonth);
 
-		slider.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 5));
-		slider.setToolTipText(new String("Choose month"));
+		this.slider.setBorder(BorderFactory.createEmptyBorder(10, 10, 5, 5));
+		this.slider.setToolTipText(new String("Choose month"));
 
-		bottomPanel.add(slider, BorderLayout.WEST);
+		this.bottomPanel.add(slider, BorderLayout.WEST);
 	}
 
 	private void setYearBoxPanel() {
@@ -86,33 +86,33 @@ public class StaticSheetListPanel extends JPanel {
 
 		JPanel yearBoxPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-		yearBox = new JComboBox<>();
+		this.yearBox = new JComboBox<>();
 
 		for (String k : getYears())
-			yearBox.addItem(k);
+			this.yearBox.addItem(k);
 
-		yearBox.setToolTipText(new String("Choose year"));
-		yearBox.setBorder(BorderFactory.createEmptyBorder(10, 30, 0, 0));
+		this.yearBox.setToolTipText(new String("Choose year"));
+		this.yearBox.setBorder(BorderFactory.createEmptyBorder(10, 30, 0, 0));
 
-		yearBoxPanel.add(yearBox);
+		yearBoxPanel.add(this.yearBox);
 
 		mainPanel.add(yearBoxPanel, BorderLayout.WEST);
 
 		JPanel pricePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 
-		actualPriceLabel = new JLabel("");
-		actualPriceLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 10, 40));
+		this.actualPriceLabel = new JLabel("");
+		this.actualPriceLabel.setBorder(BorderFactory.createEmptyBorder(15, 0, 10, 40));
 
-		pricePanel.add(actualPriceLabel);
+		pricePanel.add(this.actualPriceLabel);
 
 		mainPanel.add(pricePanel, BorderLayout.EAST);
 
-		bottomPanel.add(mainPanel, BorderLayout.CENTER);
+		this.bottomPanel.add(mainPanel, BorderLayout.CENTER);
 	}
 
 	private void addListeners() {
 
-		slider.addChangeListener(new ChangeListener() {
+		this.slider.addChangeListener(new ChangeListener() {
 
 			@Override
 			public void stateChanged(ChangeEvent e) {
@@ -123,7 +123,7 @@ public class StaticSheetListPanel extends JPanel {
 
 		});
 
-		yearBox.addActionListener(new ActionListener() {
+		this.yearBox.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -137,8 +137,8 @@ public class StaticSheetListPanel extends JPanel {
 	}
 
 	private void setGeneralValues() {
-		refresh(Integer.parseInt(month), Integer.parseInt(year));
-		setSumLabel();
+		this.refresh(Integer.parseInt(month), Integer.parseInt(year));
+		this.setSumLabel();
 	}
 
 	public void setMonth(String month) {
@@ -150,12 +150,12 @@ public class StaticSheetListPanel extends JPanel {
 	}
 
 	public void refresh(int monthNum, int yearNum) {
-		table.refresh(monthNum, yearNum);
+		this.table.refresh(monthNum, yearNum);
 	}
 
 	private void setSumLabel() {
 		double sum = table.getList().stream().mapToDouble(x -> x.getPrice().getActual()).sum();
-		actualPriceLabel.setText(String.valueOf(sum));
+		this.actualPriceLabel.setText(String.valueOf(sum));
 	}
 
 	private List<String> getYears() {

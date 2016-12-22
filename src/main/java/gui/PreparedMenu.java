@@ -20,121 +20,121 @@ public class PreparedMenu extends JMenuBar {
 	public JMenuItem toJSON, toXML, fromJSON, fromXML, toProperties;
 
 	public PreparedMenu() {
-		addFile();
-		addOptions();
-		addAdvanced();
-		addHelp();
+		this.addFile();
+		this.addOptions();
+		this.addAdvanced();
+		this.addHelp();
 	}
 
 	private void addFile() {
-		file = new JMenu("File");
+		this.file = new JMenu("File");
 
 		JMenu exportMenu = new JMenu("Export");
 
-		toProperties = new JMenuItem("Settings");
+		this.toProperties = new JMenuItem("Settings");
 
-		toProperties.addActionListener(new ParserPropertiesListener());
+		this.toProperties.addActionListener(new ParserPropertiesListener());
 
-		exportMenu.add(toProperties);
+		exportMenu.add(this.toProperties);
 
-		toJSON = new JMenuItem("JSON");
-		toJSON.addActionListener(new CompositeParserListener(false));
-		exportMenu.add(toJSON);
+		this.toJSON = new JMenuItem("JSON");
+		this.toJSON.addActionListener(new CompositeParserListener(false));
+		exportMenu.add(this.toJSON);
 
-		toXML = new JMenuItem("XML");
-		toXML.addActionListener(new CompositeParserListener(true));
-		exportMenu.add(toXML);
+		this.toXML = new JMenuItem("XML");
+		this.toXML.addActionListener(new CompositeParserListener(true));
+		exportMenu.add(this.toXML);
 
-		file.add(exportMenu);
+		this.file.add(exportMenu);
 
 		JMenu importMenu = new JMenu("Import");
 
-		fromJSON = new JMenuItem("JSON");
+		this.fromJSON = new JMenuItem("JSON");
 		importMenu.add(fromJSON);
 
-		fromXML = new JMenuItem("XML");
+		this.fromXML = new JMenuItem("XML");
 		importMenu.add(fromXML);
 
-		file.add(importMenu);
+		this.file.add(importMenu);
 
-		add(file);
+		add(this.file);
 	}
 
 	private void addOptions() {
-		options = new JMenu("Options");
+		this.options = new JMenu("Options");
 
 		JMenu mode = new JMenu("Choose mode");
 
-		general = new JMenuItem("General");
-		mode.add(general);
+		this.general = new JMenuItem("General");
+		mode.add(this.general);
 
-		exceptional = new JMenuItem("Exceptional");
-		mode.add(exceptional);
+		this.exceptional = new JMenuItem("Exceptional");
+		mode.add(this.exceptional);
 
-		options.add(mode);
+		this.options.add(mode);
 
-		add(options);
+		this.add(this.options);
 	}
 
 	private void addAdvanced() {
-		advanced = new JMenu("Advanced");
+		this.advanced = new JMenu("Advanced");
 
-		addConfigurations();
-		addDeletes();
-		addFill();
+		this.addConfigurations();
+		this.addDeletes();
+		this.addFill();
 
-		add(advanced);
+		this.add(advanced);
 	}
 
 	private void addConfigurations() {
 		JMenu addConfigure = new JMenu("Configure");
 
-		categoriesSubmenu = new JMenuItem("Categories");
-		addConfigure.add(categoriesSubmenu);
+		this.categoriesSubmenu = new JMenuItem("Categories");
+		addConfigure.add(this.categoriesSubmenu);
 
-		itemSubmenu = new JMenuItem("Static items");
-		addConfigure.add(itemSubmenu);
+		this.itemSubmenu = new JMenuItem("Static items");
+		addConfigure.add(this.itemSubmenu);
 
-		advanced.add(addConfigure);
+		this.advanced.add(addConfigure);
 	}
 
 	private void addDeletes() {
 		JMenu deleteConfigure = new JMenu("Delete");
 
-		deleteAll = new JMenuItem("all");
-		deleteConfigure.add(deleteAll);
+		this.deleteAll = new JMenuItem("all");
+		deleteConfigure.add(this.deleteAll);
 
-		deleteTrues = new JMenuItem("general sheets");
-		deleteConfigure.add(deleteTrues);
+		this.deleteTrues = new JMenuItem("general sheets");
+		deleteConfigure.add(this.deleteTrues);
 
-		deleteFalses = new JMenuItem("exceptional sheets");
-		deleteConfigure.add(deleteFalses);
+		this.deleteFalses = new JMenuItem("exceptional sheets");
+		deleteConfigure.add(this.deleteFalses);
 
-		advanced.add(deleteConfigure);
+		this.advanced.add(deleteConfigure);
 	}
 
 	private void addFill() {
-		fill = new JMenuItem("Fill");
-		fill.addActionListener(new FillListener());
-		advanced.add(fill);
+		this.fill = new JMenuItem("Fill");
+		this.fill.addActionListener(new FillListener());
+		this.advanced.add(this.fill);
 	}
 
 	private void addHelp() {
-		help = new JMenu("Help");
-		add(help);
+		this.help = new JMenu("Help");
+		add(this.help);
 	}
 
 	public void addMenuViewListener(ActionListener listener) {
-		general.addActionListener(listener);
-		exceptional.addActionListener(listener);
-		categoriesSubmenu.addActionListener(listener);
-		itemSubmenu.addActionListener(listener);
+		this.general.addActionListener(listener);
+		this.exceptional.addActionListener(listener);
+		this.categoriesSubmenu.addActionListener(listener);
+		this.itemSubmenu.addActionListener(listener);
 	}
 
 	public void addDeleteListener(ActionListener listener) {
-		deleteAll.addActionListener(listener);
-		deleteTrues.addActionListener(listener);
-		deleteFalses.addActionListener(listener);
+		this.deleteAll.addActionListener(listener);
+		this.deleteTrues.addActionListener(listener);
+		this.deleteFalses.addActionListener(listener);
 	}
 
 }

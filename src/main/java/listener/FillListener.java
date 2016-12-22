@@ -17,36 +17,35 @@ public class FillListener implements ActionListener {
 	private SheetRowService service;
 
 	public FillListener() {
-		service = new SheetRowService();
-		createPanel();
-
+		this.service = new SheetRowService();
+		this.createPanel();
 	}
 
 	private void createPanel() {
-		customPanel = new JPanel();
+		this.customPanel = new JPanel();
 
 		Calendar c = Calendar.getInstance();
 		int year = c.get(Calendar.YEAR);
 
-		yearBox = new JComboBox<Integer>();
+		this.yearBox = new JComboBox<Integer>();
 
 		for (int i = 0; i <= 5; i++) {
-			yearBox.addItem(new Integer(year));
+			this.yearBox.addItem(new Integer(year));
 			year++;
 		}
 
-		customPanel.add(yearBox);
+		this.customPanel.add(this.yearBox);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		int input = JOptionPane.showConfirmDialog(null, customPanel, "Generate sheets till year:",
+		int input = JOptionPane.showConfirmDialog(null, this.customPanel, "Generate sheets till year:",
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
 		if (input == JOptionPane.OK_OPTION) {
 			Integer lastYear = (Integer) yearBox.getSelectedItem();
-			service.fill(lastYear);
+			this.service.fill(lastYear);
 		}
 
 	}

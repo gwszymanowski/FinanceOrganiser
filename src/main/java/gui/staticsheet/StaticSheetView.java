@@ -12,19 +12,19 @@ public class StaticSheetView extends JPanel {
 
 	public StaticSheetView() {
 		setLayout(new BorderLayout());
-		listPanel = new StaticSheetListPanel();
-		add(listPanel, BorderLayout.CENTER);
+		this.listPanel = new StaticSheetListPanel();
+		add(this.listPanel, BorderLayout.CENTER);
 	}
 	
 	public void refresh(int m, int y) {
-		listPanel.refresh(m, y);
+		this.listPanel.refresh(m, y);
 	}
 	
 	public void refreshToCurrent() {
-		listPanel.initializeYearMonthValues();
-		int month = Integer.valueOf(listPanel.getMonth());
-		int year = Integer.valueOf(listPanel.getYear());
-		refresh(month, year);
+		this.listPanel.initializeYearMonthValues();
+		int month = Integer.valueOf(this.listPanel.getMonth());
+		int year = Integer.valueOf(this.listPanel.getYear());
+		this.refresh(month, year);
 	}
 
 }

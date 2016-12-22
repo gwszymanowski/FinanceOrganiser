@@ -14,23 +14,23 @@ public class CategoryService implements CrudServiceI<Category> {
 	}
 
 	public void add(Category object) {
-		repo.add(object);
+		this.repo.add(object);
 	}
 
 	public void update(Category object) {
-		repo.update(object);
+		this.repo.update(object);
 	}
 
 	public void delete(int id) {
-		repo.delete(id);
+		this.repo.delete(id);
 	}
 
 	public List<Category> getAll() {
-		return repo.getAll();
+		return this.repo.getAll();
 	}
 
 	public int getCount() {
-		return repo.getCount();
+		return this.repo.getCount();
 	}
 
 	@Override

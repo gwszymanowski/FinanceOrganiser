@@ -19,6 +19,7 @@ import listener.MenuListener;
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
+	
 	PreparedMenu menu;
 	CategoryView categoryView;
 	ItemView itemView;
@@ -28,35 +29,35 @@ public class MainFrame extends JFrame {
 	JPanel cards;
 
 	public MainFrame() {
-		initPanels();
-		initCards();
-		initMenu();
-		initSettings();
+		this.initPanels();
+		this.initCards();
+		this.initMenu();
+		this.initSettings();
 	}
 
 	private void initCards() {
-		cards = new JPanel(new CardLayout());
-		cards.add(entryPanel, "entry");
-		cards.add(itemView, "item");
-		cards.add(categoryView, "category");
-		cards.add(sheetRowView, "exceptional");
-		cards.add(staticSheetView, "general");
-		add(cards);
+		this.cards = new JPanel(new CardLayout());
+		this.cards.add(entryPanel, "entry");
+		this.cards.add(itemView, "item");
+		this.cards.add(categoryView, "category");
+		this.cards.add(sheetRowView, "exceptional");
+		this.cards.add(staticSheetView, "general");
+		this.add(cards);
 	}
 
 	private void initPanels() {
-		categoryView = new CategoryView();
-		itemView = new ItemView();
-		entryPanel = new EntryPanel();
-		sheetRowView = new SheetRowView();
-		staticSheetView = new StaticSheetView();
+		this.categoryView = new CategoryView();
+		this.itemView = new ItemView();
+		this.entryPanel = new EntryPanel();
+		this.sheetRowView = new SheetRowView();
+		this.staticSheetView = new StaticSheetView();
 	}
 
 	private void initMenu() {
-		menu = new PreparedMenu();
+		this.menu = new PreparedMenu();
 
 		CompositeActionListener compositeChange = new CompositeActionListener();
-		compositeChange.addActionListener(new MenuListener(menu, cards), 1);
+		compositeChange.addActionListener(new MenuListener(this.menu, this.cards), 1);
 		compositeChange.addActionListener(new ActionListener() {
 
 			@Override
@@ -71,7 +72,7 @@ public class MainFrame extends JFrame {
 
 		}, 2);
 
-		menu.addMenuViewListener(compositeChange);
+		this.menu.addMenuViewListener(compositeChange);
 
 		CompositeActionListener deleteComposite = new CompositeActionListener();
 		deleteComposite.addActionListener(new DeleteListener(menu), 1);
@@ -85,17 +86,17 @@ public class MainFrame extends JFrame {
 
 		}, 2);
 
-		menu.addDeleteListener(deleteComposite);
+		this.menu.addDeleteListener(deleteComposite);
 
-		setJMenuBar(menu);
+		this.setJMenuBar(menu);
 	}
 
 	private void initSettings() {
-		setSize(Settings.WIDTH, Settings.HEIGHT);
-		setTitle("Personal finances");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setLocation(Settings.X, Settings.Y);
-		setVisible(true);
+		this.setSize(Settings.WIDTH, Settings.HEIGHT);
+		this.setTitle("Personal finances");
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setLocation(Settings.X, Settings.Y);
+		this.setVisible(true);
 	}
 
 }

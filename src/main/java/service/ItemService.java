@@ -14,23 +14,23 @@ public class ItemService implements CrudServiceI<Item> {
 	}
 
 	public void add(Item object) {
-		repo.add(object);
+		this.repo.add(object);
 	}
 
 	public void update(Item object) {
-		repo.update(object);
+		this.repo.update(object);
 	}
 
 	public void delete(int id) {
-		repo.delete(id);
+		this.repo.delete(id);
 	}
 
 	public List<Item> getAll() {
-		return repo.getAll();
+		return this.repo.getAll();
 	}
 
 	public int getCount() {
-		return repo.getCount();
+		return this.repo.getCount();
 	}
 
 	@Override

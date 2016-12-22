@@ -29,7 +29,7 @@ public class ItemParser implements Parsing {
 	public void parseToJSON(String fileDirectory) {
 		ObjectMapper mapper = new ObjectMapper();
 
-		List<Item> list = service.getAll();
+		List<Item> list = this.service.getAll();
 
 		StringBuilder sb = getFilePath(fileDirectory);
 		sb.append(".json");
@@ -51,7 +51,7 @@ public class ItemParser implements Parsing {
 		sb.append(".xml");
 
 		Items items = new Items();
-		items.setItems(service.getAll());
+		items.setItems(this.service.getAll());
 
 		try {
 

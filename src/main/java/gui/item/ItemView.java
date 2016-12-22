@@ -18,22 +18,22 @@ public class ItemView extends JPanel {
 	JPanel cards;
 	
 	public ItemView() {
-		setLayout(new BorderLayout());
-		options = new BasicOptionsPanel();
+		this.setLayout(new BorderLayout());
+		this.options = new BasicOptionsPanel();
 
-		cards = new JPanel(new CardLayout());
+		this.cards = new JPanel(new CardLayout());
 
-		listPanel = new ItemListPanel();
-		cards.add(listPanel, "list");
+		this.listPanel = new ItemListPanel();
+		this.cards.add(this.listPanel, "list");
 
-		addPanel = new ItemAddPanel(listPanel.table);
-		cards.add(addPanel, "add");
+		this.addPanel = new ItemAddPanel(this.listPanel.table);
+		this.cards.add(this.addPanel, "add");
 
-		options.addCardListeners(new BasicOptionsListener(options, cards));
+		this.options.addCardListeners(new BasicOptionsListener(this.options, this.cards));
 
-		add(options, BorderLayout.NORTH);
+		this.add(this.options, BorderLayout.NORTH);
 
-		add(cards, BorderLayout.CENTER);
+		this.add(this.cards, BorderLayout.CENTER);
 	}
 	
 }

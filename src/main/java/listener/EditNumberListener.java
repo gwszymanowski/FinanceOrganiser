@@ -21,6 +21,7 @@ public class EditNumberListener implements ActionListener {
 	private String title;
 
 	public EditNumberListener(int id, int col, boolean isStatic) {
+
 		this.id = id;
 		this.col = col;
 		this.service = new SheetRowService(isStatic);
@@ -34,31 +35,31 @@ public class EditNumberListener implements ActionListener {
 	}
 
 	private void createPanel() {
-		customPanel = new JPanel();
+		this.customPanel = new JPanel();
 
-		field = new JTextField(10);
+		this.field = new JTextField(10);
 
-		PlainDocument doc = (PlainDocument) field.getDocument();
+		PlainDocument doc = (PlainDocument) this.field.getDocument();
 		doc.setDocumentFilter(new OnlyNumberFilter());
 
-		customPanel.add(field);
+		this.customPanel.add(this.field);
 
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		int input = JOptionPane.showConfirmDialog(null, customPanel, title, JOptionPane.OK_CANCEL_OPTION,
+		int input = JOptionPane.showConfirmDialog(null, this.customPanel, this.title, JOptionPane.OK_CANCEL_OPTION,
 				JOptionPane.PLAIN_MESSAGE);
 
 		if (input == JOptionPane.OK_OPTION) {
 
-			Double val = Double.parseDouble(field.getText());
+			Double val = Double.parseDouble(this.field.getText());
 
-			if (col == 2)
-				service.editPrice(getId(), val, false);
+			if (this.col == 2)
+				this.service.editPrice(getId(), val, false);
 			else
-				service.editPrice(getId(), val, true);
+				this.service.editPrice(getId(), val, true);
 
 		}
 

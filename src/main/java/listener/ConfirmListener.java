@@ -26,7 +26,7 @@ public class ConfirmListener implements ActionListener {
         		, "Confirm", dialogButton);
 
         if(dialogResult == JOptionPane.YES_OPTION)
-        	service.add(o);
+        	this.service.add(o);
   
         JOptionPane.showMessageDialog(null, "Action finished");
 		

@@ -28,19 +28,23 @@ public class ItemAddPanel extends JPanel {
 	JTextField field;
 	JButton submit;
 	JComboBox<Category> categoryBox;
+	ItemTable table;
 	private Item item;
 	private CategoryService categoryService;
-	private ItemTable table;
-	
+
 	public ItemAddPanel(ItemTable table) {
 		this.table = table;
-		categoryService = new CategoryService();
-		setLayout(new BorderLayout());
+		initializeBody();
+	}
+
+	private void initializeBody() {
+		this.categoryService = new CategoryService();
+		this.setLayout(new BorderLayout());
 
 		JPanel topPanel = new JPanel(new GridBagLayout());
 		topPanel.add(new JLabel("ADD NEW ITEM"));
 
-		add(topPanel, BorderLayout.NORTH);
+		this.add(topPanel, BorderLayout.NORTH);
 
 		JPanel body = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -49,29 +53,28 @@ public class ItemAddPanel extends JPanel {
 		c.gridx = 0;
 		body.add(new JLabel("Name: "), c);
 		c.gridx++;
-		field = new JTextField(10);
-		body.add(field, c);
-		add(body, BorderLayout.CENTER);
+		this.field = new JTextField(10);
+		body.add(this.field, c);
+		this.add(body, BorderLayout.CENTER);
 
 		c.gridx = 0;
 		c.gridy++;
 		body.add(new JLabel("Category: "), c);
 		c.gridx++;
-		categoryBox = getCategoryComboBox();
-		body.add(categoryBox, c);
+		this.categoryBox = getCategoryComboBox();
+		body.add(this.categoryBox, c);
 
-		submit = new JButton("Submit");
+		this.submit = new JButton("Submit");
 
-		addListeners();
+		this.addListeners();
 
 		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		bottomPanel.add(submit);
-		add(bottomPanel, BorderLayout.SOUTH);
-
+		bottomPanel.add(this.submit);
+		this.add(bottomPanel, BorderLayout.SOUTH);
 	}
 
 	private void addListeners() {
-		item = new Item();
+		this.item = new Item();
 
 		CompositeActionListener listener = new CompositeActionListener();
 		listener.addActionListener(new ActionListener() {
@@ -81,29 +84,29 @@ public class ItemAddPanel extends JPanel {
 				item.setTitle(title);
 				Category t = (Category) categoryBox.getSelectedItem();
 				item.setCategory(t);
-				
+
 			}
 
 		}, 1);
 
 		listener.addActionListener(new ConfirmListener(new ItemService(), item), 2);
-		
+
 		listener.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				table.refresh();			
+				table.refresh();
 			}
-			
+
 		}, 3);
 
-		submit.addActionListener(listener);
+		this.submit.addActionListener(listener);
 	}
 
 	private JComboBox<Category> getCategoryComboBox() {
 		JComboBox<Category> box = new JComboBox<Category>();
 
-		List<Category> categories = categoryService.getAll();
+		List<Category> categories = this.categoryService.getAll();
 
 		for (Category cat : categories)
 			box.addItem(cat);

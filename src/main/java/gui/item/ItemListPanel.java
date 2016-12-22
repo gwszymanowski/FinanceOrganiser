@@ -11,16 +11,20 @@ public class ItemListPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	ItemTable table;
-	
+
 	public ItemListPanel() {
-		setLayout(new BorderLayout());
-		
+		this.initializeBody();
+	}
+
+	private void initializeBody() {
+		this.setLayout(new BorderLayout());
+
 		JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		topPanel.add(new JLabel("LIST OF STATIC ITEMS:"));
-		add(topPanel, BorderLayout.NORTH);
-		
-		table = new ItemTable();
-		add(table, BorderLayout.CENTER);
+		this.add(topPanel, BorderLayout.NORTH);
+
+		this.table = new ItemTable();
+		this.add(this.table, BorderLayout.CENTER);
 
 	}
 

@@ -21,35 +21,35 @@ public class SheetRowTable extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private JTable table;
+	JTable table;
+	JMenuItem editMenu;
+	JPopupMenu mainpop, secondpop;
 	private SheetRowTableModel model;
-	private JPopupMenu mainpop, secondpop;
-	private EditNumberListener editNumberListener;
-	private JMenuItem editMenu;
+	private EditNumberListener editNumberListener;	
 	private int monthNum, yearNum;
 
 	public SheetRowTable(int monthNum, int yearNum) {
 		this.monthNum = monthNum;
 		this.yearNum = yearNum;
-		initializeTable();
-		initializePopups();
-		initializeTableListener();
+		this.initializeTable();
+		this.initializePopups();
+		this.initializeTableListener();
 	}
 
 	private void initializeTable() {
-		model = new SheetRowTableModel(monthNum, yearNum);
-		table = new JTable(model);
-		table.getColumnModel().getColumn(4).setMinWidth(0);
-		table.getColumnModel().getColumn(4).setMaxWidth(0);
+		this.model = new SheetRowTableModel(monthNum, yearNum);
+		this.table = new JTable(model);
+		this.table.getColumnModel().getColumn(4).setMinWidth(0);
+		this.table.getColumnModel().getColumn(4).setMaxWidth(0);
 
-		setLayout(new BorderLayout());
+		this.setLayout(new BorderLayout());
 
 		JScrollPane scroll = new JScrollPane(table);
-		add(scroll, BorderLayout.CENTER);
+		this.add(scroll, BorderLayout.CENTER);
 	}
 
 	private void initializeTableListener() {
-		table.addMouseListener(new MouseAdapter() {
+		this.table.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -88,26 +88,26 @@ public class SheetRowTable extends JPanel {
 	}
 
 	private void initializePopups() {
-		mainpop = new JPopupMenu();
-		secondpop = new JPopupMenu();
+		this.mainpop = new JPopupMenu();
+		this.secondpop = new JPopupMenu();
 
 		JMenuItem deleteMenu = new JMenuItem("Delete");
-		mainpop.add(deleteMenu);
+		this.mainpop.add(deleteMenu);
 
-		editMenu = new JMenuItem("Edit");
-		secondpop.add(editMenu);
+		this.editMenu = new JMenuItem("Edit");
+		this.secondpop.add(editMenu);
 
 		JMenuItem deleteTwoMenu = new JMenuItem("Delete");
-		secondpop.add(deleteTwoMenu);
+		this.secondpop.add(deleteTwoMenu);
 	}
 
 	public void refresh(int monthNum, int yearNum) {
-		model.reloadData(monthNum, yearNum);
-		model.fireTableDataChanged();
+		this.model.reloadData(monthNum, yearNum);
+		this.model.fireTableDataChanged();
 	}
 
 	public List<SheetRow> getList() {
-		return model.getList();
+		return this.model.getList();
 	}
 
 }

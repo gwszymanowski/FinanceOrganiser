@@ -28,7 +28,7 @@ public class ExceptionalParser implements Parsing {
 	public void parseToJSON(String fileDirectory) {
 		ObjectMapper mapper = new ObjectMapper();
 
-		List<SheetRow> list = service.getAll();
+		List<SheetRow> list = this.service.getAll();
 
 		StringBuilder sb = getFilePath(fileDirectory);
 		sb.append(".json");
@@ -50,7 +50,7 @@ public class ExceptionalParser implements Parsing {
 		sb.append(".xml");
 
 		SheetRows rows = new SheetRows();
-		rows.setSheetrows(service.getAll());
+		rows.setSheetrows(this.service.getAll());
 
 		try {
 

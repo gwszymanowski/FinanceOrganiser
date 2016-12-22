@@ -25,17 +25,17 @@ public class DeleteListener implements ActionListener {
 				dialogButton);
 
 		if (dialogResult == JOptionPane.YES_OPTION) {
-			if (e.getSource() == menu.deleteAll) {
-				service.deleteAll();
+			if (e.getSource() == this.menu.deleteAll) {
+				this.service.deleteAll();
 				JOptionPane.showMessageDialog(null, "Action finished");
 			}
-			else if (e.getSource() == menu.deleteTrues) {
-				service.delete(true);
+			else if (e.getSource() == this.menu.deleteTrues) {
+				this.service.delete(true);
 				JOptionPane.showMessageDialog(null, "Action finished");
 			}				
-			else if (e.getSource() == menu.deleteFalses) {
-				service.delete(false);
-				service.delete(false);
+			else if (e.getSource() == this.menu.deleteFalses) {
+				this.service.delete(false);
+				JOptionPane.showMessageDialog(null, "Action finished");
 			}			
 			else
 				throw new IllegalAccessError();

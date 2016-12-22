@@ -2,7 +2,6 @@ package listener;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
@@ -10,39 +9,24 @@ import java.util.TreeSet;
 
 public class CompositeActionListener implements ActionListener {
 
-	private Map<Integer, ArrayList<ActionListener>> listeners = new TreeMap<Integer, ArrayList<ActionListener>>();
+	private Map<Integer, ActionListener> listeners = new TreeMap<Integer, ActionListener>();
 
 	public void actionPerformed(ActionEvent e) {
 		TreeSet<Integer> t = new TreeSet<Integer>();
-		t.addAll(listeners.keySet());
+		t.addAll(this.listeners.keySet());
 		Iterator<Integer> it = t.iterator();
 		while (it.hasNext()) {
 			int x = it.next();
-			ArrayList<ActionListener> l = listeners.get(x);
-			for (ActionListener a : l) {
-				a.actionPerformed(e);
-			}
+			ActionListener a = this.listeners.get(x);
+			a.actionPerformed(e);
 		}
-	}
 
-	public boolean deleteActionListener(ActionListener a) {
-		for (Integer x : listeners.keySet()) {
-			for (int i = 0; i < listeners.get(x).size(); i++) {
-				if (listeners.get(x).get(i) == a) {
-					listeners.get(x).remove(i);
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	public void addActionListener(ActionListener a, int priority) {
-		deleteActionListener(a);
-		if (!listeners.containsKey(priority)) {
-			listeners.put(priority, new ArrayList<ActionListener>());
+		if (!this.listeners.containsKey(priority)) {
+			this.listeners.put(priority, a);
 		}
-		listeners.get(priority).add(a);
 	}
 
 }
