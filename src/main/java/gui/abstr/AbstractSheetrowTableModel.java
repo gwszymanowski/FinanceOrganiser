@@ -1,4 +1,4 @@
-package gui.sheet;
+package gui.abstr;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -8,7 +8,7 @@ import javax.swing.table.AbstractTableModel;
 import model.SheetRow;
 import service.SheetRowService;
 
-public abstract class SheetRowBridge extends AbstractTableModel {
+public abstract class AbstractSheetrowTableModel extends AbstractTableModel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -16,7 +16,7 @@ public abstract class SheetRowBridge extends AbstractTableModel {
 	private String[] colNames = { "Item", "Category", "Estimated price", "Actual price", "id" };
 	protected SheetRowService service;
 
-	public SheetRowBridge() {
+	public AbstractSheetrowTableModel() {
 		this.list = new LinkedList<SheetRow>();
 	}
 
@@ -55,7 +55,7 @@ public abstract class SheetRowBridge extends AbstractTableModel {
 
 	public void reloadData(int monthNum, int yearNum) {
 		this.list = getRows(monthNum, yearNum);
-		fireTableDataChanged();
+		this.fireTableDataChanged();
 	}
 
 	public List<SheetRow> getList() {

@@ -2,14 +2,15 @@ package gui.sheet;
 
 import java.util.List;
 
+import gui.abstr.AbstractSheetrowTableModel;
 import model.SheetRow;
 import service.SheetRowService;
 
-public class SheetRowTableModel extends SheetRowBridge {
+public class ExceptionalSheetTableModel extends AbstractSheetrowTableModel {
 
 	private static final long serialVersionUID = 1L;
 
-	public SheetRowTableModel(int monthNum, int yearNum) {
+	public ExceptionalSheetTableModel(int monthNum, int yearNum) {
 		super();
 		this.service = new SheetRowService(true);
 		this.reloadData(monthNum, yearNum);

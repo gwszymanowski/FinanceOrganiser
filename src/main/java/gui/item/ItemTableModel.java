@@ -13,7 +13,7 @@ public class ItemTableModel extends AbstractTableModel {
 
 	private List<Item> list;
 	private ItemService service;
-	private String[] colNames = { "Item", "Category" };
+	private String[] colNames = { "Item", "Category", "id" };
 
 	public ItemTableModel() {
 		this.service = new ItemService();
@@ -26,7 +26,7 @@ public class ItemTableModel extends AbstractTableModel {
 	}
 
 	public int getColumnCount() {
-		return 2;
+		return 3;
 	}
 
 	public int getRowCount() {
@@ -42,6 +42,8 @@ public class ItemTableModel extends AbstractTableModel {
 			return item.getTitle();
 		case 1:
 			return item.getCategory().getTitle();
+		case 2:
+			return item.getId();
 		}
 		return null;
 	}

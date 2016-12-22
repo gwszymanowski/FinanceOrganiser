@@ -4,15 +4,15 @@ import java.awt.BorderLayout;
 
 import javax.swing.JPanel;
 
-public class StaticSheetView extends JPanel {
+public class GeneralSheetView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	private StaticSheetListPanel listPanel;
+	private GeneralSheetListPanel listPanel;
 
-	public StaticSheetView() {
+	public GeneralSheetView() {
 		setLayout(new BorderLayout());
-		this.listPanel = new StaticSheetListPanel();
+		this.listPanel = new GeneralSheetListPanel();
 		add(this.listPanel, BorderLayout.CENTER);
 	}
 	

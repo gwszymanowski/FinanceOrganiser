@@ -8,23 +8,23 @@ import javax.swing.JPanel;
 import gui.BasicOptionsPanel;
 import listener.BasicOptionsListener;
 
-public class SheetRowView extends JPanel {
+public class ExceptionalSheetView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	BasicOptionsPanel options;
-	SheetRowListPanel listPanel;
-	SheetRowAddPanel addPanel;
+	ExceptionalSheetListPanel listPanel;
+	ExceptionalSheetAddPanel addPanel;
 	JPanel cards;
 
-	public SheetRowView() {
+	public ExceptionalSheetView() {
 		this.setLayout(new BorderLayout());
 		this.options = new BasicOptionsPanel();
 
 		this.cards = new JPanel(new CardLayout());
 
-		this.addPanel = new SheetRowAddPanel();
-		this.listPanel = new SheetRowListPanel(this.addPanel);
+		this.addPanel = new ExceptionalSheetAddPanel();
+		this.listPanel = new ExceptionalSheetListPanel(this.addPanel);
 		this.cards.add(this.listPanel, "list");
 		this.cards.add(this.addPanel, "add");
 

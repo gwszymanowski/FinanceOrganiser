@@ -21,19 +21,19 @@ import javax.swing.event.ChangeListener;
 
 import service.SheetRowService;
 
-public class SheetRowListPanel extends JPanel {
+public class ExceptionalSheetListPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
 	JPanel bottomPanel;
 	JSlider slider;
 	JComboBox<String> yearBox;
-	SheetRowAddPanel sheetrowPanel;
+	ExceptionalSheetAddPanel sheetrowPanel;
 	JLabel actualPriceLabel;
-	private SheetRowTable table;
+	private ExceptionalSheetTable table;
 	private String month, year, pickDate;
 
-	public SheetRowListPanel(SheetRowAddPanel sheetrowPanel) {
+	public ExceptionalSheetListPanel(ExceptionalSheetAddPanel sheetrowPanel) {
 
 		this.sheetrowPanel = sheetrowPanel;
 		this.setLayout(new BorderLayout());
@@ -45,7 +45,7 @@ public class SheetRowListPanel extends JPanel {
 		this.bottomPanel = new JPanel(new BorderLayout());
 		this.setSlider();
 
-		this.table = new SheetRowTable(slider.getValue(), 2016);
+		this.table = new ExceptionalSheetTable(slider.getValue(), 2016);
 		this.add(this.table, BorderLayout.CENTER);
 
 		this.setYearBoxPanel();

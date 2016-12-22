@@ -21,7 +21,7 @@ import javax.swing.event.ChangeListener;
 
 import service.SheetRowService;
 
-public class StaticSheetListPanel extends JPanel {
+public class GeneralSheetListPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,10 +29,10 @@ public class StaticSheetListPanel extends JPanel {
 	JSlider slider;
 	JLabel actualPriceLabel;
 	JComboBox<String> yearBox;
-	private StaticSheetTable table;
+	private GeneralSheetTable table;
 	private String month, year;
 
-	public StaticSheetListPanel() {
+	public GeneralSheetListPanel() {
 		this.setLayout(new BorderLayout());
 
 		JPanel topPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -42,7 +42,7 @@ public class StaticSheetListPanel extends JPanel {
 		this.bottomPanel = new JPanel(new BorderLayout());
 		this.setSlider();
 
-		this.table = new StaticSheetTable(this.slider.getValue(), 2016);
+		this.table = new GeneralSheetTable(this.slider.getValue(), 2016);
 		this.add(this.table, BorderLayout.CENTER);
 
 		this.setYearBoxPanel();
@@ -141,14 +141,6 @@ public class StaticSheetListPanel extends JPanel {
 		this.setSumLabel();
 	}
 
-	public void setMonth(String month) {
-		this.month = month;
-	}
-
-	public void setYear(String year) {
-		this.year = year;
-	}
-
 	public void refresh(int monthNum, int yearNum) {
 		this.table.refresh(monthNum, yearNum);
 	}
@@ -175,12 +167,20 @@ public class StaticSheetListPanel extends JPanel {
 		return years;
 	}
 
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
 	public String getMonth() {
 		return month;
 	}
 
-	public String getYear() {
-		return year;
+	public void setMonth(String month) {
+		this.month = month;
 	}
 
 }

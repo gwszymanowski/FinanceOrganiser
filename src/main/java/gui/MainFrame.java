@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import general.Settings;
 import gui.category.CategoryView;
 import gui.item.ItemView;
-import gui.sheet.SheetRowView;
-import gui.staticsheet.StaticSheetView;
+import gui.sheet.ExceptionalSheetView;
+import gui.staticsheet.GeneralSheetView;
 import listener.CompositeActionListener;
 import listener.DeleteListener;
 import listener.MenuListener;
@@ -24,8 +24,8 @@ public class MainFrame extends JFrame {
 	CategoryView categoryView;
 	ItemView itemView;
 	EntryPanel entryPanel;
-	SheetRowView sheetRowView;
-	StaticSheetView staticSheetView;
+	ExceptionalSheetView sheetRowView;
+	GeneralSheetView staticSheetView;
 	JPanel cards;
 
 	public MainFrame() {
@@ -49,8 +49,8 @@ public class MainFrame extends JFrame {
 		this.categoryView = new CategoryView();
 		this.itemView = new ItemView();
 		this.entryPanel = new EntryPanel();
-		this.sheetRowView = new SheetRowView();
-		this.staticSheetView = new StaticSheetView();
+		this.sheetRowView = new ExceptionalSheetView();
+		this.staticSheetView = new GeneralSheetView();
 	}
 
 	private void initMenu() {

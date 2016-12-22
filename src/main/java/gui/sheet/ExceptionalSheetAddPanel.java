@@ -23,7 +23,7 @@ import model.SheetRow;
 import service.CategoryService;
 import service.SheetRowService;
 
-public class SheetRowAddPanel extends JPanel {
+public class ExceptionalSheetAddPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
@@ -34,7 +34,7 @@ public class SheetRowAddPanel extends JPanel {
 	private SheetRow sheetrow;
 	private CategoryService categoryService;
 
-	public SheetRowAddPanel() {
+	public ExceptionalSheetAddPanel() {
 		initializeBody();
 	}
 

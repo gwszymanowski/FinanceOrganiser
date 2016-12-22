@@ -1,6 +1,5 @@
-package gui.sheet;
+package gui.staticsheet;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -8,47 +7,42 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
-import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
+import gui.abstr.AbstractSheetrowTable;
 import listener.CompositeActionListener;
 import listener.EditNumberListener;
 import model.SheetRow;
 
-public class SheetRowTable extends JPanel {
+public class GeneralSheetTable extends AbstractSheetrowTable {
 
 	private static final long serialVersionUID = 1L;
 
-	JTable table;
-	JMenuItem editMenu;
-	JPopupMenu mainpop, secondpop;
-	private SheetRowTableModel model;
-	private EditNumberListener editNumberListener;	
-	private int monthNum, yearNum;
+	private GeneralSheetTableModel model;
 
-	public SheetRowTable(int monthNum, int yearNum) {
-		this.monthNum = monthNum;
-		this.yearNum = yearNum;
-		this.initializeTable();
-		this.initializePopups();
-		this.initializeTableListener();
+	public GeneralSheetTable(int monthNum, int yearNum) {
+		super(monthNum, yearNum);
 	}
 
-	private void initializeTable() {
-		this.model = new SheetRowTableModel(monthNum, yearNum);
+	@Override
+	protected void initializeBody() {
+		this.model = new GeneralSheetTableModel(monthNum, yearNum);
 		this.table = new JTable(model);
 		this.table.getColumnModel().getColumn(4).setMinWidth(0);
 		this.table.getColumnModel().getColumn(4).setMaxWidth(0);
 
-		this.setLayout(new BorderLayout());
-
-		JScrollPane scroll = new JScrollPane(table);
-		this.add(scroll, BorderLayout.CENTER);
 	}
 
-	private void initializeTableListener() {
+	@Override
+	protected void initializePopups() {
+		this.mainpop = new JPopupMenu();
+		this.editMenu = new JMenuItem("Edit");
+		this.mainpop.add(editMenu);
+	}
+
+	@Override
+	protected void initializeTableListener() {
 		this.table.addMouseListener(new MouseAdapter() {
 
 			@Override
@@ -78,34 +72,21 @@ public class SheetRowTable extends JPanel {
 
 				if (e.getButton() == MouseEvent.BUTTON3) {
 					if (col > 1)
-						secondpop.show(table, e.getX(), e.getY());
-					else
 						mainpop.show(table, e.getX(), e.getY());
 				}
+
 			}
 
 		});
 	}
 
-	private void initializePopups() {
-		this.mainpop = new JPopupMenu();
-		this.secondpop = new JPopupMenu();
-
-		JMenuItem deleteMenu = new JMenuItem("Delete");
-		this.mainpop.add(deleteMenu);
-
-		this.editMenu = new JMenuItem("Edit");
-		this.secondpop.add(editMenu);
-
-		JMenuItem deleteTwoMenu = new JMenuItem("Delete");
-		this.secondpop.add(deleteTwoMenu);
-	}
-
+	@Override
 	public void refresh(int monthNum, int yearNum) {
 		this.model.reloadData(monthNum, yearNum);
 		this.model.fireTableDataChanged();
 	}
 
+	@Override
 	public List<SheetRow> getList() {
 		return this.model.getList();
 	}

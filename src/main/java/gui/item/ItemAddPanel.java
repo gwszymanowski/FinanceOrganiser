@@ -34,7 +34,7 @@ public class ItemAddPanel extends JPanel {
 
 	public ItemAddPanel(ItemTable table) {
 		this.table = table;
-		initializeBody();
+		this.initializeBody();
 	}
 
 	private void initializeBody() {

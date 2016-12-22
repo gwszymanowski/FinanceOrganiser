@@ -18,7 +18,7 @@ public class CategoryView extends JPanel {
 	JPanel cards;
 
 	public CategoryView() {
-		setLayout(new BorderLayout());
+		this.setLayout(new BorderLayout());
 		this.options = new BasicOptionsPanel();
 
 		this.cards = new JPanel(new CardLayout());
@@ -31,8 +31,8 @@ public class CategoryView extends JPanel {
 
 		this.options.addCardListeners(new BasicOptionsListener(this.options, this.cards));
 
-		add(this.options, BorderLayout.NORTH);
-		add(this.cards, BorderLayout.CENTER);
+		this.add(this.options, BorderLayout.NORTH);
+		this.add(this.cards, BorderLayout.CENTER);
 
 	}
 
