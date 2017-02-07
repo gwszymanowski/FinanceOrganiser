@@ -20,13 +20,13 @@ public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	
-	PreparedMenu menu;
-	CategoryView categoryView;
-	ItemView itemView;
-	EntryPanel entryPanel;
-	ExceptionalSheetView sheetRowView;
-	GeneralSheetView staticSheetView;
-	JPanel cards;
+	private PreparedMenu menu;
+	private CategoryView categoryView;
+	private ItemView itemView;
+	private EntryPanel entryPanel;
+	private ExceptionalSheetView sheetRowView;
+	private GeneralSheetView staticSheetView;
+	private JPanel cards;
 
 	public MainFrame() {
 		this.initPanels();

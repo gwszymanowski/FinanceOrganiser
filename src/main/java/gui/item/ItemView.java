@@ -12,10 +12,10 @@ public class ItemView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	BasicOptionsPanel options;
-	ItemListPanel listPanel;
-	ItemAddPanel addPanel;
-	JPanel cards;
+	private BasicOptionsPanel options;
+	private ItemListPanel listPanel;
+	private ItemAddPanel addPanel;
+	private JPanel cards;
 	
 	public ItemView() {
 		this.setLayout(new BorderLayout());

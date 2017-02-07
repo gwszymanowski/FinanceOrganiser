@@ -25,10 +25,10 @@ public class ItemAddPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	JTextField field;
-	JButton submit;
-	JComboBox<Category> categoryBox;
-	ItemTable table;
+	private JTextField field;
+	private JButton submit;
+	private JComboBox<Category> categoryBox;
+	private ItemTable table;
 	private Item item;
 	private CategoryService categoryService;
 

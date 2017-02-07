@@ -25,11 +25,11 @@ public class ExceptionalSheetListPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	JPanel bottomPanel;
-	JSlider slider;
-	JComboBox<String> yearBox;
-	ExceptionalSheetAddPanel sheetrowPanel;
-	JLabel actualPriceLabel;
+	private JPanel bottomPanel;
+	private JSlider slider;
+	private JComboBox<String> yearBox;
+	private ExceptionalSheetAddPanel sheetrowPanel;
+	private JLabel actualPriceLabel;
 	private ExceptionalSheetTable table;
 	private String month, year, pickDate;
 

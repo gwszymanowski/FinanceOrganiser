@@ -25,10 +25,10 @@ public class GeneralSheetListPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	JPanel bottomPanel;
-	JSlider slider;
-	JLabel actualPriceLabel;
-	JComboBox<String> yearBox;
+	private JPanel bottomPanel;
+	private JSlider slider;
+	private JLabel actualPriceLabel;
+	private JComboBox<String> yearBox;
 	private GeneralSheetTable table;
 	private String month, year;
 

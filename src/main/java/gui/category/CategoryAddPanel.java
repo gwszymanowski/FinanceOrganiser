@@ -21,9 +21,9 @@ public class CategoryAddPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	JButton submit;
-	JTextField field;
-	CategoryTable table;
+	private JButton submit;
+	private JTextField field;
+	private CategoryTable table;
 	private Category cat;
 	
 	public CategoryAddPanel(CategoryTable table) {

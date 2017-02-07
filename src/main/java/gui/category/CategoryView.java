@@ -12,10 +12,10 @@ public class CategoryView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	BasicOptionsPanel options;
-	CategoryListPanel listPanel;
-	CategoryAddPanel addPanel;
-	JPanel cards;
+	private BasicOptionsPanel options;
+	private CategoryListPanel listPanel;
+	private CategoryAddPanel addPanel;
+	private JPanel cards;
 
 	public CategoryView() {
 		this.setLayout(new BorderLayout());

@@ -14,7 +14,7 @@ public class PreparedMenu extends JMenuBar {
 
 	private static final long serialVersionUID = 1L;
 
-	JMenu file, options, advanced, help;
+	private JMenu file, options, advanced, help;
 	public JMenuItem categoriesSubmenu, itemSubmenu, general, exceptional, fill;
 	public JMenuItem deleteAll, deleteTrues, deleteFalses;
 	public JMenuItem toJSON, toXML, fromJSON, fromXML, toProperties;

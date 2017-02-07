@@ -27,10 +27,10 @@ public class ExceptionalSheetAddPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	JButton submit;
-	JTextField nameField;
-	JComboBox<Category> categoryBox;
-	JLabel datePickLabel;
+	private JButton submit;
+	private JTextField nameField;
+	private JComboBox<Category> categoryBox;
+	private JLabel datePickLabel;
 	private SheetRow sheetrow;
 	private CategoryService categoryService;
 
