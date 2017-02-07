@@ -13,8 +13,8 @@ import service.SheetRowService;
 
 public class EditNumberListener implements ActionListener {
 
-	JPanel customPanel;
-	JTextField field;
+	private JPanel customPanel;
+	private JTextField field;
 	private int id;
 	private int col;
 	private SheetRowService service;

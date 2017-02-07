@@ -10,8 +10,8 @@ import gui.BasicOptionsPanel;
 
 public class BasicOptionsListener implements ActionListener {
 
-	BasicOptionsPanel options;
-	JPanel cards;
+	private BasicOptionsPanel options;
+	private JPanel cards;
 
 	public BasicOptionsListener(BasicOptionsPanel options, JPanel cards) {
 		this.options = options;

@@ -12,8 +12,8 @@ import service.SheetRowService;
 
 public class FillListener implements ActionListener {
 
-	JPanel customPanel;
-	JComboBox<Integer> yearBox;
+	private JPanel customPanel;
+	private JComboBox<Integer> yearBox;
 	private SheetRowService service;
 
 	public FillListener() {

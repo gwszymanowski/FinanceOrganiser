@@ -10,8 +10,8 @@ import gui.PreparedMenu;
 
 public class MenuListener implements ActionListener {
 
-	PreparedMenu menu;
-	JPanel cards;
+	private PreparedMenu menu;
+	private JPanel cards;
 
 	public MenuListener(PreparedMenu menu, JPanel cards) {
 		this.menu = menu;

@@ -17,9 +17,9 @@ import config.PropertiesManager;
 
 public class ParserPropertiesListener implements ActionListener {
 
-	JPanel customPanel;
-	JCheckBox categoryCheckBox, itemCheckBox, excSheetrowCheckBox, genSheetrowCheckBox;
-	List<JCheckBox> checkBoxes;
+	private JPanel customPanel;
+	private JCheckBox categoryCheckBox, itemCheckBox, excSheetrowCheckBox, genSheetrowCheckBox;
+	private List<JCheckBox> checkBoxes;
 
 	public ParserPropertiesListener() {
 		this.checkBoxes = new ArrayList<JCheckBox>();

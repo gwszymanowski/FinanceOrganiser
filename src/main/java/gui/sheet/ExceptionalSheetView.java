@@ -12,10 +12,10 @@ public class ExceptionalSheetView extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	BasicOptionsPanel options;
-	ExceptionalSheetListPanel listPanel;
-	ExceptionalSheetAddPanel addPanel;
-	JPanel cards;
+	private BasicOptionsPanel options;
+	private ExceptionalSheetListPanel listPanel;
+	private ExceptionalSheetAddPanel addPanel;
+	private JPanel cards;
 
 	public ExceptionalSheetView() {
 		this.setLayout(new BorderLayout());

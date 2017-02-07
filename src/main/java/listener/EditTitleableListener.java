@@ -13,8 +13,8 @@ import service.CrudServiceI;
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class EditTitleableListener implements ActionListener {
 
-	JPanel customPanel;
-	JTextField field;
+	private JPanel customPanel;
+	private JTextField field;
 	private CrudServiceI service;
 	private int id;
 	private Titleable titleable;
