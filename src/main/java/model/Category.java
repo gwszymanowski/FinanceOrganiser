@@ -16,13 +16,14 @@ public class Category implements Serializable, Titleable {
 	public Category() {
 	}
 
-	public Category(String title) {
-		this.title = title;
+	public Category id(int id) {
+		this.id = id;
+		return this;
 	}
 
-	public Category(int id, String title) {
-		this.id = id;
+	public Category title(String title) {
 		this.title = title;
+		return this;
 	}
 
 	public int getId() {

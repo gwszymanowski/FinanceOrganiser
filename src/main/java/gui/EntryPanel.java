@@ -10,8 +10,8 @@ public class EntryPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	public EntryPanel() {
-		this.setLayout(new GridBagLayout());
-		this.add(new Label("Choose mode"));
+		setLayout(new GridBagLayout());
+		add(new Label("Choose mode"));
 	}
 
 }

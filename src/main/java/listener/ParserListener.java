@@ -20,10 +20,10 @@ public class ParserListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		if (this.isXML == true)
-			this.parser.parseToXML(this.fileDirectory);
+		if (isXML == true)
+			parser.parseToXML(fileDirectory);
 		else
-			this.parser.parseToJSON(this.fileDirectory);
+			parser.parseToJSON(fileDirectory);
 
 	}
 

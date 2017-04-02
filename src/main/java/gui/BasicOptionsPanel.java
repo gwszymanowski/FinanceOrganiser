@@ -13,21 +13,21 @@ public class BasicOptionsPanel extends JPanel {
 	public JButton persistView, listView;
 
 	public BasicOptionsPanel() {
-		this.setLayout(new FlowLayout(FlowLayout.LEFT));
-		this.initComponents();
+		setLayout(new FlowLayout(FlowLayout.LEFT));
+		initComponents();
 	}
 
 	private void initComponents() {
-		this.persistView = new JButton("Add new");
-		this.add(persistView);
-		this.listView = new JButton("View list");
-		this.add(listView);
+		persistView = new JButton("Add new");
+		add(persistView);
+		listView = new JButton("View list");
+		add(listView);
 
 	}
 
 	public void addCardListeners(ActionListener listener) {
-		this.persistView.addActionListener(listener);
-		this.listView.addActionListener(listener);
+		persistView.addActionListener(listener);
+		listView.addActionListener(listener);
 	}
 
 }

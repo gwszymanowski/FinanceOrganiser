@@ -17,14 +17,19 @@ public class Item implements Comparable<Item>, Serializable, Titleable {
 	public Item() {
 	}
 
-	public Item(String title) {
+	public Item title(String title) {
 		this.title = title;
+		return this;
 	}
 
-	public Item(int id, String title, Category category) {
+	public Item id(int id) {
 		this.id = id;
-		this.title = title;
+		return this;
+	}
+
+	public Item category(Category category) {
 		this.category = category;
+		return this;
 	}
 
 	public int getId() {

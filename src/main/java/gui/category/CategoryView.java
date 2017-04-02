@@ -18,21 +18,21 @@ public class CategoryView extends JPanel {
 	private JPanel cards;
 
 	public CategoryView() {
-		this.setLayout(new BorderLayout());
-		this.options = new BasicOptionsPanel();
+		setLayout(new BorderLayout());
+		options = new BasicOptionsPanel();
 
-		this.cards = new JPanel(new CardLayout());
+		cards = new JPanel(new CardLayout());
 
-		this.listPanel = new CategoryListPanel();
-		this.cards.add(this.listPanel, "list");
+		listPanel = new CategoryListPanel();
+		cards.add(listPanel, "list");
 
-		this.addPanel = new CategoryAddPanel(this.listPanel.table);
-		this.cards.add(this.addPanel, "add");
+		addPanel = new CategoryAddPanel(listPanel.table);
+		cards.add(addPanel, "add");
 
-		this.options.addCardListeners(new BasicOptionsListener(this.options, this.cards));
+		options.addCardListeners(new BasicOptionsListener(options, cards));
 
-		this.add(this.options, BorderLayout.NORTH);
-		this.add(this.cards, BorderLayout.CENTER);
+		add(options, BorderLayout.NORTH);
+		add(cards, BorderLayout.CENTER);
 
 	}
 

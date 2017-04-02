@@ -93,7 +93,7 @@ public class CategoryRepository implements CrudRepositoryI<Category> {
 				Integer id = rs.getInt("id");
 				String title = rs.getString("title");
 
-				Category s = new Category(id, title);
+				Category s = new Category().id(id).title(title);
 				categories.add(s);
 
 			}

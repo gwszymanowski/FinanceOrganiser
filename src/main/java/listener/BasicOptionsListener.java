@@ -22,10 +22,10 @@ public class BasicOptionsListener implements ActionListener {
 
 		CardLayout cardLayout = (CardLayout) cards.getLayout();
 
-		if (e.getSource() == this.options.persistView) {
-			cardLayout.show(this.cards, "add");
-		} else if (e.getSource() == this.options.listView) {
-			cardLayout.show(this.cards, "list");
+		if (e.getSource() == options.persistView) {
+			cardLayout.show(cards, "add");
+		} else if (e.getSource() == options.listView) {
+			cardLayout.show(cards, "list");
 		} else {
 			throw new IllegalAccessError();
 		}

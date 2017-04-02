@@ -22,56 +22,56 @@ public class ParserPropertiesListener implements ActionListener {
 	private List<JCheckBox> checkBoxes;
 
 	public ParserPropertiesListener() {
-		this.checkBoxes = new ArrayList<JCheckBox>();
-		this.createPanel();
-		this.tickBoxes();
+		checkBoxes = new ArrayList<JCheckBox>();
+		createPanel();
+		tickBoxes();
 	}
 
 	private void createPanel() {
-		this.customPanel = new JPanel(new GridBagLayout());
+		customPanel = new JPanel(new GridBagLayout());
 
 		GridBagConstraints c = new GridBagConstraints();
 
 		c.gridx = 0;
 		c.gridy = 0;
 
-		this.customPanel.add(new JLabel("Categories"), c);
+		customPanel.add(new JLabel("Categories"), c);
 
 		c.gridx++;
 
-		this.categoryCheckBox = new JCheckBox();
-		this.checkBoxes.add(this.categoryCheckBox);
-		this.customPanel.add(this.categoryCheckBox, c);
+		categoryCheckBox = new JCheckBox();
+		checkBoxes.add(categoryCheckBox);
+		customPanel.add(categoryCheckBox, c);
 
 		c.gridy++;
 		c.gridx = 0;
 
-		this.customPanel.add(new JLabel("Items"), c);
+		customPanel.add(new JLabel("Items"), c);
 		c.gridx++;
 
-		this.itemCheckBox = new JCheckBox();
-		this.checkBoxes.add(itemCheckBox);
-		this.customPanel.add(itemCheckBox, c);
+		itemCheckBox = new JCheckBox();
+		checkBoxes.add(itemCheckBox);
+		customPanel.add(itemCheckBox, c);
 		c.gridy++;
 		c.gridx = 0;
 
-		this.customPanel.add(new JLabel("Exceptional sheets"), c);
+		customPanel.add(new JLabel("Exceptional sheets"), c);
 		c.gridx++;
 
-		this.excSheetrowCheckBox = new JCheckBox();
-		this.checkBoxes.add(this.excSheetrowCheckBox);
-		this.customPanel.add(this.excSheetrowCheckBox, c);
+		excSheetrowCheckBox = new JCheckBox();
+		checkBoxes.add(excSheetrowCheckBox);
+		customPanel.add(excSheetrowCheckBox, c);
 
 		c.gridy++;
 		c.gridx = 0;
 
-		this.customPanel.add(new JLabel("General sheets"), c);
+		customPanel.add(new JLabel("General sheets"), c);
 
 		c.gridx++;
 
-		this.genSheetrowCheckBox = new JCheckBox();
-		this.checkBoxes.add(this.genSheetrowCheckBox);
-		this.customPanel.add(this.genSheetrowCheckBox, c);
+		genSheetrowCheckBox = new JCheckBox();
+		checkBoxes.add(genSheetrowCheckBox);
+		customPanel.add(genSheetrowCheckBox, c);
 
 	}
 
@@ -81,24 +81,24 @@ public class ParserPropertiesListener implements ActionListener {
 		Properties p = manager.readExportProperties();
 
 		if ("true".equals(p.getProperty("category")))
-			this.categoryCheckBox.setSelected(true);
+			categoryCheckBox.setSelected(true);
 		else
-			this.categoryCheckBox.setSelected(false);
+			categoryCheckBox.setSelected(false);
 		
 		if ("true".equals(p.getProperty("item")))
-			this.itemCheckBox.setSelected(true);
+			itemCheckBox.setSelected(true);
 		else
-			this.itemCheckBox.setSelected(false);	
+			itemCheckBox.setSelected(false);	
 		
 		if ("true".equals(p.getProperty("exceptional")))
-			this.excSheetrowCheckBox.setSelected(true);
+			excSheetrowCheckBox.setSelected(true);
 		else
-			this.excSheetrowCheckBox.setSelected(false);
+			excSheetrowCheckBox.setSelected(false);
 		
 		if ("true".equals(p.getProperty("general")))
-			this.genSheetrowCheckBox.setSelected(true);
+			genSheetrowCheckBox.setSelected(true);
 		else
-			this.genSheetrowCheckBox.setSelected(false);
+			genSheetrowCheckBox.setSelected(false);
 
 	}
 
@@ -111,22 +111,22 @@ public class ParserPropertiesListener implements ActionListener {
 	private String getContent() {
 		StringBuilder sb = new StringBuilder();
 
-		if (this.categoryCheckBox.isSelected())
+		if (categoryCheckBox.isSelected())
 			sb.append("category=true\n");
 		else
 			sb.append("category=false\n");
 
-		if (this.itemCheckBox.isSelected())
+		if (itemCheckBox.isSelected())
 			sb.append("item=true\n");
 		else
 			sb.append("item=false\n");
 
-		if (this.excSheetrowCheckBox.isSelected())
+		if (excSheetrowCheckBox.isSelected())
 			sb.append("exceptional=true\n");
 		else
 			sb.append("exceptional=false\n");
 
-		if (this.genSheetrowCheckBox.isSelected())
+		if (genSheetrowCheckBox.isSelected())
 			sb.append("general=true\n");
 		else
 			sb.append("general=false\n");
@@ -137,11 +137,11 @@ public class ParserPropertiesListener implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		int input = JOptionPane.showConfirmDialog(null, this.customPanel, "Which should be serialized:",
+		int input = JOptionPane.showConfirmDialog(null, customPanel, "Which should be serialized:",
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
 		if (input == JOptionPane.OK_OPTION)
-			this.saveSettings();
+			saveSettings();
 
 	}
 

@@ -27,23 +27,23 @@ public class GeneralSheetTable extends AbstractSheetrowTable {
 
 	@Override
 	protected void initializeBody() {
-		this.model = new GeneralSheetTableModel(monthNum, yearNum);
-		this.table = new JTable(model);
-		this.table.getColumnModel().getColumn(4).setMinWidth(0);
-		this.table.getColumnModel().getColumn(4).setMaxWidth(0);
-		this.table.getTableHeader().setReorderingAllowed(false);
+		model = new GeneralSheetTableModel(monthNum, yearNum);
+		table = new JTable(model);
+		table.getColumnModel().getColumn(4).setMinWidth(0);
+		table.getColumnModel().getColumn(4).setMaxWidth(0);
+		table.getTableHeader().setReorderingAllowed(false);
 	}
 
 	@Override
 	protected void initializePopups() {
-		this.mainpop = new JPopupMenu();
-		this.editMenu = new JMenuItem("Edit");
-		this.mainpop.add(editMenu);
+		mainpop = new JPopupMenu();
+		editMenu = new JMenuItem("Edit");
+		mainpop.add(editMenu);
 	}
 
 	@Override
 	protected void initializeTableListener() {
-		this.table.addMouseListener(new MouseAdapter() {
+		table.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -87,13 +87,13 @@ public class GeneralSheetTable extends AbstractSheetrowTable {
 
 	@Override
 	public void refresh(int monthNum, int yearNum) {
-		this.model.reloadData(monthNum, yearNum);
-		this.model.fireTableDataChanged();
+		model.reloadData(monthNum, yearNum);
+		model.fireTableDataChanged();
 	}
 
 	@Override
 	public List<SheetRow> getList() {
-		return this.model.getList();
+		return model.getList();
 	}
 
 }

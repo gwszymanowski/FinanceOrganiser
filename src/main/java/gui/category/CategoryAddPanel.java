@@ -28,17 +28,17 @@ public class CategoryAddPanel extends JPanel {
 	
 	public CategoryAddPanel(CategoryTable table) {
 		this.table = table;
-		this.initializeBody();
+		initializeBody();
 	}
 	
 	private void initializeBody() {
 		
-		this.setLayout(new BorderLayout());
+		setLayout(new BorderLayout());
 
 		JPanel topPanel = new JPanel(new GridBagLayout());
 		topPanel.add(new JLabel("ADD NEW CATEGORY"));
 
-		this.add(topPanel, BorderLayout.NORTH);
+		add(topPanel, BorderLayout.NORTH);
 
 		JPanel body = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -47,21 +47,21 @@ public class CategoryAddPanel extends JPanel {
 		c.gridx = 0;
 		body.add(new JLabel("Name: "), c);
 		c.gridx++;
-		this.field = new JTextField(10);
-		body.add(this.field, c);
-		this.add(body, BorderLayout.CENTER);
+		field = new JTextField(10);
+		body.add(field, c);
+		add(body, BorderLayout.CENTER);
 
-		this.submit = new JButton("Submit");
+		submit = new JButton("Submit");
 		
-		this.addListeners();
+		addListeners();
 
 		JPanel bottomPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-		bottomPanel.add(this.submit);
-		this.add(bottomPanel, BorderLayout.SOUTH);
+		bottomPanel.add(submit);
+		add(bottomPanel, BorderLayout.SOUTH);
 	}
 
 	private void addListeners() {
-		this.cat = new Category();
+		cat = new Category();
 
 		CompositeActionListener listener = new CompositeActionListener();
 
@@ -74,7 +74,7 @@ public class CategoryAddPanel extends JPanel {
 
 		}, 1);
 
-		listener.addActionListener(new ConfirmListener(new CategoryService(), this.cat), 2);
+		listener.addActionListener(new ConfirmListener(new CategoryService(), cat), 2);
 		
 		listener.addActionListener(new ActionListener() {
 
@@ -85,7 +85,7 @@ public class CategoryAddPanel extends JPanel {
 			
 		}, 3);
 
-		this.submit.addActionListener(listener);
+		submit.addActionListener(listener);
 	}
 
 }

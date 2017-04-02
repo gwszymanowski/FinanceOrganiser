@@ -7,14 +7,16 @@ import javax.swing.JOptionPane;
 
 import service.CrudServiceI;
 
-@SuppressWarnings("rawtypes")
+
 public class DeleteTitleableListener implements ActionListener {
 
+	@SuppressWarnings("rawtypes")
 	private CrudServiceI service;
 	private int id;
 
+	@SuppressWarnings("rawtypes")
 	public DeleteTitleableListener(CrudServiceI service) {
-		this.id = 0;
+		id = 0;
 		this.service = service;
 	}
 
@@ -25,7 +27,7 @@ public class DeleteTitleableListener implements ActionListener {
 				JOptionPane.YES_NO_OPTION);
 
 		if (dialogResult == JOptionPane.OK_OPTION)
-			this.service.delete(this.id);
+			service.delete(id);
 
 	}
 

@@ -25,18 +25,18 @@ public abstract class AbstractSheetrowTable extends JPanel {
 	public AbstractSheetrowTable(int monthNum, int yearNum) {
 		this.monthNum = monthNum;
 		this.yearNum = yearNum;
-		this.initializeBody();
-		this.initializeLayout();
-		this.initializePopups();
-		this.initializeTableListener();
-		this.initializeEditListener();
+		initializeBody();
+		initializeLayout();
+		initializePopups();
+		initializeTableListener();
+		initializeEditListener();
 	}
 
 	private void initializeLayout() {
-		this.setLayout(new BorderLayout());
+		setLayout(new BorderLayout());
 
 		JScrollPane scroll = new JScrollPane(table);
-		this.add(scroll, BorderLayout.CENTER);
+		add(scroll, BorderLayout.CENTER);
 	}
 
 	protected int getCol() {

@@ -19,7 +19,7 @@ import listener.MenuListener;
 public class MainFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private PreparedMenu menu;
 	private CategoryView categoryView;
 	private ItemView itemView;
@@ -29,50 +29,50 @@ public class MainFrame extends JFrame {
 	private JPanel cards;
 
 	public MainFrame() {
-		this.initPanels();
-		this.initCards();
-		this.initMenu();
-		this.initSettings();
+		initPanels();
+		initCards();
+		initMenu();
+		initSettings();
 	}
 
 	private void initCards() {
-		this.cards = new JPanel(new CardLayout());
-		this.cards.add(entryPanel, "entry");
-		this.cards.add(itemView, "item");
-		this.cards.add(categoryView, "category");
-		this.cards.add(sheetRowView, "exceptional");
-		this.cards.add(staticSheetView, "general");
-		this.add(cards);
+		cards = new JPanel(new CardLayout());
+		cards.add(entryPanel, "entry");
+		cards.add(itemView, "item");
+		cards.add(categoryView, "category");
+		cards.add(sheetRowView, "exceptional");
+		cards.add(staticSheetView, "general");
+		add(cards);
 	}
 
 	private void initPanels() {
-		this.categoryView = new CategoryView();
-		this.itemView = new ItemView();
-		this.entryPanel = new EntryPanel();
-		this.sheetRowView = new ExceptionalSheetView();
-		this.staticSheetView = new GeneralSheetView();
+		categoryView = new CategoryView();
+		itemView = new ItemView();
+		entryPanel = new EntryPanel();
+		sheetRowView = new ExceptionalSheetView();
+		staticSheetView = new GeneralSheetView();
 	}
 
 	private void initMenu() {
-		this.menu = new PreparedMenu();
+		menu = new PreparedMenu();
 
 		CompositeActionListener compositeChange = new CompositeActionListener();
-		compositeChange.addActionListener(new MenuListener(this.menu, this.cards), 1);
+		compositeChange.addActionListener(new MenuListener(menu, cards), 1);
 		compositeChange.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
-				if(e.getSource() == menu.general)		
+
+				if (e.getSource() == menu.general)
 					staticSheetView.refreshToCurrent();
-				else if(e.getSource() == menu.exceptional)
+				else if (e.getSource() == menu.exceptional)
 					sheetRowView.refreshToCurrent();
-				
+
 			}
 
 		}, 2);
 
-		this.menu.addMenuViewListener(compositeChange);
+		menu.addMenuViewListener(compositeChange);
 
 		CompositeActionListener deleteComposite = new CompositeActionListener();
 		deleteComposite.addActionListener(new DeleteMenuListener(menu), 1);
@@ -86,17 +86,17 @@ public class MainFrame extends JFrame {
 
 		}, 2);
 
-		this.menu.addDeleteListener(deleteComposite);
+		menu.addDeleteListener(deleteComposite);
 
-		this.setJMenuBar(menu);
+		setJMenuBar(menu);
 	}
 
 	private void initSettings() {
-		this.setSize(Settings.WIDTH, Settings.HEIGHT);
-		this.setTitle("Personal finances");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setLocation(Settings.X, Settings.Y);
-		this.setVisible(true);
+		setSize(Settings.WIDTH, Settings.HEIGHT);
+		setTitle("Personal finances");
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setLocation(Settings.X, Settings.Y);
+		setVisible(true);
 	}
 
 }

@@ -22,16 +22,16 @@ public class CategoryTable extends AbstractGeneralTable {
 
 	@Override
 	protected void initializeBody() {
-		this.model = new CategoryTableModel();
-		this.table = new JTable(this.model);
-		this.table.getColumnModel().getColumn(1).setMinWidth(0);
-		this.table.getColumnModel().getColumn(1).setMaxWidth(0);
+		model = new CategoryTableModel();
+		table = new JTable(model);
+		table.getColumnModel().getColumn(1).setMinWidth(0);
+		table.getColumnModel().getColumn(1).setMaxWidth(0);
 
 	}
 
 	@Override
 	protected void initializeListeners() {
-		this.table.addMouseListener(new MouseAdapter() {
+		table.addMouseListener(new MouseAdapter() {
 
 			@Override
 			public void mousePressed(MouseEvent e) {
@@ -54,11 +54,11 @@ public class CategoryTable extends AbstractGeneralTable {
 
 		CategoryService service = new CategoryService();
 
-		this.editTitleListener = new EditTitleableListener(service, new Category());
+		editTitleListener = new EditTitleableListener(service, new Category());
 
 		CompositeActionListener editListeners = new CompositeActionListener();
 
-		editListeners.addActionListener(this.editTitleListener, 1);
+		editListeners.addActionListener(editTitleListener, 1);
 		editListeners.addActionListener(new ActionListener() {
 
 			@Override
@@ -68,13 +68,13 @@ public class CategoryTable extends AbstractGeneralTable {
 
 		}, 2);
 
-		this.edit.addActionListener(editListeners);
+		edit.addActionListener(editListeners);
 
-		this.deleteTitleableListener = new DeleteTitleableListener(service);
+		deleteTitleableListener = new DeleteTitleableListener(service);
 
 		CompositeActionListener deleteListeners = new CompositeActionListener();
 
-		deleteListeners.addActionListener(this.deleteTitleableListener, 1);
+		deleteListeners.addActionListener(deleteTitleableListener, 1);
 
 		deleteListeners.addActionListener(new ActionListener() {
 
@@ -85,12 +85,12 @@ public class CategoryTable extends AbstractGeneralTable {
 
 		}, 2);
 
-		this.delete.addActionListener(deleteListeners);
+		delete.addActionListener(deleteListeners);
 	}
 
 	public void refresh() {
-		this.model.reloadData();
-		this.model.fireTableDataChanged();
+		model.reloadData();
+		model.fireTableDataChanged();
 	}
 
 }

@@ -23,26 +23,26 @@ public abstract class AbstractGeneralTable extends JPanel {
 	protected DeleteTitleableListener deleteTitleableListener;
 
 	public AbstractGeneralTable() {
-		this.initializeBody();
-		this.initializeLayout();
-		this.initializePopup();
-		this.initializeListeners();
+		initializeBody();
+		initializeLayout();
+		initializePopup();
+		initializeListeners();
 	}
 
 	private void initializeLayout() {
-		this.setLayout(new BorderLayout());
-		JScrollPane scroll = new JScrollPane(this.table);
-		this.add(scroll, BorderLayout.CENTER);
+		setLayout(new BorderLayout());
+		JScrollPane scroll = new JScrollPane(table);
+		add(scroll, BorderLayout.CENTER);
 	}
 
 	private void initializePopup() {
-		this.popup = new JPopupMenu();
+		popup = new JPopupMenu();
 
-		this.edit = new JMenuItem("Edit");
-		this.popup.add(this.edit);
+		edit = new JMenuItem("Edit");
+		popup.add(edit);
 
-		this.delete = new JMenuItem("Delete");
-		this.popup.add(this.delete);
+		delete = new JMenuItem("Delete");
+		popup.add(delete);
 
 	}
 

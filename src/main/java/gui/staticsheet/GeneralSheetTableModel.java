@@ -12,13 +12,13 @@ public class GeneralSheetTableModel extends AbstractSheetrowTableModel {
 
 	public GeneralSheetTableModel(int monthNum, int yearNum) {
 		super();
-		this.service = new SheetRowService(false);
-		this.reloadData(monthNum, yearNum);
+		service = new SheetRowService(false);
+		reloadData(monthNum, yearNum);
 	}
 
 	@Override
 	public List<SheetRow> getRows(int monthNum, int yearNum) {
-		return this.service.getByYearMonth(yearNum, monthNum, true);
+		return service.getByYearMonth(yearNum, monthNum, true);
 	}
 
 }

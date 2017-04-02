@@ -101,9 +101,9 @@ public class ItemRepository implements CrudRepositoryI<Item> {
 				String title = rs.getString(2);
 				int category_id = rs.getInt(3);
 				String category_title = rs.getString(4);
-				Category c = new Category(category_id, category_title);
+				Category c = new Category().id(category_id).title(category_title);
 
-				Item s = new Item(id, title, c);
+				Item s = new Item().id(id).title(title).category(c);
 				items.add(s);
 
 			}

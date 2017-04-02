@@ -169,9 +169,9 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 				int categoryId = rs.getInt(6);
 				String categoryTitle = rs.getString(7);
-				Category c = new Category(categoryId, categoryTitle);
+				Category c = new Category().id(categoryId).title(categoryTitle);
 
-				SheetRow s = new SheetRow(id, title, c, p);
+				SheetRow s = new SheetRow().id(id).title(title).category(c).price(p);
 
 				categories.add(s);
 
@@ -216,9 +216,9 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 				int categoryId = rs.getInt(5);
 				String categoryTitle = rs.getString(6);
-				Category c = new Category(categoryId, categoryTitle);
+				Category c = new Category().id(categoryId).title(categoryTitle);
 
-				SheetRow s = new SheetRow(id, title, c, p);
+				SheetRow s = new SheetRow().id(id).title(title).category(c).price(p);
 
 				categories.add(s);
 
@@ -231,34 +231,10 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 		return categories;
 	}
-
-	public int getCount() {
-		PreparedStatement stmt = null;
-		Database db = Database.getInstance();
-		Connection conn = db.getConnection();
-		int count = 0;
-		try {
-
-			String selectSql = "SELECT count(*) as count FROM sheetrow";
-			stmt = conn.prepareStatement(selectSql);
-
-			ResultSet rs = stmt.executeQuery();
-			rs.next();
-
-			count = rs.getInt("count");
-
-			stmt.close();
-			rs.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		return count;
-	}
-
+	
 	public List<SheetRow> getByMonth(int month) {
 
-		List<SheetRow> categories = new ArrayList<SheetRow>();
+		List<SheetRow> sheetrows = new ArrayList<SheetRow>();
 
 		PreparedStatement stmt = null;
 		Database db = Database.getInstance();
@@ -285,11 +261,11 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 				int categoryId = rs.getInt(5);
 				String categoryTitle = rs.getString(6);
-				Category c = new Category(categoryId, categoryTitle);
+				Category c = new Category().id(categoryId).title(categoryTitle);
 
-				SheetRow s = new SheetRow(id, title, c, p);
+				SheetRow s = new SheetRow().id(id).title(title).category(c).price(p);
 
-				categories.add(s);
+				sheetrows.add(s);
 
 			}
 			stmt.close();
@@ -298,7 +274,7 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 			e.printStackTrace();
 		}
 
-		return categories;
+		return sheetrows;
 	}
 
 	public List<SheetRow> getByYearMonth(int year, int month, boolean isStatic) {
@@ -336,9 +312,9 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 				int categoryId = rs.getInt(5);
 				String categoryTitle = rs.getString(6);
-				Category cat = new Category(categoryId, categoryTitle);
+				Category c = new Category().id(categoryId).title(categoryTitle);
 
-				SheetRow s = new SheetRow(id, title, cat, p);
+				SheetRow s = new SheetRow().id(id).title(title).category(c).price(p);
 
 				sheetRows.add(s);
 
@@ -352,6 +328,32 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 		return sheetRows;
 
 	}
+
+	public int getCount() {
+		PreparedStatement stmt = null;
+		Database db = Database.getInstance();
+		Connection conn = db.getConnection();
+		int count = 0;
+		try {
+
+			String selectSql = "SELECT count(*) as count FROM sheetrow";
+			stmt = conn.prepareStatement(selectSql);
+
+			ResultSet rs = stmt.executeQuery();
+			rs.next();
+
+			count = rs.getInt("count");
+
+			stmt.close();
+			rs.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return count;
+	}
+
+
 
 	public void fill(int lastYear) {
 
@@ -378,7 +380,8 @@ public class SheetRowRepository implements CrudRepositoryI<SheetRow> {
 
 				for (Item item : items) {
 
-					SheetRow s = new SheetRow(item.getTitle(), item.getCategory(), true, givenDate);
+					SheetRow s = new SheetRow().title(item.getTitle()).category(item.getCategory()).state(true)
+							.currentTime(givenDate);
 
 					if (isAdded(s) == false)
 						add(s);

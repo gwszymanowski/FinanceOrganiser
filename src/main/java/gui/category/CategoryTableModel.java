@@ -16,13 +16,13 @@ public class CategoryTableModel extends AbstractTableModel {
 	private String[] colNames = { "Title", "id" };
 
 	public CategoryTableModel() {
-		this.service = new CategoryService();
-		this.list = this.service.getAll();
+		service = new CategoryService();
+		list = service.getAll();
 	}
 
 	@Override
 	public String getColumnName(int col) {
-		return this.colNames[col];
+		return colNames[col];
 	}
 
 	public int getColumnCount() {
@@ -30,12 +30,12 @@ public class CategoryTableModel extends AbstractTableModel {
 	}
 
 	public int getRowCount() {
-		return this.list.size();
+		return list.size();
 	}
 
 	public Object getValueAt(int row, int col) {
 
-		Category cat = this.list.get(row);
+		Category cat = list.get(row);
 
 		switch (col) {
 		case 0:
@@ -47,7 +47,7 @@ public class CategoryTableModel extends AbstractTableModel {
 	}
 	
 	public void reloadData() {
-		this.list = this.service.getAll();
+		list = service.getAll();
 	}
 
 }

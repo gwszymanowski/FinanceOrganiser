@@ -22,14 +22,14 @@ public class MenuListener implements ActionListener {
 
 		CardLayout cardLayout = (CardLayout) cards.getLayout();
 
-		if (e.getSource() == this.menu.itemSubmenu)
-			cardLayout.show(this.cards, "item");
-		else if (e.getSource() == this.menu.categoriesSubmenu)
-			cardLayout.show(this.cards, "category");
-		else if (e.getSource() == this.menu.general)
-			cardLayout.show(this.cards, "general");
-		else if (e.getSource() == this.menu.exceptional)
-			cardLayout.show(this.cards, "exceptional");
+		if (e.getSource() == menu.itemSubmenu)
+			cardLayout.show(cards, "item");
+		else if (e.getSource() == menu.categoriesSubmenu)
+			cardLayout.show(cards, "category");
+		else if (e.getSource() == menu.general)
+			cardLayout.show(cards, "general");
+		else if (e.getSource() == menu.exceptional)
+			cardLayout.show(cards, "exceptional");
 		else
 			throw new IllegalAccessError();
 

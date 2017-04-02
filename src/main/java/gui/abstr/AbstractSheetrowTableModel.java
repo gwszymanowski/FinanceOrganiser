@@ -17,12 +17,12 @@ public abstract class AbstractSheetrowTableModel extends AbstractTableModel {
 	protected SheetRowService service;
 
 	public AbstractSheetrowTableModel() {
-		this.list = new LinkedList<SheetRow>();
+		list = new LinkedList<SheetRow>();
 	}
 
 	@Override
 	public String getColumnName(int col) {
-		return this.colNames[col];
+		return colNames[col];
 	}
 
 	public int getColumnCount() {
@@ -30,12 +30,12 @@ public abstract class AbstractSheetrowTableModel extends AbstractTableModel {
 	}
 
 	public int getRowCount() {
-		return this.list.size();
+		return list.size();
 	}
 
 	public Object getValueAt(int row, int col) {
 
-		SheetRow sheetRow = this.list.get(row);
+		SheetRow sheetRow = list.get(row);
 
 		switch (col) {
 		case 0:
@@ -54,12 +54,12 @@ public abstract class AbstractSheetrowTableModel extends AbstractTableModel {
 	}
 
 	public void reloadData(int monthNum, int yearNum) {
-		this.list = getRows(monthNum, yearNum);
-		this.fireTableDataChanged();
+		list = getRows(monthNum, yearNum);
+		fireTableDataChanged();
 	}
 
 	public List<SheetRow> getList() {
-		return this.list;
+		return list;
 	}
 
 	public abstract List<SheetRow> getRows(int monthNum, int yearNum);

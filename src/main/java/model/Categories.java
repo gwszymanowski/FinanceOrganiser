@@ -16,7 +16,7 @@ public class Categories {
 	private List<Category> categories;
 	
 	public Categories() {
-		this.categories = new ArrayList<Category>();
+		categories = new ArrayList<Category>();
 	}
 
 	public List<Category> getCategories() {

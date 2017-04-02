@@ -25,33 +25,34 @@ public class SheetRow implements Comparable<SheetRow>, Serializable {
 		this.isStatic = false;
 	}
 
-	public SheetRow(String title, Category category, Price price) {
-		this.title = title;
-		this.category = category;
-		this.price = price;
-		this.isStatic = false;
-		this.createdAt = Instant.now();
-		this.lastModified = Instant.now();
-	}
-
-	public SheetRow(String title, Category category, boolean isStatic, Instant current) {
-		this.price = new Price(0, 0);
-		this.createdAt = Instant.now();
-		this.lastModified = Instant.now();
-		this.title = title;
-		this.category = category;
-		this.isStatic = isStatic;
-		this.current = current;
-	}
-
-	public SheetRow(int id, String title, Category category, Price price) {
+	public SheetRow id(int id) {
 		this.id = id;
+		return this;
+	}
+
+	public SheetRow title(String title) {
 		this.title = title;
-		this.isStatic = false;
+		return this;
+	}
+
+	public SheetRow category(Category category) {
 		this.category = category;
+		return this;
+	}
+
+	public SheetRow price(Price price) {
 		this.price = price;
-		this.createdAt = Instant.now();
-		this.lastModified = Instant.now();
+		return this;
+	}
+
+	public SheetRow state(boolean isStatic) {
+		this.isStatic = isStatic;
+		return this;
+	}
+
+	public SheetRow currentTime(Instant current) {
+		this.current = current;
+		return this;
 	}
 
 	public int getId() {
@@ -156,9 +157,9 @@ public class SheetRow implements Comparable<SheetRow>, Serializable {
 
 	@Override
 	public String toString() {
-		return "SheetRow [id=" + id + ", title=" + title + ", category=" + category.getFullString()
-				+ ", price=" + price + ", isStatic=" + isStatic + ", createdAt=" + createdAt + ", lastModified="
-				+ lastModified + ", current=" + current + "]";
+		return "SheetRow [id=" + id + ", title=" + title + ", category=" + category.getFullString() + ", price=" + price
+				+ ", isStatic=" + isStatic + ", createdAt=" + createdAt + ", lastModified=" + lastModified
+				+ ", current=" + current + "]";
 	}
 
 }

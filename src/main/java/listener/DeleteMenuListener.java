@@ -15,7 +15,7 @@ public class DeleteMenuListener implements ActionListener {
 
 	public DeleteMenuListener(PreparedMenu menu) {
 		this.menu = menu;
-		this.service = new SheetRowService();
+		service = new SheetRowService();
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -25,14 +25,14 @@ public class DeleteMenuListener implements ActionListener {
 				dialogButton);
 
 		if (dialogResult == JOptionPane.YES_OPTION) {
-			if (e.getSource() == this.menu.deleteAll) {
-				this.service.deleteAll();
+			if (e.getSource() == menu.deleteAll) {
+				service.deleteAll();
 				JOptionPane.showMessageDialog(null, "Action finished");
-			} else if (e.getSource() == this.menu.deleteTrues) {
-				this.service.delete(true);
+			} else if (e.getSource() == menu.deleteTrues) {
+				service.delete(true);
 				JOptionPane.showMessageDialog(null, "Action finished");
-			} else if (e.getSource() == this.menu.deleteFalses) {
-				this.service.delete(false);
+			} else if (e.getSource() == menu.deleteFalses) {
+				service.delete(false);
 				JOptionPane.showMessageDialog(null, "Action finished");
 			} else
 				throw new IllegalAccessError();

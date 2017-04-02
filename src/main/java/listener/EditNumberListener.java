@@ -21,21 +21,21 @@ public class EditNumberListener implements ActionListener {
 	private String title;
 
 	public EditNumberListener(boolean isStatic) {
-		this.id = 0;
-		this.col = 0;
-		this.service = new SheetRowService(isStatic);
+		id = 0;
+		col = 0;
+		service = new SheetRowService(isStatic);
 		createPanel();
 	}
 
 	private void createPanel() {
-		this.customPanel = new JPanel();
+		customPanel = new JPanel();
 
-		this.field = new JTextField(10);
+		field = new JTextField(10);
 
-		PlainDocument doc = (PlainDocument) this.field.getDocument();
+		PlainDocument doc = (PlainDocument) field.getDocument();
 		doc.setDocumentFilter(new OnlyNumberFilter());
 
-		this.customPanel.add(this.field);
+		customPanel.add(field);
 
 	}
 
@@ -43,21 +43,21 @@ public class EditNumberListener implements ActionListener {
 	public void actionPerformed(ActionEvent e) {
 
 		if (col == 2)
-			this.title = "Select new estimated price:";
+			title = "Select new estimated price:";
 		else if (col == 3)
-			this.title = "Select new actual price:";
+			title = "Select new actual price:";
 
-		int input = JOptionPane.showConfirmDialog(null, this.customPanel, this.title, JOptionPane.OK_CANCEL_OPTION,
+		int input = JOptionPane.showConfirmDialog(null, customPanel, title, JOptionPane.OK_CANCEL_OPTION,
 				JOptionPane.PLAIN_MESSAGE);
 
 		if (input == JOptionPane.OK_OPTION) {
 
-			Double val = Double.parseDouble(this.field.getText());
+			Double val = Double.parseDouble(field.getText());
 
-			if (this.col == 2)
-				this.service.editPrice(getId(), val, false);
+			if (col == 2)
+				service.editPrice(getId(), val, false);
 			else
-				this.service.editPrice(getId(), val, true);
+				service.editPrice(getId(), val, true);
 
 		}
 

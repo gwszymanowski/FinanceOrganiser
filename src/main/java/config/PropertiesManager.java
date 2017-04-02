@@ -42,7 +42,7 @@ public class PropertiesManager {
 	public Map<String, String> getPropertiesMap() {
 		Map<String, String> propertiesMap = new HashMap<String, String>();
 
-		Properties props = this.readExportProperties();
+		Properties props = readExportProperties();
 
 		propertiesMap.put("category", props.getProperty("category"));
 		propertiesMap.put("item", props.getProperty("item"));

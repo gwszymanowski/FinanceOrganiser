@@ -7,12 +7,14 @@ import javax.swing.JOptionPane;
 
 import service.CrudServiceI;
 
-@SuppressWarnings("rawtypes")
-public class ConfirmListener implements ActionListener {
 
+public class ConfirmListener implements ActionListener {
+	
+	@SuppressWarnings("rawtypes")
 	private CrudServiceI service;
 	private Object o;
 	
+	@SuppressWarnings("rawtypes")
 	public ConfirmListener(CrudServiceI service, Object o) {
 		this.service = service;
 		this.o = o;	

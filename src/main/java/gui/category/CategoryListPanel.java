@@ -23,8 +23,8 @@ public class CategoryListPanel extends JPanel {
 		topPanel.add(new JLabel("LIST OF CATEGORIES:"));
 		add(topPanel, BorderLayout.NORTH);
 
-		this.table = new CategoryTable();
-		add(this.table, BorderLayout.CENTER);
+		table = new CategoryTable();
+		add(table, BorderLayout.CENTER);
 	}
 
 }

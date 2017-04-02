@@ -20,32 +20,32 @@ public class EditTitleableListener implements ActionListener {
 	private Titleable titleable;
 
 	public EditTitleableListener(CrudServiceI service, Titleable titleable) {
-		this.id = 0;
+		id = 0;
 		this.service = service;
 		this.titleable = titleable;
-		this.createPanel();
+		createPanel();
 	}
 
 	private void createPanel() {
-		this.customPanel = new JPanel();
-		this.field = new JTextField(10);
-		this.customPanel.add(this.field);
+		customPanel = new JPanel();
+		field = new JTextField(10);
+		customPanel.add(field);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 
-		int input = JOptionPane.showConfirmDialog(null, this.customPanel, "Choose new title",
+		int input = JOptionPane.showConfirmDialog(null, customPanel, "Choose new title",
 				JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
 
 		if (input == JOptionPane.OK_OPTION) {
 
-			String val = this.field.getText();
+			String val = field.getText();
 
-			this.titleable.setId(id);
-			this.titleable.setTitle(val);
+			titleable.setId(id);
+			titleable.setTitle(val);
 
-			this.service.update(this.titleable);
+			service.update(titleable);
 
 		}
 
